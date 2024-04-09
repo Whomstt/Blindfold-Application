@@ -24,8 +24,22 @@ export class FirebaseService {
       });
   }
 
+  async checkEmailExists(email: string): Promise<boolean> {
+    try {
+      // Check if the email exists
+      const result = await this.firebaseAuth.fetchSignInMethodsForEmail(email);
+      
+      // If result contains methods, it means email exists
+      return result.length > 0;
+    } catch (error) {
+      console.error('Error checking email existence:', error);
+      return false; // Return false if an error occurs
+    }
+  }
+
   logout() {
     this.firebaseAuth.signOut();
     localStorage.removeItem('user');
   }
+  
 }
