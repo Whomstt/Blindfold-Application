@@ -1,14 +1,19 @@
 <div *ngIf="!isSignedIn">
     <h2>Sign up</h2>
-    <input type="text" #emailSignup>
-    <input type="text" #passwordSignup>
+    <label for="emailSignup">Email:</label>
+    <input type="text" id="emailSignup" #emailSignup>
+    <label for="passwordSignup">Password:</label>
+    <input type="text" id="passwordSignup" #passwordSignup>
     <button (click)="onSignup(emailSignup.value, passwordSignup.value)">Sign up</button>
 </div>
 <hr>
 <div *ngIf="!isSignedIn">
     <h2>Sign in</h2>
-    <input type="text" #email>
-    <input type="text" #password>
+    <label for="email">Email:</label>
+    <input type="text" id="email" #email>
+    <label for="password">Password:</label>
+    <input type="text" id="password" #password>
     <button (click)="onSignin(email.value, password.value)">Sign in</button>
 </div>
 <app-home *ngIf="isSignedIn" (isLogout)="handleLogout()"></app-home>
+<img src="assets/images/blindfold-512.png" alt="blindfold" class="logo">
