@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { FirebaseService } from './services/firebase.service';
+import { environment } from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -18,19 +19,11 @@ import { FirebaseService } from './services/firebase.service';
     BrowserModule,
     AppRoutingModule,
     AngularFireAuthModule,
-    AngularFireModule.initializeApp({
-      apiKey: "AIzaSyCShg7ErBfUMVAsl-Kt6UTNRoQiPQGOJvA",
-      authDomain: "blindfold-application.firebaseapp.com",
-      projectId: "blindfold-application",
-      storageBucket: "blindfold-application.appspot.com",
-      messagingSenderId: "244075422081",
-      appId: "1:244075422081:web:608e0c8bfd508aae61c880",
-      measurementId: "G-50EEMXE1PC"
-    })
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [
     provideClientHydration(),
-    FirebaseService
+    FirebaseService,
   ],
   bootstrap: [AppComponent]
 })
