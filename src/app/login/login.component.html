@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href='https://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet'>
+    <style>
+        .login-container {
+            font-family: 'Irish Grover', cursive;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" *ngIf="!isSignedIn">
+        <h2>Blindfold</h2>
+        <div>
+            <label for="email">Email:</label>
+            <br>
+            <input type="text" id="email" #email>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <br>
+            <input type="password" id="password" #password>
+        </div>
+        <button (click)="onSignin(email.value, password.value)">Login</button>
+        <button routerLink="/signup">Sign Up</button>
+    </div>
+    <!-- <app-home *ngIf="isSignedIn" (isLogout)="handleLogout()"></app-home> -->
+</body>
+</html>
