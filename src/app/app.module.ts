@@ -10,6 +10,9 @@ import { FirebaseService } from './services/firebase.service';
 import { environment } from "../environments/environment";
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { ProfileComponent } from './profile/profile.component';
+import { DealerComponent } from './dealer/dealer.component';
+import { MessagesComponent } from './messages/messages.component';
 
 
 @NgModule({
@@ -18,7 +21,10 @@ import { SignupComponent } from './signup/signup.component';
     HeaderComponent,
     HomeComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ProfileComponent,
+    DealerComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
