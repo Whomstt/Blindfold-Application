@@ -31,10 +31,17 @@
     text-align: center;
 }
 
-label {
+.label {
     display: inline-block;
     width: 10%;
     font-weight: bold;
+    text-align: center;
+}
+
+.label2 {
+    display: inline-block;
+    width: 10%;
+    font-weight: normal;
     text-align: center;
 }
 
@@ -47,16 +54,32 @@ textarea {
     margin-bottom: 10px;
 }
 
-input[type="submit"] {
+input[type="submit"]{
     padding: 10px 20px;
     background-color: black;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 100px;
 }
 
 input[type="submit"]:hover {
+    background-color: red;
+}
+
+input[type="signout"]{
+    padding: 10px 20px;
+    background-color: black;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px;
+    text-align: center;
+}
+
+input[type="signout"]:hover {
     background-color: red;
 }
 
