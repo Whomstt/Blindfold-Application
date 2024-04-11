@@ -1,24 +1,32 @@
-import { Component } from '@angular/core';
-import { EventEmitter } from '@angular/core';
-import { Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  @Output() isLogout = new EventEmitter<void>();
-  constructor(public firebaseService: FirebaseService, private router: Router) { }
+export class HomeComponent implements OnInit {
+  userEmail: string | null = null; // Initialize userEmail
+
+  constructor(
+    public firebaseService: FirebaseService,
+    private afAuth: AngularFireAuth,
+    private router: Router
+  ) {}
+
   ngOnInit(): void {
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.userEmail = user.email; // Get user email if user is logged in
+      }
+    });
   }
+
   async logout() {
     this.firebaseService.logout();
-    this.isLogout.emit();
     this.router.navigate(['']);
   }
-
-
 }

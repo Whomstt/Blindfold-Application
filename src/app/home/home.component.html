@@ -1,6 +1,3 @@
-<!-- <p>You are logged in</p>
-<button (click)="logout()">Logout</button>
-<img src = "assets/images/blindfold-512.png" alt="Blindfold-Logo" style="width:25%"> -->
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,6 +20,8 @@
                     <input type="text" name="query" placeholder="Enter search here">
                     <button type="submit">Search</button>
                 </form>
+                <!-- Display Hello user here -->
+                <p id="userGreeting">Hello {{ userEmail }}</p>
             </div>
         </div>
     </body>

@@ -6,7 +6,6 @@
     top: 0;
     left: 0;
     background-color: #000; 
-    /* padding-top: 20px; */
 }
 .sidenav a {
     padding: 10px 15px;
@@ -32,7 +31,7 @@
     height: 70%;
     position: relative;
     z-index: 1;
-  }
+}
 
 .container {
     max-width: 400px;
@@ -59,9 +58,14 @@ button:hover {
     background-color: #eb1919;
 }
 
+/* Move this outside the media query */
+#userGreeting {
+    color: white;
+}
+
 @media (max-width:60em) {
     .sidenav {
-      display: none;
+        display: none;
     }
 
     .centre {
