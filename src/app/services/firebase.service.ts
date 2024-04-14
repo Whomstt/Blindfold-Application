@@ -1,45 +1,63 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
-
+  user$ = this.afAuth.authState.pipe(
+    filter(user => !!user),
+    map(user => user!)
+  );
   isLoggedIn = false;
-  constructor(public firebaseAuth: AngularFireAuth) { }
+
+  constructor(
+    private afAuth: AngularFireAuth,
+    private router: Router
+  ) {}
+
   async signin(email: string, password: string) {
-    await this.firebaseAuth.signInWithEmailAndPassword(email, password)
-      .then(res => {
-        this.isLoggedIn = true;
-        localStorage.setItem('user', JSON.stringify(res.user));
-      });
+    try {
+      const res = await this.afAuth.signInWithEmailAndPassword(email, password);
+      this.isLoggedIn = true;
+      localStorage.setItem('user', JSON.stringify(res.user));
+    } catch (error) {
+      console.error('Error signing in:', error);
+      throw error;
+    }
   }
 
   async signup(email: string, password: string) {
-    await this.firebaseAuth.createUserWithEmailAndPassword(email, password)
-      .then(res => {
-        this.isLoggedIn = true;
-        localStorage.setItem('user', JSON.stringify(res.user));
-      });
+    try {
+      const res = await this.afAuth.createUserWithEmailAndPassword(email, password);
+      this.isLoggedIn = true;
+      localStorage.setItem('user', JSON.stringify(res.user));
+    } catch (error) {
+      console.error('Error signing up:', error);
+      throw error;
+    }
   }
 
   async checkEmailExists(email: string): Promise<boolean> {
     try {
-      // Check if the email exists
-      const result = await this.firebaseAuth.fetchSignInMethodsForEmail(email);
-      
-      // If result contains methods, it means email exists
+      const result = await this.afAuth.fetchSignInMethodsForEmail(email);
       return result.length > 0;
     } catch (error) {
       console.error('Error checking email existence:', error);
-      return false; // Return false if an error occurs
+      return false;
     }
   }
 
   logout() {
-    this.firebaseAuth.signOut();
-    localStorage.removeItem('user');
+    try {
+      this.afAuth.signOut();
+      localStorage.removeItem('user');
+      this.isLoggedIn = false;
+    } catch (error) {
+      console.error('Error signing out:', error);
+      throw error;
+    }
   }
-  
 }
