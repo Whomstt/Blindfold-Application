@@ -1,3 +1,8 @@
+* {
+    background-color: #000;
+}
+
+
 .sidenav {
     height: 100%;
     width: 12%;
@@ -27,23 +32,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 10%;
     height: 70%;
     position: relative;
-    z-index: 1;
+    margin-left: 10%;
 }
 
 .container {
-    max-width: 400px;
     margin: 0 auto;
     text-align: center;
+    height: 70%;
+    position: relative;
+    margin-left: 12%;
+    background-color: #000;
 }
 
 input[type="text"] {
     padding: 10px;
-    width: 80%;
+    width: 90%;
     margin-bottom: 10px;
-    margin-left: 10%;
+    height: 70%;
+    position: relative;
+    background-color: #caccd1;
 }
 
 button {
@@ -58,9 +67,23 @@ button:hover {
     background-color: #eb1919;
 }
 
-/* Move this outside the media query */
+html, body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+}
+
 #userGreeting {
     color: white;
+    
 }
 
 @media (max-width:60em) {
@@ -68,15 +91,16 @@ button:hover {
         display: none;
     }
 
+
     .centre {
-        margin-left: 0;
+        margin-left: 0%;
     }
 
     .container {
-        margin-left: 0;
+    margin-left: 5%;
     }
 
     input[type="text"] {
-        margin-left: 0;
+        margin-left: 5%;
     }
 }

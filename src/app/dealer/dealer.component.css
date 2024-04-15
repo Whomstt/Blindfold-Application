@@ -97,8 +97,17 @@ html, body {
     height: auto;
   }
 
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
   body {
     background: linear-gradient(to bottom, #7B947A, rgb(0, 54, 0));
+    height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 @media (max-width:60em) {
