@@ -34,14 +34,13 @@
 }
 
 .container {
-    max-width: 400px;
     margin: 0 auto;
     text-align: center;
 }
 
 input[type="text"] {
     padding: 10px;
-    width: 80%;
+    width: 90%;
     margin-bottom: 10px;
     margin-left: 10%;
 }
@@ -58,6 +57,12 @@ button:hover {
     background-color: #eb1919;
 }
 
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
 /* Move this outside the media query */
 #userGreeting {
     color: white;
@@ -67,6 +72,7 @@ button:hover {
     .sidenav {
         display: none;
     }
+
 
     .centre {
         margin-left: 0;

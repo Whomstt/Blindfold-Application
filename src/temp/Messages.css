@@ -81,20 +81,17 @@ body {
     display: flex;
     flex-direction: column;
     box-shadow: 2px 2px 20px rgba(0,0,0,0.4);
-    max-height: 100%;
 }
 
 .chatlist {
-    max-width: 27%;
+    width: 12%;
     position: absolute;
-    top: max(8%, calc(100vh - 40px - 100%)); /* Ensures it's at least 8% from the top but never higher than 40px from the top */
-    max-height: 100%; /* Set the max-height relative to the .chat container's height */
-    overflow-y: auto; 
+    top: 8%;;
+    overflow-y: auto;
 }
-
 .header h1 {
     color: white;
-    padding: 15px;
+    
     margin-left: 40%;
 }
 
