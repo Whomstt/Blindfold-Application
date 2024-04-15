@@ -1,20 +1,58 @@
+// signup.component.ts
 import { Component } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
-import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
   isSignedIn = false;
+  userID: string = '';
+  userName: string = '';
+  userEmail: string = '';
+  userPassword: string = '';
+  userType: string = '';
   passwordErrorMessage: string = '';
   emailErrorMessage: string = '';
 
+  constructor(
+    public firebaseService: FirebaseService,
+    private router: Router,
+    private firestore: AngularFirestore
+  ) {}
 
-  constructor(public firebaseService: FirebaseService, private router: Router) { }
+  async addUser(userID: string, userName: string, userEmail: string, userPassword: string, userType: string) {
+    try {
+      const newUser = {
+        userID: userID,
+        userName: userName,
+        userEmail: userEmail,
+        userPassword: userPassword,
+        userType: userType
+        // Add other fields as needed
+      };
+
+      // Add the new user document to the "users" collection
+      await this.firestore.collection('users').add(newUser);
+
+      console.log('New user added successfully!');
+    } catch (error) {
+      console.error('Error adding new user:', error);
+    }
+  }
+
+  async onSubmit() {
+    // Call addUser function with the provided form values
+    await this.addUser(this.userID, this.userName, this.userEmail, this.userPassword, this.userType);
+    this.onSignup(this.userEmail, this.userPassword);
+  }
+
+  // Other methods remain unchanged
+
   ngOnInit() {
     if (typeof localStorage !== 'undefined' && localStorage.getItem('user') !== null)
       this.isSignedIn = true;
@@ -45,6 +83,7 @@ export class SignupComponent {
     // Redirect to desired route after successful signup
     this.router.navigate(['/home']); // Redirect to home page
   }
+
   handleLogout() {
     this.isSignedIn = false;
   }
