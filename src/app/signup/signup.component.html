@@ -1,0 +1,8 @@
+<h2>Sign up</h2>
+    <label for="emailSignup">Email:</label>
+    <input type="text" id="emailSignup" #emailSignup>
+    <div class="error-message" *ngIf="emailErrorMessage">{{ emailErrorMessage }}</div>
+    <label for="passwordSignup">Password:</label>
+    <input type="password" id="passwordSignup" #passwordSignup>
+    <div class="error-message" *ngIf="passwordErrorMessage">{{ passwordErrorMessage }}</div>
+    <button (click)="onSignup(emailSignup.value, passwordSignup.value)">Sign up</button>
