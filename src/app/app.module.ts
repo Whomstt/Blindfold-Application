@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, importProvidersFrom } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireAuth } from '@angular/fire/compat/auth'; // Import AngularFireAuth
 import { AngularFireModule } from '@angular/fire/compat';
@@ -13,6 +13,11 @@ import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DealerComponent } from './dealer/dealer.component';
 import { MessagesComponent } from './messages/messages.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { FormsModule } from '@angular/forms';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp';
 
 
 @NgModule({
@@ -29,13 +34,21 @@ import { MessagesComponent } from './messages/messages.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig), // Initializing Firebase here,
+    AngularFirestoreModule,
+    FormsModule,
   ],
+  
   providers: [
     AngularFireAuth, // Provide AngularFireAuth directly
     FirebaseService,
+    importProvidersFrom([
+      provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+      provideFirestore(() => getFirestore())
+    ])
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+}
+
