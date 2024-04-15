@@ -1,3 +1,8 @@
+* {
+    background-color: #000;
+}
+
+
 .sidenav {
     height: 100%;
     width: 12%;
@@ -38,6 +43,7 @@
     height: 70%;
     position: relative;
     margin-left: 12%;
+    background-color: #000;
 }
 
 input[type="text"] {
@@ -46,6 +52,7 @@ input[type="text"] {
     margin-bottom: 10px;
     height: 70%;
     position: relative;
+    background-color: #caccd1;
 }
 
 button {
@@ -61,7 +68,7 @@ button:hover {
 }
 
 html, body {
-    height: 100%;
+    height: 100vh;
     margin: 0;
     padding: 0;
     background-color: #000;
