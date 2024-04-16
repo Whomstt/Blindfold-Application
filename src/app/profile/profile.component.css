@@ -122,7 +122,9 @@ select {
     border: 1px solid #ccc; 
     padding: 8px; 
     font-size: 16px; 
-    border-bottom: 1.5px solid #F7270B;    
+    border-bottom: 1.5px solid #F7270B;  
+    width: 64%; 
+  
 }
 
 #age {
@@ -292,4 +294,25 @@ input[type="submit"]:hover {
     color: #FFFFFF;
 } 
 
+@media (max-width:60em) {
+    .sidenav {
+      display: none;
+    }
+  
+    .con1 {
+      left: 0;
+    }
+  
+    .centered-container {
+      margin-left: 0;
+    }
+  
+    .heading{
+      margin-left: 0;
+    }
+  
+    .bottom-image {
+      width: 100%;
+      margin-left: 0;
+    }
 
