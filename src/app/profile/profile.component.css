@@ -270,7 +270,7 @@ margin-bottom: 15%;
 .profile_description textarea{
 
     margin-top: 1%;
-    width: 68%;
+    width: 60%;
     border-bottom: 1.5px solid #F7270B;    
 
 }
@@ -315,4 +315,21 @@ input[type="submit"]:hover {
       width: 100%;
       margin-left: 0;
     }
+}
+
+@media screen and (max-width: 710px) {
+    /* Hide the right container when the screen width is below 768px */
+    .container {
+        flex-direction: column; /* Stack containers vertically */
+    }
+
+    .left {
+        order: 1; /* Move the left container to the top */
+        flex: 3;
+    }
+
+    .right {
+        display: none; /* Hide the right container */
+    }
+}
 
