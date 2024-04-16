@@ -16,13 +16,18 @@
                 <img src="assets/images/rabbit.jpg" class="img-fluid">
             </div>
             <div class="container">
-                <form action="search.php" method="GET">
-                    <input type="text" name="query" placeholder="Enter search here">
-                    <button type="submit">Search</button>
+                <form (submit)="onSearch()">
+                  <input type="text" [(ngModel)]="searchQuery" name="query" placeholder="Enter search here">
+                  <button type="submit">Search</button>
                 </form>
                 <!-- Display Hello user here -->
-                <p id="userGreeting">Hello {{ userEmail }}</p>
+                <p id="userGreeting">Test {{ userEmail }}</p>
             </div>
         </div>
+
+
+
+
+
     </body>
 </html>

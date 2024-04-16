@@ -17,6 +17,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { SearchListComponent } from './search-list/search-list.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     SignupComponent,
     ProfileComponent,
     DealerComponent,
-    MessagesComponent
+    MessagesComponent,
+    SearchListComponent
   ],
   imports: [
     BrowserModule,

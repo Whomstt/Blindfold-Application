@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   userEmail: string | null = null; // Initialize userEmail
+  searchQuery: string = '';
 
   constructor(
     public firebaseService: FirebaseService,
@@ -28,5 +29,10 @@ export class HomeComponent implements OnInit {
   async logout() {
     this.firebaseService.logout();
     this.router.navigate(['']);
+  }
+
+  onSearch() {
+    // Redirect to search-list component with the search query as a parameter
+    this.router.navigate(['/search-list'], { queryParams: { query: this.searchQuery } });
   }
 }
