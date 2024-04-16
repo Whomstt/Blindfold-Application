@@ -18,6 +18,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp';
+import { SearchListComponent } from './search-list/search-list.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp';
     SignupComponent,
     ProfileComponent,
     DealerComponent,
-    MessagesComponent
+    MessagesComponent,
+    SearchListComponent
   ],
   imports: [
     BrowserModule,

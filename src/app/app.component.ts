@@ -19,6 +19,8 @@ export class AppComponent implements OnInit {
     private router: Router
   ) {}
 
+  
+
   ngOnInit() {
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -26,4 +28,7 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
+
+  
 }

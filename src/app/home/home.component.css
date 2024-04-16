@@ -1,7 +1,3 @@
-* {
-    background-color: #000;
-}
-
 
 .sidenav {
     height: 100%;
@@ -10,8 +6,9 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #000; 
+    background-color: #000000; 
 }
+
 .sidenav a {
     padding: 10px 15px;
     text-decoration: none;
@@ -35,6 +32,7 @@
     height: 70%;
     position: relative;
     margin-left: 10%;
+    transition: left 0.3s;
 }
 
 .container {
@@ -85,6 +83,13 @@ body {
     color: white;
     
 }
+
+.centered-button {
+    font-size: 200%;
+    cursor: pointer;
+    border-radius: 8px;
+    z-index: 10;
+  }
 
 @media (max-width:60em) {
     .sidenav {

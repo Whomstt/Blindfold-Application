@@ -7,6 +7,7 @@ import { AuthGuard } from './auth.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { DealerComponent } from './dealer/dealer.component';  
 import { MessagesComponent } from './messages/messages.component';
+import { SearchListComponent } from './search-list/search-list.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }, // Require authentication
   { path: 'profile', component : ProfileComponent, canActivate: [AuthGuard] }, 
   { path: 'dealer', component : DealerComponent, canActivate: [AuthGuard] }, 
-  { path: 'messages', component : MessagesComponent, canActivate: [AuthGuard] }
+  { path: 'messages', component : MessagesComponent, canActivate: [AuthGuard] },
+  { path: 'search-list', component : SearchListComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
