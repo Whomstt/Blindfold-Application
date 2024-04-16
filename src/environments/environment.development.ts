@@ -3,6 +3,7 @@ export const environment = {
     firebaseConfig: {
       apiKey: "AIzaSyCShg7ErBfUMVAsl-Kt6UTNRoQiPQGOJvA",
       authDomain: "blindfold-application.firebaseapp.com",
+      databaseURL: "https://blindfold-application-default-rtdb.europe-west1.firebasedatabase.app",
       projectId: "blindfold-application",
       storageBucket: "blindfold-application.appspot.com",
       messagingSenderId: "244075422081",

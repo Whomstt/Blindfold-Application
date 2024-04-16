@@ -1,0 +1,16 @@
+.h2 {
+    font-family: 'Irish Grover', cursive;
+    width: 30%;
+}
+
+.container{
+    width: 50%;
+
+}
+
+button{
+    background-color: red;
+    color: black;
+    font-weight: bold;
+}
+
