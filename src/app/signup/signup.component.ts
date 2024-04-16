@@ -3,6 +3,7 @@ import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, map } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +12,6 @@ import { Observable, map } from 'rxjs';
 })
 export class SignupComponent {
   isSignedIn = false;
-  userID: number = 0;
   userName: string = '';
   userEmail: string = '';
   userPassword: string = '';
@@ -22,10 +22,11 @@ export class SignupComponent {
   constructor(
     public firebaseService: FirebaseService,
     private router: Router,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private afAuth: AngularFireAuth
   ) {}
 
-  async addUser(userID: number, userName: string, userEmail: string, userPassword: string, userPassword2: string, userType: string) {
+  async addUser(uid: string, userName: string, userEmail: string, userPassword: string, userPassword2: string, userType: string) {
     try {
         // Validation checks
         if (userName.length < 6) {
@@ -42,16 +43,16 @@ export class SignupComponent {
         }
 
         const newUser = {
-            userID: userID,
+            userID: uid, // Use the UID as the user ID
             userName: userName,
             userEmail: userEmail,
             userPassword: userPassword,
-            userType: userType
+            userType: userType,
             // Add other fields as needed
         };
 
         // Add the new user document to the "users" collection
-        await this.firestore.collection('users').add(newUser);
+        await this.firestore.collection('users').doc(uid).set(newUser);
 
         console.log('New user added successfully!');
         // Call onSignup() after user is added successfully
@@ -63,35 +64,34 @@ export class SignupComponent {
   }
 
   async onSubmit() {
-    // Generate userID dynamically
-    const lastUserID = await this.getLastUserID().toPromise();
-    const newUserID = this.incrementUserID(lastUserID); // Increment if lastUserID is not null, otherwise start from 1
-    // Call addUser function with the provided form values
-    console.log(newUserID, this.userName, this.userEmail, this.userPassword, this.userType);
-    await this.addUser(newUserID, this.userName, this.userEmail, this.userPassword, this.userPassword2, this.userType);
+    try {
+      const { user } = await this.afAuth.createUserWithEmailAndPassword(this.userEmail, this.userPassword);
+      if (user) {
+        this.isSignedIn = true;
+        // Call addUser with the UID
+        await this.addUser(user.uid, this.userName, this.userEmail, this.userPassword, this.userType);
+        
+        // Redirect to desired route after successful signup
+        this.router.navigate(['/home']); // Redirect to home page
+      } else {
+        throw new Error("User creation failed.");
+      }
+    } catch (error: any) {
+      console.error("Signup Error:", error);
+      this.errorMessage = error.message;
+    }
   }
 
-  getLastUserID(): Observable<number | null> {
-    // Query Firestore to get the last user's ID
-    return this.firestore.collection('users', ref => ref.orderBy('userID', 'desc').limit(1))
-      .get()
-      .pipe(
-        map(snapshot => {
-          if (!snapshot.empty) {
-            const lastUser = snapshot.docs[0].data() as { userID: number };
-            return lastUser.userID;
-          } else {
-            return null;
-          }
-        })
-      );
-  }
-
-  incrementUserID(lastUserID: number | null | undefined): number {
-    if (lastUserID !== null && lastUserID !== undefined) {
-      return lastUserID + 1;
-    } else {
-      return 1;
+  async onSignup(email: string, password: string) {
+    try {
+        await this.afAuth.createUserWithEmailAndPassword(email, password);
+        this.isSignedIn = true;
+        
+        // Redirect to desired route after successful signup
+        this.router.navigate(['/home']); // Redirect to home page
+    } catch (error) {
+        console.error("Signup Error:", error);
+        // Handle error here
     }
   }
 
@@ -100,15 +100,6 @@ export class SignupComponent {
       this.isSignedIn = true;
     else
       this.isSignedIn = false;
-  }
-
-  async onSignup(email: string, password: string) {
-    await this.firebaseService.signup(email, password);
-    if (this.firebaseService.isLoggedIn)
-      this.isSignedIn = true;
-    
-    // Redirect to desired route after successful signup
-    this.router.navigate(['/home']); // Redirect to home page
   }
 
   handleLogout() {

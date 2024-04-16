@@ -1,59 +1,52 @@
-/* Reset default browser styles */
 html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+.sidenav {
+    height: 100%;
+    width: 12%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #000; 
+    /* padding-top: 20px; */
+}
+
+.sidenav a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff; 
+    display: block;
+}
+.sidenav a:hover {
+    background-color: #333; 
+}
+.rounded_img {
+    border-radius: 50%;
+    overflow: hidden; 
+    width: 100%;
+    height: 100%;
+}
+
+ h1 {
+      font-family: 'Irish Grover', sans-serif;
+      font-size: 36px;
+      color: #333; /* Dark gray text */
+      text-align: center;
+    }
+
+  body{
+    background-color: white;
+    font-family: Arial, sans-serif; /* Default font */
     margin: 0;
     padding: 0;
   }
-  
-  /* Set default font for the body */
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2; /* Light gray background */
+
+  .results {
+    margin-left: 12%;
   }
-  
-  /* Center content vertically and horizontally */
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Full viewport height */
-  }
-  
-  /* Style the content area */
-  .content {
-    text-align: center;
-  }
-  
-  /* Style the paragraph */
-  p {
-    font-size: 20px;
-    color: #333; /* Dark gray text */
-  }
-  
-  /* Style the user list */
-  .user-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  /* Style each user item */
-  .user-item {
-    margin-bottom: 10px;
-    background-color: #fff; /* White background */
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
-  }
-  
-  /* Hover effect on user items */
-  .user-item:hover {
-    background-color: #f0f0f0; /* Light gray background on hover */
-  }
-  
-  /* Style the title */
-  .title {
-    font-family: 'Irish Grover', sans-serif; /* Custom font */
-    font-size: 36px;
-    color: #555; /* Dark grayish blue */
-    margin-bottom: 20px;
-  }
-  
