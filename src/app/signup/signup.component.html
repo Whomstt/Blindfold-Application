@@ -28,8 +28,9 @@
     </div>
     <div class="form-group">
         <label for="userPassword">Confirm Password:</label>
+        <br>
         <input type="password" id="userPassword2" name="userPassword2" [(ngModel)]="userPassword2">
-    </div>
+    </div><br>
       
     <button type="submit">Sign Up</button>
     <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
