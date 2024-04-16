@@ -15,6 +15,7 @@ export class SignupComponent {
   userName: string = '';
   userEmail: string = '';
   userPassword: string = '';
+  userPassword2: string= '';
   userType: string = 'User';
   errorMessage: string = ''; // Declare error message variable
 
@@ -24,7 +25,7 @@ export class SignupComponent {
     private firestore: AngularFirestore
   ) {}
 
-  async addUser(userID: number, userName: string, userEmail: string, userPassword: string, userType: string) {
+  async addUser(userID: number, userName: string, userEmail: string, userPassword: string, userPassword2: string, userType: string) {
     try {
         // Validation checks
         if (userName.length < 6) {
@@ -32,6 +33,9 @@ export class SignupComponent {
         }
         if (userPassword.length < 6) {
             throw new Error('Password must be 6 characters long.');
+        }
+        if (userPassword2 !== userPassword){
+          throw new Error('Passwords do not match')
         }
         if (!userEmail.includes('@')) {
             throw new Error('Invalid email address.');
@@ -64,7 +68,7 @@ export class SignupComponent {
     const newUserID = this.incrementUserID(lastUserID); // Increment if lastUserID is not null, otherwise start from 1
     // Call addUser function with the provided form values
     console.log(newUserID, this.userName, this.userEmail, this.userPassword, this.userType);
-    await this.addUser(newUserID, this.userName, this.userEmail, this.userPassword, this.userType);
+    await this.addUser(newUserID, this.userName, this.userEmail, this.userPassword, this.userPassword2, this.userType);
   }
 
   getLastUserID(): Observable<number | null> {
