@@ -13,7 +13,7 @@
             <div class="profile_info">
                 <div class="edit_profile">Edit Profile</div>
                 <div class="profile-image">
-                    <img src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg">
+                    <img src="assets/images/greyIcon.png">
                 </div>
                 <div class="user-details">
                     <form action="profile.php" method="post">
@@ -23,7 +23,7 @@
                         </div>
                         <div class="form-group">
                             <div class="label">Age</div>
-                            <input type="number" id="age" name="age" required>
+                            <input type="number" id="age" name="age" min="18" max="100" required>
                         </div>
                         <div class="form-group">
                             <div class="label">Gender</div>
@@ -32,6 +32,13 @@
                                 <option value="female">Female</option>
                                 <option value="other">Other</option>
                             </select>
+                            <div class="label">Seeking</div>
+                            <select id="Seeking" name="Seeking" required>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                            
                         </div>
                     </form>
                 </div>
@@ -41,9 +48,32 @@
             <div class="black-section">
                 <div class="Profile_button"> <button>Sign Out</button></div>
                 <div class="Profile_title"> Dating in Disguise </div>
-                <div class="Profile_background">Choose a background cover </div>
+                <div class="Profile_background"><img src="assets/images/pokerBackground.jpg"> </div>
             </div>
-            <div class="white-section"></div>
+            <div class="white-section">
+                <div class="interests">
+                    <label class="label" for="interests">Interests</label><br>
+            
+                <input type="checkbox" id="reading" name="interest" value="reading">
+                <label class="label2" for="reading">Reading</label><br>
+                <input type="checkbox" id="cooking" name="interest" value="cooking">
+                <label class="label2" for="cooking">Cooking</label><br>
+                <input type="checkbox" id="sports" name="interest" value="sports">
+                <label class="label2" for="sports">Sports</label><br>
+                <input type="checkbox" id="traveling" name="interest" value="traveling">
+                <label class="label2" for="traveling">Traveling</label><br>
+                <input type="checkbox" id="smoker" name="interest" value="smoker">
+                <label class="label2" for="smoker">Smoker</label><br>
+                </div>
+                <div class="profile_description">
+                <label class="label" for="description">Description:</label><br>
+                <textarea id="description" name="description" rows="4" cols="50" required></textarea>
+               </div>
+               <div class="profile_submit">
+                <input type="submit" value="Submit">
+               </div>
+                
+            </div>
         </div>
 
     </div>
