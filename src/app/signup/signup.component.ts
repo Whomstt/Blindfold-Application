@@ -69,7 +69,7 @@ export class SignupComponent {
       if (user) {
         this.isSignedIn = true;
         // Call addUser with the UID
-        await this.addUser(user.uid, this.userName, this.userEmail, this.userPassword, this.userType);
+        await this.addUser(user.uid, this.userName, this.userEmail, this.userPassword, this.userPassword2, this.userType);
         
         // Redirect to desired route after successful signup
         this.router.navigate(['/home']); // Redirect to home page
