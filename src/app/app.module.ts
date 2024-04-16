@@ -17,7 +17,6 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { FirebaseTSApp } from 'firebasets/firebasetsApp/firebaseTSApp';
 
 
 @NgModule({
