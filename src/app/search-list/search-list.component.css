@@ -1,0 +1,59 @@
+/* Reset default browser styles */
+html, body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Set default font for the body */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2; /* Light gray background */
+  }
+  
+  /* Center content vertically and horizontally */
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+  }
+  
+  /* Style the content area */
+  .content {
+    text-align: center;
+  }
+  
+  /* Style the paragraph */
+  p {
+    font-size: 20px;
+    color: #333; /* Dark gray text */
+  }
+  
+  /* Style the user list */
+  .user-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* Style each user item */
+  .user-item {
+    margin-bottom: 10px;
+    background-color: #fff; /* White background */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  }
+  
+  /* Hover effect on user items */
+  .user-item:hover {
+    background-color: #f0f0f0; /* Light gray background on hover */
+  }
+  
+  /* Style the title */
+  .title {
+    font-family: 'Irish Grover', sans-serif; /* Custom font */
+    font-size: 36px;
+    color: #555; /* Dark grayish blue */
+    margin-bottom: 20px;
+  }
+  
