@@ -27,10 +27,10 @@ export class SignupComponent {
   async addUser(userID: number, userName: string, userEmail: string, userPassword: string, userType: string) {
     try {
         // Validation checks
-        if (userName.length !== 6) {
+        if (userName.length < 6) {
             throw new Error('Username must be 6 characters long.');
         }
-        if (userPassword.length !== 6) {
+        if (userPassword.length < 6) {
             throw new Error('Password must be 6 characters long.');
         }
         if (!userEmail.includes('@')) {
@@ -63,6 +63,7 @@ export class SignupComponent {
     const lastUserID = await this.getLastUserID().toPromise();
     const newUserID = this.incrementUserID(lastUserID); // Increment if lastUserID is not null, otherwise start from 1
     // Call addUser function with the provided form values
+    console.log(newUserID, this.userName, this.userEmail, this.userPassword, this.userType);
     await this.addUser(newUserID, this.userName, this.userEmail, this.userPassword, this.userType);
   }
 
