@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class FirebaseService {
 
   constructor(
     private afAuth: AngularFireAuth,
-    private router: Router
+    private router: Router,
+    private firestore: AngularFirestore
   ) {}
 
   async signin(email: string, password: string) {
@@ -47,6 +49,15 @@ export class FirebaseService {
     } catch (error) {
       console.error('Error checking email existence:', error);
       return false;
+    }
+  }
+
+  async updateProfile(uid: string, newData: any): Promise<void> {
+    try {
+      // Assuming 'profiles' is the name of your Firestore collection
+      await this.firestore.collection('profiles').doc(uid).update(newData);
+    } catch (error) {
+      throw error;
     }
   }
 

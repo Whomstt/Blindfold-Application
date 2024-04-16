@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { EventEmitter } from '@angular/core';
-import { Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
-import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore'; // Import AngularFirestore
+import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-profile',
@@ -13,34 +11,63 @@ import { AngularFirestore } from '@angular/fire/compat/firestore'; // Import Ang
 })
 export class ProfileComponent implements OnInit {
   @Output() isLogout = new EventEmitter<void>();
-  userData: any; // Define a variable to hold user data
+  uid: string = ''; // Initialize UID
+  userProfile: any; // Initialize userProfile to hold user profile data
+  newProfileData: any = {}; // Assuming you have the new profile data to update
 
   constructor(
-    public firebaseService: FirebaseService, 
-    private router: Router, 
+    private firebaseService: FirebaseService,
     private afAuth: AngularFireAuth,
-    private firestore: AngularFirestore // Inject AngularFirestore
-  ) { }
+    private router: Router,
+    private firestore: AngularFirestore
+  ) {}
 
-  ngOnInit(): void {
-    this.getAndLogUID();
-  }
-
-  async getAndLogUID() {
+  async ngOnInit() {
+    // Accessing UID
     const user = await this.afAuth.currentUser;
     if (user) {
-      const uid = user.uid;
-      console.log("UID:", uid);
+      this.uid = user.uid;
+      console.log("UID:", this.uid);
 
-      // Now, fetch the user document using the UID
-      this.firestore.collection('users').doc(uid).get().subscribe(doc => {
-        if (doc.exists) {
-          this.userData = doc.data(); // Save the user data
-          console.log("User Data:", this.userData);
-        } else {
-          console.log("No such document!");
-        }
-      });
+      // Fetch user profile data
+      await this.getUserProfile();
+    }
+  }
+
+  async getUserProfile() {
+    try {
+      const userProfileDoc = await this.firestore.collection('profiles').doc(this.uid).get().toPromise();
+      if (userProfileDoc && userProfileDoc.exists) {
+        this.userProfile = userProfileDoc.data();
+        console.log('User profile fetched successfully:', this.userProfile);
+      } else {
+        console.log('User profile does not exist.');
+        // Handle the case where the user profile does not exist
+        // You can initialize this.userProfile to an empty object or handle it based on your application logic
+      }
+    } catch (error: any) {
+      console.error('Error fetching user profile:', error);
+      // Handle error as needed
+    }
+  }  
+
+  async updateProfile() {
+    try {
+      this.newProfileData.userAge = this.userProfile.userAge;
+      this.newProfileData.userGender = this.userProfile.userGender;
+      this.newProfileData.userSeeking = this.userProfile.userSeeking;
+      this.newProfileData.userRealName = this.userProfile.userRealName;
+      await this.firebaseService.updateProfile(this.uid, this.newProfileData);
+      console.log('Profile updated successfully!');
+    } catch (error: any) {
+      console.error('Error updating profile:', error);
+    }
+  }
+
+  onFileSelected(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      // You can now handle the selected file, such as uploading it to a server or displaying it preview.
     }
   }
 
