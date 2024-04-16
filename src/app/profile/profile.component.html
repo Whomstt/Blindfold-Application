@@ -63,8 +63,8 @@
                     <label class="label2" for="smoker">Smoker</label><br>
                 </div>
                 <div class="profile_description">
-                    <label class="label" for="description">Description:</label><br>
-                    <textarea id="description" name="description" rows="4" cols="50" required></textarea>
+                  <label class="label" for="description">Description:</label><br>
+                  <textarea id="userBio" name="userBio" rows="4" cols="50" [(ngModel)]="userProfile.userBio" required></textarea>
                 </div>
                 <div class="profile_submit">
                     <button type="button" (click)="updateProfile()">Submit</button>

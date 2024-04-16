@@ -28,44 +28,31 @@ export class SignupComponent {
 
   async addUser(uid: string, userName: string, userEmail: string, userPassword: string, userPassword2: string, userType: string) {
     try {
-      // Validation checks
-      if (userName.length < 6) {
-        throw new Error('Username must be 6 characters long.');
-      }
-      if (userPassword.length < 6) {
-        throw new Error('Password must be 6 characters long.');
-      }
-      if (userPassword !== userPassword2) {
-        throw new Error('Passwords do not match.');
-      }
-      if (!userEmail.includes('@')) {
-        throw new Error('Invalid email address.');
-      }
-  
-      const newUser = {
-        userID: uid, // Use the UID as the user ID
-        userName: userName,
-        userEmail: userEmail,
-        userPassword: userPassword,
-        userType: userType,
-        // Add other fields as needed
-      };
-  
-      // Add the new user document to the "users" collection
-      await this.firestore.collection('users').doc(uid).set(newUser);
-  
-      console.log('New user added successfully!');
-      
-      // Call addProfile after user is added successfully
-      await this.addProfile(uid, 18, '', '', '', '', '', ''); // Pass necessary arguments for profile creation
-  
-      console.log('Profile created successfully!');
-      
-      // Call onSignup() after user and profile are added successfully
-      await this.onSignup(userEmail, userPassword);
+        const newUser = {
+            userID: uid, // Use the UID as the user ID
+            userName: userName,
+            userEmail: userEmail,
+            userPassword: userPassword,
+            userType: userType,
+            // Add other fields as needed
+        };
+
+        // Add the new user document to the "users" collection
+        await this.firestore.collection('users').doc(uid).set(newUser);
+
+        console.log('New user added successfully!');
+
+        // Call addProfile after user is added successfully
+        await this.addProfile(uid, 18, '', '', '', 'False', '', ''); // Pass necessary arguments for profile creation
+
+        console.log('Profile created successfully!');
+
+        // Call onSignup() after user and profile are added successfully
+        await this.onSignup(userEmail, userPassword);
     } catch (error: any) {
-      this.errorMessage = error.message;
-      console.error('Error adding new user:', error);
+        this.errorMessage = error.message;
+        console.error('Error adding new user:', error);
+        return; // Halt the process if an error occurred
     }
   }
 
@@ -104,6 +91,22 @@ export class SignupComponent {
   }
 
   async onSubmit() {
+    if (this.userPassword !== this.userPassword2) {
+      this.errorMessage = "Passwords do not match.";
+      return;
+    }
+    if (this.userPassword.length < 6) {
+      this.errorMessage = "Password must be at least 6 characters long.";
+      return;
+    }
+    if (this.userName.length < 6) {
+      this.errorMessage = "Username must be at least 6 characters long.";
+      return;
+    }
+    if (!this.userEmail.includes('@')) {
+      this.errorMessage = "Invalid email address.";
+      return;
+    }
     try {
       const { user } = await this.afAuth.createUserWithEmailAndPassword(this.userEmail, this.userPassword);
       if (user) {

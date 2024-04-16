@@ -57,6 +57,7 @@ export class ProfileComponent implements OnInit {
       this.newProfileData.userGender = this.userProfile.userGender;
       this.newProfileData.userSeeking = this.userProfile.userSeeking;
       this.newProfileData.userRealName = this.userProfile.userRealName;
+      this.newProfileData.userBio = this.userProfile.userBio;
       await this.firebaseService.updateProfile(this.uid, this.newProfileData);
       console.log('Profile updated successfully!');
     } catch (error: any) {
