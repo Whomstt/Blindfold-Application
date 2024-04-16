@@ -15,6 +15,7 @@ export class SignupComponent {
   userName: string = '';
   userEmail: string = '';
   userPassword: string = '';
+  userPassword2: string = '';
   userType: string = 'User';
   errorMessage: string = ''; // Declare error message variable
 
@@ -25,7 +26,7 @@ export class SignupComponent {
     private afAuth: AngularFireAuth
   ) {}
 
-  async addUser(uid: string, userName: string, userEmail: string, userPassword: string, userType: string) {
+  async addUser(uid: string, userName: string, userEmail: string, userPassword: string, userPassword2: string, userType: string) {
     try {
       // Validation checks
       if (userName.length < 6) {
@@ -33,6 +34,9 @@ export class SignupComponent {
       }
       if (userPassword.length < 6) {
         throw new Error('Password must be 6 characters long.');
+      }
+      if (userPassword !== userPassword2) {
+        throw new Error('Passwords do not match.');
       }
       if (!userEmail.includes('@')) {
         throw new Error('Invalid email address.');
@@ -105,7 +109,7 @@ export class SignupComponent {
       if (user) {
         this.isSignedIn = true;
         // Call addUser with the UID
-        await this.addUser(user.uid, this.userName, this.userEmail, this.userPassword, this.userType);
+        await this.addUser(user.uid, this.userName, this.userEmail, this.userPassword, this.userPassword2, this.userType);
         
         // Redirect to desired route after successful signup
         this.router.navigate(['/profile']); // Redirect to home page
