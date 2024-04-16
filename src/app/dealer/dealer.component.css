@@ -25,6 +25,8 @@ html, body {
     font-size: 18px;
     color: #fff; 
     display: block;
+    border-top: 1.5px solid #a9a5a4;    
+
 }
 .sidenav a:hover {
     background-color: #333; 
