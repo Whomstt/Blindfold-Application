@@ -62,6 +62,8 @@ export class ProfileComponent implements OnInit {
       this.newProfileData.userBio = this.userProfile.userBio;
       await this.firebaseService.updateProfile(this.uid, this.newProfileData);
       console.log('Profile updated successfully!');
+
+      window.location.reload();
     } catch (error: any) {
       console.error('Error updating profile:', error);
     }
