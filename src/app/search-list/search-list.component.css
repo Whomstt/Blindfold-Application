@@ -50,3 +50,11 @@ html, body {
   .results {
     margin-left: 12%;
   }
+
+  .circular-image {
+    width: 20%; /* Adjust the width percentage to your desired size */
+  height: auto; /* Let the height adjust automatically based on the width */
+  max-width: 150px; /* Limit the maximum width to ensure the image doesn't become too large */
+  border-radius: 50%; /* Make the image circular */
+  object-fit: cover; 
+  }
