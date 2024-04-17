@@ -290,9 +290,23 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #FF8C66; /* Background color on hover */
+    background-color: #FF8C66; 
     color: #FFFFFF;
 } 
+
+input[type="file"] {
+  color: transparent;
+}
+
+.profile-image img {
+  padding-bottom: 10px; /* Adjust the value as needed */
+}
+
+
+input[type="file"]::-webkit-file-upload-button {
+  margin: 0 auto;
+  display: block;
+}
 
 @media (max-width:60em) {
     .sidenav {
@@ -318,18 +332,18 @@ input[type="submit"]:hover {
 }
 
 @media screen and (max-width: 710px) {
-    /* Hide the right container when the screen width is below 768px */
+    
     .container {
-        flex-direction: column; /* Stack containers vertically */
+        flex-direction: column; 
     }
 
     .left {
-        order: 1; /* Move the left container to the top */
+        order: 1; 
         flex: 3;
     }
 
     .right {
-        display: none; /* Hide the right container */
+        display: none;
     }
 }
 
