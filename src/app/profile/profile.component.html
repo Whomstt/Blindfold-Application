@@ -10,7 +10,8 @@
             <div class="profile_info">
                 <div class="edit_profile">Edit Profile</div>
                 <div class="profile-image">
-                    <img src="assets/images/greyIcon.png">
+                    <img [src]="userProfile?.profileImageURL || 'assets/images/greyIcon.png'">
+                    <input type="file" (change)="onFileSelected($event)">
                 </div>
                 <div class="user-details">
                     <form>

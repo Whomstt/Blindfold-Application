@@ -3,6 +3,7 @@ import { FirebaseService } from '../services/firebase.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +20,8 @@ export class ProfileComponent implements OnInit {
     private firebaseService: FirebaseService,
     private afAuth: AngularFireAuth,
     private router: Router,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private storage: AngularFireStorage
   ) {}
 
   async ngOnInit() {
@@ -65,16 +67,47 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  onFileSelected(event: any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      // You can now handle the selected file, such as uploading it to a server or displaying it preview.
-    }
-  }
-
   async logout() {
     this.firebaseService.logout();
     this.isLogout.emit();
     this.router.navigate(['']);
   }
+
+  async uploadImage(event: any) {
+    try {
+      if (event.target.files.length > 0) {
+        const file = event.target.files[0];
+        
+        // Generate a unique name for the file
+        const fileName = `${Date.now()}_${file.name}`;
+        
+        // Path to upload the image in Firebase Storage
+        const filePath = `userProfileImages/${fileName}`;
+        
+        // Reference to the Firebase Storage location
+        const storageRef = this.storage.ref(filePath);
+        
+        // Upload the file to Firebase Storage
+        const uploadTask = storageRef.child(filePath).put(file);
+        
+        // Wait for the upload to complete
+        const snapshot = await uploadTask;
+  
+        // Get the download URL of the uploaded file
+        const downloadURL = await snapshot.ref.getDownloadURL();
+  
+        // Update the user profile with the download URL
+        this.newProfileData.profileImageURL = downloadURL;
+        
+        console.log('Image uploaded successfully:', downloadURL);
+      }
+    } catch (error: any) {
+      console.error('Error uploading image:', error);
+    }
+  }
+
+  onFileSelected(event: any) {
+    this.uploadImage(event);
+  }
+  
 }
