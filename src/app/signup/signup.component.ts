@@ -43,7 +43,7 @@ export class SignupComponent {
         console.log('New user added successfully!');
 
         // Call addProfile after user is added successfully
-        await this.addProfile(uid, 18, '', '', '', 'False', '', ''); // Pass necessary arguments for profile creation
+        await this.addProfile(uid, 18, '', '', 'False', '', ''); // Pass necessary arguments for profile creation
 
         console.log('Profile created successfully!');
 
@@ -70,14 +70,13 @@ export class SignupComponent {
   }
 
   async addProfile(uid: string, userAge: number, userGender: string, 
-    userSeeking: string, userPhoto: string, userBanned: string, userBio: string, userRealName: string) {
+    userSeeking: string, userBanned: string, userBio: string, userRealName: string) {
     try {
         const newProfile = {
             userID: uid,
             userAge: userAge,
             userGender: userGender,
             userSeeking: userSeeking,
-            userPhoto: userPhoto,
             userBanned: userBanned,
             userBio: userBio,
             userRealName: userRealName

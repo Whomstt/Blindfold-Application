@@ -3,6 +3,7 @@ import { FirebaseService } from '../services/firebase.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +20,8 @@ export class ProfileComponent implements OnInit {
     private firebaseService: FirebaseService,
     private afAuth: AngularFireAuth,
     private router: Router,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private storage: AngularFireStorage
   ) {}
 
   async ngOnInit() {
@@ -60,15 +62,10 @@ export class ProfileComponent implements OnInit {
       this.newProfileData.userBio = this.userProfile.userBio;
       await this.firebaseService.updateProfile(this.uid, this.newProfileData);
       console.log('Profile updated successfully!');
+
+      window.location.reload();
     } catch (error: any) {
       console.error('Error updating profile:', error);
-    }
-  }
-
-  onFileSelected(event: any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      // You can now handle the selected file, such as uploading it to a server or displaying it preview.
     }
   }
 
@@ -77,4 +74,93 @@ export class ProfileComponent implements OnInit {
     this.isLogout.emit();
     this.router.navigate(['']);
   }
+
+ async uploadImage(event: any) {
+  try {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      
+      // Create FileReader to read the uploaded file
+      const reader = new FileReader();
+      
+      // Define the callback function for when the file is loaded
+      reader.onload = async (e: any) => {
+        try {
+          // Create an image element to hold the uploaded image
+          const img = new Image();
+          img.src = e.target.result;
+          
+          // Define the callback function for when the image is loaded
+          img.onload = async () => {
+            try {
+              // Calculate the size of the square to crop
+              const size = Math.min(img.width, img.height);
+              
+              // Create a canvas element to perform cropping
+              const canvas = document.createElement('canvas');
+              const ctx = canvas.getContext('2d');
+              
+              if (ctx) { // Check if ctx is not null
+                // Set the canvas size to the calculated square size
+                canvas.width = size;
+                canvas.height = size;
+                
+                // Draw the image onto the canvas, cropping to the square
+                ctx.drawImage(img, (img.width - size) / 2, (img.height - size) / 2, size, size, 0, 0, size, size);
+                
+                // Convert the canvas content to a Blob
+                canvas.toBlob(async (blob) => {
+                  if (blob) {
+                    // Create a new File object from the Blob
+                    const croppedFile = new File([blob], file.name, { type: 'image/png' });
+                    
+                    // Upload the cropped file to Firebase Storage
+                    const snapshot = await this.storage.upload(`userProfileImages/${croppedFile.name}`, croppedFile);
+                    
+                    // Get the download URL of the uploaded image
+                    const downloadURL = await snapshot.ref.getDownloadURL();
+                    
+                    // Update the user profile with the download URL
+                    this.newProfileData.profileImageURL = downloadURL;
+                  }
+                }, 'image/png');
+              } else {
+                console.error('Canvas context is null');
+              }
+            } catch (error) {
+              console.error('Error cropping image:', error);
+            }
+          };
+        } catch (error) {
+          console.error('Error loading image:', error);
+        }
+      };
+      
+      // Read the uploaded file as a data URL
+      reader.readAsDataURL(file);
+    }
+  } catch (error) {
+    console.error('Error uploading image:', error);
+  }
+}
+
+  onFileSelected(event: any) {
+  try {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      
+      // Update the label text to indicate that a file has been selected
+      const label = document.querySelector('.input-file-button');
+      if (label) {
+        label.textContent = `File Selected: ${file.name}`;
+      }
+      
+      // Continue with the upload process
+      this.uploadImage(event);
+    }
+  } catch (error) {
+    console.error('Error handling file selection:', error);
+  }
+}
+  
 }

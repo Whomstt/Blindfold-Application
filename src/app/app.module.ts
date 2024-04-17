@@ -18,6 +18,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { SearchListComponent } from './search-list/search-list.component';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { SearchListComponent } from './search-list/search-list.component';
     FirebaseService,
     importProvidersFrom([
       provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-      provideFirestore(() => getFirestore())
+      provideFirestore(() => getFirestore()),
+      provideStorage(() => getStorage())
     ])
   ],
   bootstrap: [AppComponent]

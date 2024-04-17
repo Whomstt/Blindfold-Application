@@ -9,9 +9,11 @@
         <div class="left">
             <div class="profile_info">
                 <div class="edit_profile">Edit Profile</div>
-                <div class="profile-image">
-                    <img src="assets/images/greyIcon.png">
-                </div>
+              <div class="profile-image">
+              <img id="preview-image" [src]="userProfile?.profileImageURL || 'assets/images/greyIcon.png'">
+              <label for="file-upload" class="input-file-button"></label>
+             <input id="file-upload" type="file" (change)="onFileSelected($event)">
+               </div>
                 <div class="user-details">
                     <form>
                         <div class="form-group">
