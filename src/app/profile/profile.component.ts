@@ -145,7 +145,22 @@ export class ProfileComponent implements OnInit {
 }
 
   onFileSelected(event: any) {
-    this.uploadImage(event);
+  try {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      
+      // Update the label text to indicate that a file has been selected
+      const label = document.querySelector('.input-file-button');
+      if (label) {
+        label.textContent = `File Selected: ${file.name}`;
+      }
+      
+      // Continue with the upload process
+      this.uploadImage(event);
+    }
+  } catch (error) {
+    console.error('Error handling file selection:', error);
   }
+}
   
 }
