@@ -300,6 +300,7 @@ input[type="file"] {
 
 .profile-image img {
   padding-bottom: 10px; /* Adjust the value as needed */
+  border-radius: 50%;
 }
 
 
