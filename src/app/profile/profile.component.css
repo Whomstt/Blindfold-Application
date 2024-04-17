@@ -191,16 +191,16 @@ select {
     margin-top: 2%;
 }
 
-.Profile_button{
+.Profile_button {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: larger;
     text-align: right;
-    cursor: pointer;
-
 }
 
  .black-section .Profile_button:hover button{
     background-color:grey;
+    cursor: pointer;
+
 }
 
 .Poker_background img{
