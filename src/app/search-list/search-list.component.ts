@@ -9,8 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SearchListComponent implements OnInit {
   searchQuery: string = ''; 
-  searchResults: string[] = [];
-  usernames: string[] = []; 
+  searchResults: any[] = []; 
 
   constructor(
     private route: ActivatedRoute,
@@ -18,33 +17,42 @@ export class SearchListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  this.route.queryParams.subscribe(params => {
-    this.searchQuery = params['query'] || ''; 
-    console.log('Search query:', this.searchQuery); 
-    this.fetchUsernames(); 
-  });
-}
+    this.route.queryParams.subscribe(params => {
+      this.searchQuery = params['query'] || ''; 
+      console.log('Search query:', this.searchQuery); 
+      this.fetchUsernames(); 
+    });
+  }
 
   fetchUsernames() {
-  this.firestore.collection('users').valueChanges().subscribe(
-  (usernames: any[]) => {
-    console.log('Usernames:', usernames); 
-    this.usernames = usernames.map(user => user.userName); 
-    this.filterSearchResults(); 
-  },
-  error => {
-    console.error('Error fetching usernames:', error);
-  }
-);
-}
+    this.firestore.collection('users').valueChanges().subscribe(
+      (users: any[]) => {
+        console.log('Users:', users); 
 
- filterSearchResults() {
-  if (this.usernames && this.usernames.length > 0) {
-    this.searchResults = this.usernames.filter(username =>
-      username && username.toLowerCase().includes(this.searchQuery.toLowerCase())
+        // Fetch profiles
+        this.firestore.collection('profiles').valueChanges().subscribe(
+          (profiles: any[]) => {
+            console.log('Profiles:', profiles);
+
+            // Match profiles with users
+            this.searchResults = profiles.map(profile => {
+              const user = users.find(u => u.uid === profile.uid);
+              return {
+                user: user,
+                profile: profile
+              };
+            });
+
+            console.log('Search results:', this.searchResults);
+          },
+          error => {
+            console.error('Error fetching profiles:', error);
+          }
+        );
+      },
+      error => {
+        console.error('Error fetching users:', error);
+      }
     );
-  } else {
-    this.searchResults = [];
   }
-}
 }
