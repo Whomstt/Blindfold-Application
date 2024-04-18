@@ -163,17 +163,15 @@ export class ProfileComponent implements OnInit {
   async onFileSelected(event: any) {
     try {
       const file: File = event.target.files[0];
-      const reader: FileReader = new FileReader();
-  
-      reader.onload = (e: any) => {
-        this.userProfile.profileImageURL = e.target.result;
-        // Call uploadImage to handle image upload
-        this.uploadImage(event);
-      };
-  
-      reader.readAsDataURL(file);
+      
+      // Set the profile image to the grey icon initially
+      this.userProfile.profileImageURL = 'assets/images/uploading.jpg';
+      
+      // Call uploadImage to handle image upload
+      this.uploadImage(event);
     } catch (error) {
       console.error('Error uploading image:', error);
     }
-  } 
+  }
+  
 }
