@@ -76,92 +76,104 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['']);
   }
 
- async uploadImage(event: any) {
-  try {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      
-      // Create FileReader to read the uploaded file
-      const reader = new FileReader();
-      
-      // Define the callback function for when the file is loaded
-      reader.onload = async (e: any) => {
-        try {
-          // Create an image element to hold the uploaded image
-          const img = new Image();
-          img.src = e.target.result;
-          
-          // Define the callback function for when the image is loaded
-          img.onload = async () => {
-            try {
-              // Calculate the size of the square to crop
-              const size = Math.min(img.width, img.height);
-              
-              // Create a canvas element to perform cropping
-              const canvas = document.createElement('canvas');
-              const ctx = canvas.getContext('2d');
-              
-              if (ctx) { // Check if ctx is not null
-                // Set the canvas size to the calculated square size
-                canvas.width = size;
-                canvas.height = size;
+  async uploadImage(event: any) {
+    console.log('Uploading image...');
+    try {
+      if (event.target.files.length > 0) {
+        const file = event.target.files[0];
+        
+        // Create FileReader to read the uploaded file
+        const reader = new FileReader();
+        
+        // Define the callback function for when the file is loaded
+        reader.onload = async (e: any) => {
+          try {
+            // Create an image element to hold the uploaded image
+            const img = new Image();
+            img.src = e.target.result;
+            
+            // Define the callback function for when the image is loaded
+            img.onload = async () => {
+              try {
+                // Log the image dimensions to ensure it's loaded properly
+                console.log('Image dimensions:', img.width, 'x', img.height);
                 
-                // Draw the image onto the canvas, cropping to the square
-                ctx.drawImage(img, (img.width - size) / 2, (img.height - size) / 2, size, size, 0, 0, size, size);
+                // Calculate the size of the square to crop
+                const size = Math.min(img.width, img.height);
                 
-                // Convert the canvas content to a Blob
-                canvas.toBlob(async (blob) => {
-                  if (blob) {
-                    // Create a new File object from the Blob
-                    const croppedFile = new File([blob], file.name, { type: 'image/png' });
-                    
-                    // Upload the cropped file to Firebase Storage
-                    const snapshot = await this.storage.upload(`userProfileImages/${croppedFile.name}`, croppedFile);
-                    
-                    // Get the download URL of the uploaded image
-                    const downloadURL = await snapshot.ref.getDownloadURL();
-                    
-                    // Update the user profile with the download URL
-                    this.newProfileData.profileImageURL = downloadURL;
-                  }
-                }, 'image/png');
-              } else {
-                console.error('Canvas context is null');
+                // Create a canvas element to perform cropping
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                if (ctx) { // Check if ctx is not null
+                  // Set the canvas size to the calculated square size
+                  canvas.width = size;
+                  canvas.height = size;
+                  
+                  // Draw the image onto the canvas, cropping to the square
+                  ctx.drawImage(img, (img.width - size) / 2, (img.height - size) / 2, size, size, 0, 0, size, size);
+                  
+                  // Log the canvas dimensions to ensure the cropping is correct
+                  console.log('Canvas dimensions:', canvas.width, 'x', canvas.height);
+                  
+                  // Convert the canvas content to a Blob
+                  canvas.toBlob(async (blob) => {
+                    if (blob) {
+                      // Log the blob size to ensure it's created correctly
+                      console.log('Blob size:', blob.size);
+                      
+                      // Create a new File object from the Blob
+                      const croppedFile = new File([blob], file.name, { type: 'image/png' });
+                      
+                      // Log the cropped file to ensure it's created correctly
+                      console.log('Cropped file:', croppedFile);
+                      
+                      // Upload the cropped file to Firebase Storage
+                      const snapshot = await this.storage.upload(`userProfileImages/${croppedFile.name}`, croppedFile);
+                      
+                      // Get the download URL of the uploaded image
+                      const downloadURL = await snapshot.ref.getDownloadURL();
+                      
+                      // Update the user profile with the download URL
+                      this.userProfile.profileImageURL = downloadURL;
+                    }
+                  }, 'image/png');
+                } else {
+                  console.error('Canvas context is null');
+                }
+              } catch (error) {
+                console.error('Error cropping image:', error);
               }
-            } catch (error) {
-              console.error('Error cropping image:', error);
-            }
-          };
-        } catch (error) {
-          console.error('Error loading image:', error);
-        }
-      };
-      
-      // Read the uploaded file as a data URL
-      reader.readAsDataURL(file);
-    }
-  } catch (error) {
-    console.error('Error uploading image:', error);
-  }
-}
-
-  onFileSelected(event: any) {
-  try {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      
-      // Update the label text to indicate that a file has been selected
-      const label = document.querySelector('.input-file-button');
-      if (label) {
-        label.textContent = `File Selected: ${file.name}`;
+            };
+          } catch (error) {
+            console.error('Error loading image:', error);
+          }
+        };
+        
+        // Read the uploaded file as a data URL
+        reader.readAsDataURL(file);
       }
-      
-      // Continue with the upload process
-      this.uploadImage(event);
+    } catch (error) {
+      console.error('Error uploading image:', error);
     }
-  } catch (error) {
-    console.error('Error handling file selection:', error);
   }
-}
   
+  
+
+  async onFileSelected(event: any) {
+    try {
+      const file: File = event.target.files[0];
+      const reader: FileReader = new FileReader();
+  
+      reader.onload = (e: any) => {
+        this.userProfile.profileImageURL = e.target.result;
+        // Call uploadImage to handle image upload
+        this.uploadImage(event);
+      };
+  
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
+  } 
 }
