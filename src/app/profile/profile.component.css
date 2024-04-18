@@ -240,26 +240,6 @@ select {
     float: right;
 }
 
-#reading{
-margin-bottom: 15%;
-}
-
-#cooking{
-    margin-bottom: 15%;
-}
-
-#sports{
-    margin-bottom: 15%;
- }
-
- #traveling{
-    margin-bottom: 15%;
-}
-
-#smoker{
-    margin-bottom: 15%;
-}
-
 .profile_description{
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: larger;

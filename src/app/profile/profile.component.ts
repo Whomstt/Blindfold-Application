@@ -55,19 +55,20 @@ export class ProfileComponent implements OnInit {
 
   async updateProfile() {
     try {
-      this.newProfileData.userAge = this.userProfile.userAge;
-      this.newProfileData.userGender = this.userProfile.userGender;
-      this.newProfileData.userSeeking = this.userProfile.userSeeking;
-      this.newProfileData.userRealName = this.userProfile.userRealName;
-      this.newProfileData.userBio = this.userProfile.userBio;
-      await this.firebaseService.updateProfile(this.uid, this.newProfileData);
+      // Copy userProfile object to newProfileData
+      const { userProfile, uid } = this;
+      const newProfileData = { ...userProfile };
+  
+      // Update profile in Firestore
+      await this.firebaseService.updateProfile(uid, newProfileData);
+      
       console.log('Profile updated successfully!');
-
       window.location.reload();
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error updating profile:', error);
     }
   }
+  
 
   async logout() {
     this.firebaseService.logout();
