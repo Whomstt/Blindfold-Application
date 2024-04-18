@@ -21,9 +21,8 @@
                   <p><strong>Username:</strong> {{ result.user.userName }}</p>
                   <p><strong>Email:</strong> {{ result.user.email }}</p>
                   <!-- Add more user information as needed -->
-                  <h3>Profile Information:</h3>
-                  <p><strong>Profile Image URL:</strong> {{ result.profile.profileImageURL }}</p>
-                  <img [src]="result.profile.profileImageURL || 'assets/images/greyIcon.png'">
+                
+                  <img [src]="result.profile.profileImageURL || 'assets/images/greyIcon.png'" class="circular-image">
                   <!-- Add more profile information as needed -->
                 </div>
                 <hr>
