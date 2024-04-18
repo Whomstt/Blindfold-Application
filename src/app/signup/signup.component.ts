@@ -43,7 +43,7 @@ export class SignupComponent {
         console.log('New user added successfully!');
 
         // Call addProfile after user is added successfully
-        await this.addProfile(uid, 18, '', '', 'False', '', ''); // Pass necessary arguments for profile creation
+        await this.addProfile(uid, 18, '', '', false, '', '', false, false, false, false, false, false, false, false, false); // Pass necessary arguments for profile creation
 
         console.log('Profile created successfully!');
 
@@ -70,7 +70,9 @@ export class SignupComponent {
   }
 
   async addProfile(uid: string, userAge: number, userGender: string, 
-    userSeeking: string, userBanned: string, userBio: string, userRealName: string) {
+    userSeeking: string, userBanned: boolean, userBio: string, userRealName: string,
+    userReading: boolean, userFilm: boolean, userCooking: boolean, userSport: boolean, userTravel: boolean, userGaming: boolean,
+    userMusic: boolean, userSmoker: boolean, userDrinker: boolean) {
     try {
         const newProfile = {
             userID: uid,
@@ -79,7 +81,16 @@ export class SignupComponent {
             userSeeking: userSeeking,
             userBanned: userBanned,
             userBio: userBio,
-            userRealName: userRealName
+            userRealName: userRealName,
+            userReading: userReading,
+            userFilm: userFilm,
+            userCooking: userCooking,
+            userSport: userSport,
+            userTravel: userTravel,
+            userGaming: userGaming,
+            userMusic: userMusic,
+            userSmoker: userSmoker,
+            userDrinker: userDrinker,
         };
 
         await this.firestore.collection('profiles').doc(uid).set(newProfile);

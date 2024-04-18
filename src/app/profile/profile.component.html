@@ -9,11 +9,11 @@
         <div class="left">
             <div class="profile_info">
                 <div class="edit_profile">Edit Profile</div>
-              <div class="profile-image">
-              <img id="preview-image" [src]="userProfile?.profileImageURL || 'assets/images/greyIcon.png'">
-              <label for="file-upload" class="input-file-button"></label>
-             <input id="file-upload" type="file" (change)="onFileSelected($event)">
-               </div>
+                <div class="profile-image">
+                    <img id="preview-image" [src]="userProfile?.profileImageURL || 'assets/images/greyIcon.png'">
+                    <label for="file-upload" class="input-file-button"></label>
+                    <input id="file-upload" type="file" (change)="onFileSelected($event)">
+                </div>
                 <div class="user-details">
                     <form>
                         <div class="form-group">
@@ -22,20 +22,20 @@
                         </div>
                         <div class="form-group">
                           <div class="label">Age</div>
-                          <input type="number" id="age" name="age" [(ngModel)]="userProfile.userAge" required>
+                          <input type="number" id="age" name="age" min="18" max="99" [(ngModel)]="userProfile.userAge" required>
                         </div>
                         <div class="form-group">
                             <div class="label">Gender</div>
                             <select id="gender" name="gender" [(ngModel)]="userProfile.userGender" required>
-                              <option value="male">Male</option>
-                              <option value="female">Female</option>
-                              <option value="other">Other</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
                             </select>
                             <div class="label">Seeking</div>
                             <select id="Seeking" name="Seeking" [(ngModel)]="userProfile.userSeeking" required>
-                              <option value="male">Male</option>
-                              <option value="female">Female</option>
-                              <option value="other">Other</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
                             </select>
                         </div>
                     </form>
@@ -53,20 +53,28 @@
             <div class="white-section">
                 <div class="interests">
                     <label class="label" for="interests">Interests</label><br>
-                    <input type="checkbox" id="reading" name="interest" value="reading">
+                    <input type="checkbox" id="reading" name="interest" value="reading" [(ngModel)]="userProfile.userReading">
                     <label class="label2" for="reading">Reading</label><br>
-                    <input type="checkbox" id="cooking" name="interest" value="cooking">
+                    <input type="checkbox" id="film" name="interest" value="film" [(ngModel)]="userProfile.userFilm">
+                    <label class="label2" for="film">Film</label><br>
+                    <input type="checkbox" id="cooking" name="interest" value="cooking" [(ngModel)]="userProfile.userCooking">
                     <label class="label2" for="cooking">Cooking</label><br>
-                    <input type="checkbox" id="sports" name="interest" value="sports">
+                    <input type="checkbox" id="sports" name="interest" value="sports" [(ngModel)]="userProfile.userSport">
                     <label class="label2" for="sports">Sports</label><br>
-                    <input type="checkbox" id="traveling" name="interest" value="traveling">
-                    <label class="label2" for="traveling">Traveling</label><br>
-                    <input type="checkbox" id="smoker" name="interest" value="smoker">
+                    <input type="checkbox" id="travel" name="interest" value="travel" [(ngModel)]="userProfile.userTravel">
+                    <label class="label2" for="travel">Travel</label><br>
+                    <input type="checkbox" id="gaming" name="interest" value="gaming" [(ngModel)]="userProfile.userGaming">
+                    <label class="label2" for="gaming">Gaming</label><br>
+                    <input type="checkbox" id="music" name="interest" value="music" [(ngModel)]="userProfile.userMusic">
+                    <label class="label2" for="music">Music</label><br>
+                    <input type="checkbox" id="smoker" name="interest" value="smoker" [(ngModel)]="userProfile.userSmoker">
                     <label class="label2" for="smoker">Smoker</label><br>
+                    <input type="checkbox" id="drinker" name="interest" value="drinker" [(ngModel)]="userProfile.userDrinker">
+                    <label class="label2" for="drinker">Drinker</label><br>
                 </div>
                 <div class="profile_description">
-                  <label class="label" for="description">Description:</label><br>
-                  <textarea id="userBio" name="userBio" rows="4" cols="50" [(ngModel)]="userProfile.userBio" required></textarea>
+                    <label class="label" for="description">Description:</label><br>
+                    <textarea id="userBio" name="userBio" rows="4" cols="50" [(ngModel)]="userProfile.userBio" required></textarea>
                 </div>
                 <div class="profile_submit">
                     <button type="button" (click)="updateProfile()">Submit</button>
