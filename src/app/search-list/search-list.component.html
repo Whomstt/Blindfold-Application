@@ -25,13 +25,14 @@
             <ng-container *ngIf="searchResults.length > 0; else noResults">
                 <div class="row">
                     <div class="col-md-4" *ngFor="let result of searchResults">
-    <div class="user-info">
-        <h3>User Information:</h3>
-        <p><strong>Username:</strong> {{ result.user.userName }}</p>
-        <p><strong>Email:</strong> {{ result.user.userEmail }}</p>
-        <img [src]="result.profile.profileImageURL || 'assets/images/greyIcon.png'" class="circular-image">
-    </div>
-</div>
+                        <div class="user-info">
+                            <h3>User Information:</h3>
+                            <p><strong>Username:</strong> {{ result.user.userName }}</p>
+                            <p><strong>Email:</strong> {{ result.user.userEmail }}</p>
+                            <p><strong>Name:</strong> {{ result.profile.userRealName }}</p>
+                            <img [src]="result.profile.profileImageURL || 'assets/images/greyIcon.png'" class="circular-image">
+                        </div>
+                    </div>
                 </div>
             </ng-container>
             <ng-template #noResults>
@@ -43,3 +44,4 @@
     </div>
 </body>
 </html>
+

@@ -33,20 +33,22 @@ fetchUsernames() {
           console.log('Profiles:', profiles);
 
           const matchedResults = users.map(user => {
-            const profile = profiles.find(p => p.uid === user.uid);
+            const profile = profiles.find(p => p.userID === user.userID);
             if (profile) {
               return {
                 user: user,
                 profile: profile
               };
             } else {
-              console.warn(`Profile not found for user with UID: ${user.uid}`);
+              console.warn(`Profile not found for user with userID: ${user.userID}`);
               return null;
             }
           }).filter(Boolean); // Filter out null values
 
           this.searchResults = matchedResults.filter(result =>
-            result && result.user && result.user.userName && result.user.userName.toLowerCase().includes(this.searchQuery.toLowerCase())
+            result && result.user &&
+            (result.user.userName.toLowerCase().startsWith(this.searchQuery.toLowerCase()) ||
+             result.profile.userRealName.toLowerCase().startsWith(this.searchQuery.toLowerCase()))
           );
 
           console.log('Search results:', this.searchResults);
