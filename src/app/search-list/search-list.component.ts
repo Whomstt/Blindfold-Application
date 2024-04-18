@@ -23,36 +23,43 @@ export class SearchListComponent implements OnInit {
       this.fetchUsernames(); 
     });
   }
+fetchUsernames() {
+  this.firestore.collection('users').valueChanges().subscribe(
+    (users: any[]) => {
+      console.log('Users:', users);
 
-  fetchUsernames() {
-    this.firestore.collection('users').valueChanges().subscribe(
-      (users: any[]) => {
-        console.log('Users:', users); 
+      this.firestore.collection('profiles').valueChanges().subscribe(
+        (profiles: any[]) => {
+          console.log('Profiles:', profiles);
 
-        // Fetch profiles
-        this.firestore.collection('profiles').valueChanges().subscribe(
-          (profiles: any[]) => {
-            console.log('Profiles:', profiles);
-
-            // Match profiles with users
-            this.searchResults = profiles.map(profile => {
-              const user = users.find(u => u.uid === profile.uid);
+          const matchedResults = users.map(user => {
+            const profile = profiles.find(p => p.uid === user.uid);
+            if (profile) {
               return {
                 user: user,
                 profile: profile
               };
-            });
+            } else {
+              console.warn(`Profile not found for user with UID: ${user.uid}`);
+              return null;
+            }
+          }).filter(Boolean); // Filter out null values
 
-            console.log('Search results:', this.searchResults);
-          },
-          error => {
-            console.error('Error fetching profiles:', error);
-          }
-        );
-      },
-      error => {
-        console.error('Error fetching users:', error);
-      }
-    );
-  }
+          this.searchResults = matchedResults.filter(result =>
+            result && result.user && result.user.userName && result.user.userName.toLowerCase().includes(this.searchQuery.toLowerCase())
+          );
+
+          console.log('Search results:', this.searchResults);
+        },
+        error => {
+          console.error('Error fetching profiles:', error);
+        }
+      );
+    },
+    error => {
+      console.error('Error fetching users:', error);
+    }
+  );
+}
+
 }

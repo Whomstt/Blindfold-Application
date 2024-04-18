@@ -22,6 +22,7 @@ html, body {
     font-size: 18px;
     color: #fff; 
     display: block;
+    border-top: 1.5px solid #a9a5a4;   
 }
 .sidenav a:hover {
     background-color: #333; 
@@ -48,7 +49,7 @@ html, body {
   }
 
   .results {
-    margin-left: 12%;
+    margin-left: 12.5%;
   }
 
   .circular-image {
@@ -58,3 +59,14 @@ html, body {
   border-radius: 50%; /* Make the image circular */
   object-fit: cover; 
   }
+
+
+@media (max-width:60em) {
+    .sidenav {
+      display: none;
+    }
+  
+    .results {
+      margin-left: 0.5%;
+    }
+}
