@@ -7,24 +7,43 @@
     <link href='https://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet'>
 </head>
 <body>
-    <div class=".container" *ngIf="!isSignedIn">
-        <h2 class="h2">Blindfold</h2>
-        <div>
+    <div class="container" *ngIf="!isSignedIn">
+
+        <div class="left">
+            <h2 class="h2">Blindfold</h2>
+
+        
             <label for="email">Email:</label>
             <br>
             <input type="text" id="email" #email>
-        </div>
-        <div>
+        
+        
             <label for="password">Password:</label>
             <br>
             <input type="password" id="password" #password>
+            <div>
+                <button class="buttom" (click)="onSignin(email.value, password.value)">Login</button>
+                <button class="button" routerLink="/signup">Sign Up</button>
+                </div>
+        
         </div>
-        <button class="buttom" (click)="onSignin(email.value, password.value)">Login</button>
-        <button class="button" routerLink="/signup">Sign Up</button>
+
+         
+        <div class="right"> 
+            <div><h2>Dating in disguise</h2></div>
+            <div class="rightcentral">
+                <div class="centralcontainer1">hi</div>
+                <div class="centralcontainer2">hi</div>
+                <div class="centralcontainer3">hi</div>
+                <div class="centralcontainer4">hi</div>
+
+            </div>
+            
+
+        </div>
+    
     </div>
-    <div class=".container">
-        <img style="background-color: black;" src="assets/images/rabbit.jpg" class="img-fluid">
-    </div>
+    
     <!-- <app-home *ngIf="isSignedIn" (isLogout)="handleLogout()"></app-home> -->
 </body>
 </html>
