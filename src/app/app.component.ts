@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.afAuth.authState.subscribe(user => {
-      if (user && this.router.url === '/') {
+      if (user && this.router.url === '/login') {
         this.router.navigate(['/home']);
       }
     });

@@ -11,7 +11,8 @@ import { SearchListComponent } from './search-list/search-list.component';
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }, // Require authentication
   { path: 'profile', component : ProfileComponent, canActivate: [AuthGuard] }, 
