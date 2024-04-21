@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
+
 
 @Component({
   selector: 'app-messages',
@@ -11,7 +13,8 @@ export class MessagesComponent implements OnInit {
   uid: string = ''; // Initialize UID
   userChats: any[] = [];
   chatMessages: any[] = [];
-  selectedChatId: string | null = null;
+  selectedChatID: string | null = null;
+  messageContent: string = '';
 
   constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth) { }
 
@@ -42,10 +45,10 @@ export class MessagesComponent implements OnInit {
     });
   }
 
-  loadMessages(chatId: string): void {
-    this.selectedChatId = chatId;
+  loadMessages(chatID: string): void {
+    this.selectedChatID = chatID;
     this.chatMessages = []; // Clear previous messages
-    const messagesCollection = this.firestore.collection(`chats/${chatId}/messages`);
+    const messagesCollection = this.firestore.collection(`chats/${chatID}/messages`);
     messagesCollection.get().subscribe(messagesSnapshot => {
       messagesSnapshot.forEach(messageDoc => {
         const messageData = messageDoc.data();
@@ -53,9 +56,37 @@ export class MessagesComponent implements OnInit {
           messageId: messageDoc.id,
           data: messageData
         });
-        console.log("Message ID:", messageDoc.id);
-        console.log("Message Data:", messageData);
       });
+      // Sort messages by timestamp
+      this.chatMessages.sort((a, b) => a.data.timestamp - b.data.timestamp);
     });
+  }
+  
+
+  sendMessage(content: string, chatId: string): void {
+    const messageRef = this.firestore.collection(`chats/${chatId}/messages`).doc(); // Automatically generate a message ID
+    const messageData = {
+      content: content,
+      senderID: this.uid,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp() // Add timestamp field
+      // You can add more fields here if needed
+    };
+    messageRef.set(messageData)
+      .then(() => {
+        console.log('Message sent successfully');
+        // Optionally, you can reload the chat messages after sending the message
+        this.loadMessages(chatId);
+      })
+      .catch(error => {
+        console.error('Error sending message:', error);
+      });
+  }
+  
+
+  sendMessageForm(chatId: string): void {
+    if (this.messageContent.trim() !== '') {
+      this.sendMessage(this.messageContent, chatId);
+      this.messageContent = ''; // Clear the input field after sending the message
+    }
   }
 }

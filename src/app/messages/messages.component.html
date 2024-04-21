@@ -29,23 +29,25 @@
               <h1>Chat</h1>
             </div>
             <div class="body">
-              <div *ngIf="selectedChatId">
+              <div *ngIf="selectedChatID">
                 <div *ngFor="let message of chatMessages" [ngClass]="{'sent-message': message.data.senderID === uid, 'received-message': message.data.senderID !== uid}">
                   <p class="message1">Message ID: {{ message.messageId }}</p>
                   <p class="message1">Text: {{ message.data.content }}</p>
                   <p class="message1">SenderID: {{ message.data.senderID }}</p>
+                  <p class="message1">Timestamp: {{ message.data.timestamp | date: 'medium' }}</p> <!-- Display timestamp -->
                   <!-- Add more properties if needed -->
                 </div>
               </div>
-              <div *ngIf="!selectedChatId">
+              <div *ngIf="!selectedChatID">
                 <p class="placeholder-message">Select a chat to view messages</p>
               </div>
             </div>
             
+            
             <div class="footer">
-              <form>
-                <input type="text" name="lol">
-                <button>submit</button>
+                <form (submit)="sendMessageForm(selectedChatID ? selectedChatID : '')">
+                <input type="text" name="messageContent" [(ngModel)]="messageContent">
+                <button type="submit">Send</button>
               </form>
             </div>
           </div>
