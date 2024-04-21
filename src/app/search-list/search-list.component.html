@@ -29,7 +29,15 @@
                             <h3>User Information:</h3>
                             <div class="profile-info">
                             <p><strong>Username:</strong> {{ result.user.userName }}</p>
+                            <p><strong>Age:</strong> {{ result.profile.userAge }}</p>
                             <p><strong>Name:</strong> {{ result.profile.userRealName }}</p>
+                            <p><strong>Interests:</strong>
+                                {{ result.profile.userDrinker ? 'Drinker' : '' }}
+                                {{ result.profile.userSmoker ? 'Smoker' : '' }}
+                                {{ result.profile.userSport ? 'Sport' : '' }}
+                                {{ result.profile.userCooking ? 'Cooking' : '' }}
+                                {{ result.profile.userReading ? 'Reading' : '' }}
+                            </p>
                             </div>
                             <img [src]="result.profile.profileImageURL || 'assets/images/greyIcon.png'" class="circular-image">
                         </div>
@@ -45,4 +53,3 @@
     </div>
 </body>
 </html>
-
