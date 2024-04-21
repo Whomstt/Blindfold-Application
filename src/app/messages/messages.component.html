@@ -6,107 +6,53 @@
 <body>
     <div class="container">
         <div class="row no-gutters">
-            
-             
-                <div class="chat">
-                    <input type="text" placeholder="Search">
+          <div class="chat">
+            <input type="text" placeholder="Search">
+          </div>
+          <div class="chatlist">
+            <div class="block" *ngFor="let chat of userChats" (click)="loadMessages(chat.id)">
+              <div class="img">
+                <img src="assets/images/greyIcon.png" class="cover">
+              </div>
+              <div class="info">
+                <div class="list">
+                  <h5>{{ chat.id }}</h5>
                 </div>
-                <div class="chatlist">
-                    <div class="block">
-                        <div class="img">
-                            <img src="assets/images/greyIcon.png" class="cover">
-                        </div>
-                        <div class="info">
-                            <div class="list">
-                                <h5>Tom</h5>
-                                <p class="time">23:13</p>
-                            </div>
-                            <div class="message3">
-                                <p>You have recently matched with Tom. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block">
-                        <div class="img">
-                            <img src="assets/images/greyIcon.png" class="cover">
-                        </div>
-                        <div class="info">
-                            <div class="list">
-                                <h5>Cathal Crowe</h5>
-                                <p class="time">12:00</p>
-                            </div>
-                            <div class="message3">
-                                <p>You have recently matched with Cathal. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block">
-                        <div class="img">
-                            <img src="assets/images/greyIcon.png" class="cover">
-                        </div>
-                        <div class="info">
-                            <div class="list">
-                                <h5>Robert Flannagan</h5>
-                                <p class="time">1:03</p>
-                            </div>
-                            <div class="message3">
-                                <p>You have recently matched with Robert. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block">
-                        <div class="img">
-                            <img src="assets/images/greyIcon.png" class="cover">
-                        </div>
-                        <div class="info">
-                            <div class="list">
-                                <h5>Steven Lavelle</h5>
-                                <p class="time">19:13</p>
-                            </div>
-                            <div class="message3">
-                                <p>You have recently matched with Steven. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block">
-                        <div class="img">
-                            <img src="assets/images/greyIcon.png" class="cover">
-                        </div>
-                        <div class="info">
-                            <div class="list">
-                                <h5>Mo</h5>
-                                <p class="time">12:35</p>
-                            </div>
-                            <div class="message3">
-                                <p>You have recently matched with Mo. </p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="message3">
+                  <p>You have recently matched with {{ chat.id }}.</p>
                 </div>
-            
-            
-             
-                <div class="chatContainer">
-                    <div class="header">
-                        <h1>Chat</h1>
-                    </div>
-                    <div class="body">
-                        <p class="message1">Hello</p>
-                        <p class="message1 user_message">Hi</p>
-                        <p class="message2">How are you doing?</p>
-                        <p class="message1 user_message">I am doing great, thank you. And you?</p>
-                        <p class="message2">I am too</p>
-                        <p class="message1 user_message">Lovely</p>
-                    </div>
-                    <div class="footer">
-                        <form>
-                            <input type="text" name="lol">
-                            <button>submit</button>
-                        </form>
-                    </div>
-                </div>
+              </div>
             </div>
-    </div>
+          </div>
+          <div class="chatContainer">
+            <div class="header">
+              <h1>Chat</h1>
+            </div>
+            <div class="body">
+              <div *ngIf="selectedChatId">
+                <div *ngFor="let message of chatMessages">
+                  <p class="message1">Message ID: {{ message.messageId }}</p>
+                  <p class="message1">Text: {{ message.data.content }}</p>
+                  <p class="message1">SenderID: {{ message.data.senderID }}</p>
+                  <!-- Add more properties if needed -->
+                </div>
+              </div>
+              <div *ngIf="!selectedChatId">
+                <p class="placeholder-message">Select a chat to view messages</p>
+              </div>
+            </div>
+            <div class="footer">
+              <form>
+                <input type="text" name="lol">
+                <button>submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+    
     
     <div class="sidenav">
         <a routerLink="/home"><img src="assets/images/search_icon.jpg" class="rounded_img"></a>
