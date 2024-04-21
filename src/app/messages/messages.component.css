@@ -106,31 +106,6 @@ body {
     margin: 0;
 }
 
-.message1 {
-    padding: 10px;
-    color: white;
-    background-color: dodgerblue;
-    width: fit-content;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-.message2 {
-    padding: 10px;
-    color: white;
-    background-color: dodgerblue;
-    width: fit-content;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-.user_message {
-    margin-left: auto;
-    background-color: white;
-    color: black;
-}
-
-
 .chat div {
     width: 100%;
 }
@@ -226,6 +201,16 @@ form button:hover {
     width: 100%;
     
 }
+
+.sent-message {
+    text-align: right;
+    /* Add other styles for sent messages */
+  }
+  
+  .received-message {
+    text-align: left;
+    /* Add other styles for received messages */
+  }  
 
 @media (max-height: calc(100vh - 300px)) {
     .chatlist {
