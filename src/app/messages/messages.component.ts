@@ -3,7 +3,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 
-
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
@@ -15,6 +14,7 @@ export class MessagesComponent implements OnInit {
   chatMessages: any[] = [];
   selectedChatID: string | null = null;
   messageContent: string = '';
+  matchedUserRealNames: { [key: string]: string } = {}; // Map to store matched user real names by ID
 
   constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth) { }
 
@@ -25,8 +25,7 @@ export class MessagesComponent implements OnInit {
       console.log("UID:", this.uid);
     }
 
-    const chatsCollection = this.firestore.collection('chats');
-    chatsCollection.get().subscribe(snapshot => {
+    this.firestore.collection('chats').get().subscribe(snapshot => {
       snapshot.forEach(chatDoc => {
         const chatData: any = chatDoc.data();
         const userID1 = chatData.userID1;
@@ -40,9 +39,32 @@ export class MessagesComponent implements OnInit {
 
           console.log("Chat ID:", chatDoc.id);
           console.log("Chat Data:", chatData);
+
+          // Fetch matched user's profile data to get real name
+          const matchedUserID = userID1 === this.uid ? userID2 : userID1;
+          this.fetchMatchedUserRealName(matchedUserID);
         }
       });
     });
+  }
+
+  fetchMatchedUserRealName(userID: string): void {
+    console.log('Fetching real name for userID:', userID);
+    this.firestore.collection('profiles').doc(userID).get().subscribe(
+      (profileDoc: any) => {
+        if (profileDoc.exists) {
+          const profileData = profileDoc.data();
+          console.log('Profile data for userID:', userID, profileData);
+          this.matchedUserRealNames[userID] = profileData.userRealName;
+          console.log('Matched user real name:', this.matchedUserRealNames[userID]);
+        } else {
+          console.error('Profile does not exist for userID:', userID);
+        }
+      },
+      error => {
+        console.error('Error fetching profile data for userID:', userID, error);
+      }
+    );
   }
 
   loadMessages(chatID: string): void {
@@ -61,7 +83,6 @@ export class MessagesComponent implements OnInit {
       this.chatMessages.sort((a, b) => a.data.timestamp - b.data.timestamp);
     });
   }
-  
 
   sendMessage(content: string, chatId: string): void {
     const messageRef = this.firestore.collection(`chats/${chatId}/messages`).doc(); // Automatically generate a message ID
@@ -81,7 +102,6 @@ export class MessagesComponent implements OnInit {
         console.error('Error sending message:', error);
       });
   }
-  
 
   sendMessageForm(chatId: string): void {
     if (this.messageContent.trim() !== '') {
