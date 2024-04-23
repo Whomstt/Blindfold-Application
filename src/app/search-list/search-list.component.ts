@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-list',
@@ -13,7 +14,8 @@ export class SearchListComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -23,6 +25,7 @@ export class SearchListComponent implements OnInit {
       this.fetchUsernames(); 
     });
   }
+
   fetchUsernames() {
     this.firestore.collection('users').valueChanges().subscribe(
       (users: any[]) => {
@@ -37,7 +40,8 @@ export class SearchListComponent implements OnInit {
               if (profile) {
                 return {
                   user: user,
-                  profile: profile
+                  profile: profile,
+                  userID: user.userID // Include userID here
                 };
               } else {
                 console.warn(`Profile not found for user with userID: ${user.userID}`);
@@ -55,7 +59,7 @@ export class SearchListComponent implements OnInit {
               (searchTerms[1] ? result.profile.userAge >= parseInt(searchTerms[1]) : true) && 
               (searchTerms[2] ? result.profile.userAge <= parseInt(searchTerms[2]) : true) && 
               (interests.length === 0 || interests.some(interest => result.profile['user' + interest.charAt(0).toUpperCase() + interest.slice(1).toLowerCase()] === true))
-          );
+            );
   
             console.log('Search results:', this.searchResults);
           },
@@ -68,5 +72,8 @@ export class SearchListComponent implements OnInit {
         console.error('Error fetching users:', error);
       }
     );
-  }  
+  }
+  viewProfile(userID: string) {
+    this.router.navigate(['/view-other-profile', userID]); // Navigate to view_other_profile page with user ID
+  }
 }
