@@ -89,7 +89,7 @@ body {
     position: absolute;
     top: 45px;
     overflow-y: auto;
-    height: 90%;
+    height: 92%;
 }
 
 .header h1 {
@@ -227,8 +227,11 @@ form button:hover {
     clear: both; /* Ensure each message starts on a new line */
     max-width: 50%; /* Limit the maximum width to 50% */
     word-wrap: break-word;
-
   }  
+
+  .timestamp {
+    opacity: 0.3; /* Adjust the opacity value as needed */
+}
 
 @media (max-height: calc(100vh - 300px)) {
     .chatlist {

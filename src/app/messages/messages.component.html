@@ -33,7 +33,7 @@
                     <div *ngIf="selectedChatID">
                         <div *ngFor="let message of chatMessages" [ngClass]="{'sent-message': message.data.senderID === uid, 'received-message': message.data.senderID !== uid}">
                             <p class="message1">{{ message.data.content }}</p>
-                            <p class="message1">{{ message.data.timestamp | timestampDate | date: 'medium' }}</p>
+                            <p class="message1 timestamp">{{ message.data.timestamp | timestampDate | date: 'medium' }}</p>
                         </div>
                     </div>
                     <div *ngIf="!selectedChatID">
