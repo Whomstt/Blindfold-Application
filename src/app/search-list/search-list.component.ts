@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class SearchListComponent implements OnInit {
   searchQuery: string = ''; 
   searchResults: any[] = []; 
+  currentUserID: string = ''; // Add current user ID property
 
   constructor(
     private route: ActivatedRoute,
@@ -24,6 +25,9 @@ export class SearchListComponent implements OnInit {
       console.log('Search query:', this.searchQuery); 
       this.fetchUsernames(); 
     });
+
+    // Get current user ID (assuming it's available in your application)
+    this.currentUserID = ''; // Set it to the current user's ID
   }
 
   fetchUsernames() {
@@ -54,6 +58,7 @@ export class SearchListComponent implements OnInit {
   
             this.searchResults = matchedResults.filter(result =>
               result && result.user &&
+              result.userID !== this.currentUserID && // Exclude current user
               (result.user.userName.toLowerCase().startsWith(searchTerms[0].toLowerCase()) ||
                   result.profile.userRealName.toLowerCase().startsWith(searchTerms[0].toLowerCase())) &&
               //(searchTerms[1] ? result.profile.userAge >= parseInt(searchTerms[1]) : true) && 
