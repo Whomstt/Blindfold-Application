@@ -65,7 +65,7 @@
 }
 
 .leftblack img{
-    width: 98%;
+    width: 98.5%;
     height: 100%;
     border-right: 5px solid black;    
 
@@ -73,7 +73,7 @@
 
 .rightblack img{
     height: 100%;
-    width: 98.5%;
+    width: 99%;
     border-left: 5px solid black;    
 
 
