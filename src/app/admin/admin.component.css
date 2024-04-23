@@ -1,0 +1,94 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    font-size: 1em;
+}
+
+.sidenav {
+    height: 100%;
+    width: 12%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #000; 
+}
+
+.sidenav a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff; 
+    display: block;
+    border-top: 1.5px solid #a9a5a4;   
+}
+
+.sidenav a:hover {
+    background-color: #333; 
+}
+
+.rounded_img {
+    border-radius: 50%;
+    overflow: hidden; 
+    width: 100%;
+    height: 100%;
+}
+
+h1 {
+    font-family: 'Irish Grover', sans-serif;
+    font-size: 36px;
+    color: #333; /* Dark gray text */
+    text-align: center;
+}
+
+.results {
+    margin-left: 13%;
+}
+
+.user-info {
+  width: 95%;
+    padding: 3px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    overflow: hidden; /* Clear the floats */
+}
+
+.profile-info {
+    float: left;
+}
+
+.row>* {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+
+.circular-image {
+    float: right;
+    width: 50%;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+@media (max-width:60em) {
+    .sidenav {
+        display: none;
+    }
+
+    .results {
+        margin-left: 0.5%;
+    }
+}
+
+button{
+    background-color: #000;
+    color: #fff;
+    display: block;
+}
+
+button:hover{
+background-color: red;
+}
