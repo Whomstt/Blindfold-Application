@@ -6,61 +6,57 @@
 <body>
     <div class="container">
         <div class="row no-gutters">
-          <div class="chat">
-            <input type="text" placeholder="Search">
-          </div>
-          <div class="chatlist">
-            <div class="block" *ngFor="let chat of userChats" (click)="loadMessages(chat.id)">
-              <div class="img">
-                <img src="assets/images/greyIcon.png" class="cover">
-              </div>
-              <div class="info">
-                <div class="list">
-                  <h5>{{ chat.id }}</h5>
+            <div class="chat">
+                <input type="text" placeholder="Search">
+            </div>
+            <div class="chatlist">
+                <div class="block" *ngFor="let chat of userChats" (click)="loadMessages(chat.id)">
+                    <div class="img">
+                        <img src="assets/images/greyIcon.png" class="cover">
+                    </div>
+                    <div class="info">
+                        <div class="list">
+                            <h5>{{ matchedUserRealNames[chat.data.userID1 === uid ? chat.data.userID2 : chat.data.userID1] }}</h5>
+                        </div>
+                        <div class="message3">
+                            <p>You have recently matched with {{ matchedUserRealNames[chat.data.userID1 === uid ? chat.data.userID2 : chat.data.userID1] }}.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="message3">
-                  <p>You have recently matched with {{ chat.id }}.</p>
+            </div>
+            <div class="chatContainer">
+                <div class="header">
+                    <h1>Chat</h1>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="chatContainer">
-            <div class="header">
-              <h1>Chat</h1>
-            </div>
-            <div class="body">
-              <div *ngIf="selectedChatID">
-                <div *ngFor="let message of chatMessages" [ngClass]="{'sent-message': message.data.senderID === uid, 'received-message': message.data.senderID !== uid}">
-                  <p class="message1">Message ID: {{ message.messageId }}</p>
-                  <p class="message1">Text: {{ message.data.content }}</p>
-                  <p class="message1">SenderID: {{ message.data.senderID }}</p>
-                  <p class="message1">Timestamp: {{ message.data.timestamp | date: 'medium' }}</p> <!-- Display timestamp -->
-                  <!-- Add more properties if needed -->
+                <div class="body">
+                    <div *ngIf="selectedChatID">
+                        <div *ngFor="let message of chatMessages" [ngClass]="{'sent-message': message.data.senderID === uid, 'received-message': message.data.senderID !== uid}">
+                            <p class="message1">{{ message.data.content }}</p>
+                            <p class="message1">{{ message.data.timestamp | timestampDate | date: 'medium' }}</p>
+                        </div>
+                    </div>
+                    <div *ngIf="!selectedChatID">
+                      <p class="placeholder-message" style="font-size: larger;">Select a chat to view messages</p>
+                  </div>
+                  
                 </div>
-              </div>
-              <div *ngIf="!selectedChatID">
-                <p class="placeholder-message">Select a chat to view messages</p>
-              </div>
+                <div class="footer" *ngIf="selectedChatID">
+                  <form (submit)="sendMessageForm(selectedChatID)">
+                      <input type="text" name="messageContent" [(ngModel)]="messageContent" placeholder="Type your message...">
+                      <button type="submit">Send</button>
+                  </form>
+                </div>
             </div>
-            
-            
-            <div class="footer">
-                <form (submit)="sendMessageForm(selectedChatID ? selectedChatID : '')">
-                <input type="text" name="messageContent" [(ngModel)]="messageContent">
-                <button type="submit">Send</button>
-              </form>
-            </div>
-          </div>
         </div>
-      </div>
-      
-      
-    
-    
+    </div>
+
     <div class="sidenav">
         <a routerLink="/home"><img src="assets/images/search_icon.jpg" class="rounded_img"></a>
         <a routerLink="/messages"><img src="assets/images/message_icon.jpg" class="img-fluid"></a>
         <a routerLink="/dealer"><img src="assets/images/cards.jpg" class="img-fluid"></a>
         <a routerLink="/profile"><img src="assets/images/profile_icon.jpg" class="rounded_img"></a>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEH3j5o4wX0l2n5l5rZ5JwFgjV8z4n4y1p5CUZZBpZbP" crossorigin="anonymous"></script>
+</body>
+</html>

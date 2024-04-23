@@ -20,6 +20,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { SearchListComponent } from './search-list/search-list.component';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { ViewOtherProfileComponent } from './view-other-profile/view-other-profile.component';
+import { TimestampDatePipe } from './timestamp-date.pipe';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ViewOtherProfileComponent } from './view-other-profile/view-other-profi
     DealerComponent,
     MessagesComponent,
     SearchListComponent,
-    ViewOtherProfileComponent
+    ViewOtherProfileComponent,
+    TimestampDatePipe
   ],
   imports: [
     BrowserModule,
