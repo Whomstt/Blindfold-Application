@@ -26,7 +26,7 @@
 
 .right {
     flex: 0 0 65%; /* Set the right container to take up 70% of the container width */
-    background-color: rgb(187, 188, 188);
+    background-color: rgb(7, 7, 7);
     display: flex;
     flex-direction: column;
 }
@@ -38,8 +38,41 @@
     height: 100%;
     width: 100%;
     flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: space-between;
+    display: flex;
+    
+}
+
+.leftblack, .rightblack {
+    flex: 1; /* Each container takes up equal space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.leftblack {
+    background-color: white; /* Set background color to white */
+}
+
+.rightblack {
+    background-color: red; /* Set background color to red */
+}
+
+.container-image {
+    max-width: 100%; /* Ensures the image doesn't exceed the width of its container */
+    max-height: 100%; /* Ensures the image doesn't exceed the height of its container */
+    display: block; /* Ensures the image is displayed as a block element */
+    margin: auto; /* Centers the image horizontally within its container */
+}
+
+.leftblack img{
+    width: 100%;
+    height: 80%;
+
+}
+
+.rightblack img{
+    height: 100%;
+    width: 80%;
 
 }
 
@@ -48,34 +81,11 @@
     text-align: center; /* Center align the heading */
     color: white;
     font-size: 40px;
+    text-decoration: underline;
 
     }
 
-    .centralcontainer1, .centralcontainer2, .centralcontainer3, .centralcontainer4 {
-        flex: 1 1 25%; /* Each container takes up 25% of the width of the right central container */
-        height: 25%; /* Each container takes up 25% of the height of the right central container */
-        box-sizing: border-box; /* Include padding and border in the width calculation */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
     
-    .centralcontainer1 {
-        background-color: rgba(255, 0, 0, 0.5); /* Red color with 50% opacity */
-    }
-    
-    .centralcontainer2 {
-        background-color: rgba(0, 255, 0, 0.5); /* Green color with 50% opacity */
-    }
-    
-    .centralcontainer3 {
-        background-color: rgba(0, 0, 255, 0.5); /* Blue color with 50% opacity */
-    }
-    
-    .centralcontainer4 {
-        background-color: rgba(255, 255, 0, 0.5); /* Yellow color with 50% opacity */
-    }
-
 
 
 

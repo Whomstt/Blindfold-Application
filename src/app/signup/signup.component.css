@@ -1,16 +1,129 @@
+
+
+.container {
+    width: 80%;
+    max-width: 68%;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 97vh;
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
+}
+
+.left {
+    flex: 0 0 35%; /* Set the left container to take up 30% of the container width */
+    background-color: white;
+    padding: 10px;
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+.left h2{
+    text-decoration: underline;
+    font-size: 40px;
+}
+
+.right {
+    flex: 0 0 65%; /* Set the right container to take up 70% of the container width */
+    background-color: rgb(7, 7, 7);
+    display: flex;
+    flex-direction: column;
+}
+
+.rightcentral{
+    flex: 1; /* Make the right central container take up remaining space */
+    background-color: rgb(9, 9, 9);
+    max-height: 65%;
+    height: 100%;
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    
+}
+
+.leftblack, .rightblack {
+    flex: 1; /* Each container takes up equal space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.leftblack {
+    background-color: white; /* Set background color to white */
+}
+
+.rightblack {
+    background-color: red; /* Set background color to red */
+}
+
+.container-image {
+    max-width: 100%; /* Ensures the image doesn't exceed the width of its container */
+    max-height: 100%; /* Ensures the image doesn't exceed the height of its container */
+    display: block; /* Ensures the image is displayed as a block element */
+    margin: auto; /* Centers the image horizontally within its container */
+}
+
+.leftblack img{
+    width: 100%;
+    height: 80%;
+
+}
+
+.rightblack img{
+    height: 100%;
+    width: 80%;
+
+}
+
+    .right h2 {
+    font-family: 'Irish Grover', sans-serif; /* Apply the custom font */
+    text-align: center; /* Center align the heading */
+    color: white;
+    font-size: 40px;
+    text-decoration: underline;
+
+    }
+
+    
+
+
+
+
 .h2 {
-    font-family: 'Irish Grover', cursive;
-    width: 30%;
+    font-family: 'Irish Grover', sans-serif; /* Apply the custom font */
+    text-align: center; /* Center align the heading */
+    margin-bottom: 20px; /* Add margin below the heading */
 }
 
-.container{
-    width: 50%;
+label {
+    display: block; /* Make labels block elements to stack vertically */
+    margin-bottom: 5px; /* Add margin below each label */
+}
+
+input {
+    width: 100%; /* Make input fields take full width of the container */
+    padding: 8px; /* Add padding to input fields */
+    margin-bottom: 10px; /* Add margin below each input field */
+    border: 1px solid #ccc; /* Add border to input fields */    
+    box-sizing: border-box; /* Include padding and border in the input width */
+    border-bottom: 1.5px solid #F7270B;    
+    align-items: center;
+    justify-content: center;
 
 }
 
-button{
-    background-color: red;
-    color: black;
-    font-weight: bold;
+button {
+    width: 100%; /* Make buttons take full width of the container */
+    padding: 10px; /* Add padding to buttons */
+    margin-top: 10px; /* Add margin above buttons */
+    border: none; /* Remove default button border */
+    border-radius: 4px; /* Add rounded corners to buttons */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    background-color: #F7270B; /* Set button background color */
+    color: white; /* Set button text color */
 }
 
+button:hover {
+    background-color: #c11e08; /* Change button background color on hover */
+}
