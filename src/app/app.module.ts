@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { SearchListComponent } from './search-list/search-list.component';
 import { provideStorage, getStorage } from '@angular/fire/storage';
+import { ViewOtherProfileComponent } from './view-other-profile/view-other-profile.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
     ProfileComponent,
     DealerComponent,
     MessagesComponent,
-    SearchListComponent
+    SearchListComponent,
+    ViewOtherProfileComponent
   ],
   imports: [
     BrowserModule,

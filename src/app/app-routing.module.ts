@@ -8,16 +8,20 @@ import { ProfileComponent } from './profile/profile.component';
 import { DealerComponent } from './dealer/dealer.component';  
 import { MessagesComponent } from './messages/messages.component';
 import { SearchListComponent } from './search-list/search-list.component';
+import { ViewOtherProfileComponent } from './view-other-profile/view-other-profile.component';
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }, // Require authentication
   { path: 'profile', component : ProfileComponent, canActivate: [AuthGuard] }, 
   { path: 'dealer', component : DealerComponent, canActivate: [AuthGuard] }, 
   { path: 'messages', component : MessagesComponent, canActivate: [AuthGuard] },
-  { path: 'search-list', component : SearchListComponent, canActivate: [AuthGuard] }
+  { path: 'search-list', component : SearchListComponent, canActivate: [AuthGuard] },
+  { path: 'view-other-profile', component : ViewOtherProfileComponent, canActivate: [AuthGuard] },
+  { path: 'view-other-profile/:userID', component: ViewOtherProfileComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

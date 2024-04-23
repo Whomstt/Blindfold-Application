@@ -19,11 +19,11 @@ export class AppComponent implements OnInit {
     private router: Router
   ) {}
 
-  
-
   ngOnInit() {
+    this.afAuth.authState.subscribe(user => {
+      if (user && this.router.url === '/login') {
+        this.router.navigate(['/home']);
+      }
+    });
   }
-
-
-  
 }

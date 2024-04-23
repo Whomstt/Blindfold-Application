@@ -28,11 +28,24 @@
                         <div class="user-info">
                             <h3>User Information:</h3>
                             <div class="profile-info">
-                            <p><strong>Username:</strong> {{ result.user.userName }}</p>
-                            <p><strong>Email:</strong> {{ result.user.userEmail }}</p>
-                            <p><strong>Name:</strong> {{ result.profile.userRealName }}</p>
+                                <p><strong>Username:</strong> {{ result.user.userName }}</p>
+                                <p><strong>Age:</strong> {{ result.profile.userAge }}</p>
+                                <p><strong>Name:</strong> {{ result.profile.userRealName }}</p>
+                                <p><strong>Interests:</strong>
+                                    {{ result.profile.userDrinker ? 'Drinker' : '' }}
+                                    {{ result.profile.userSmoker ? 'Smoker' : '' }}
+                                    {{ result.profile.userSport ? 'Sport' : '' }}
+                                    {{ result.profile.userCooking ? 'Cooking' : '' }}
+                                    {{ result.profile.userReading ? 'Reading' : '' }}
+                                    {{ result.profile.userFilm ? 'Film' : '' }}
+                                    {{ result.profile.userGaming ? 'Gaming' : '' }}
+                                    {{ result.profile.userMusic ? 'Music' : '' }}
+                                    {{ result.profile.userTravel ? 'Travel' : '' }}
+                                </p>
                             </div>
-                            <img [src]="result.profile.profileImageURL || 'assets/images/greyIcon.png'" class="circular-image">
+                            <a [routerLink]="['/view-other-profile', result.userID]"> <!-- Adding anchor tag here -->
+                                <img [src]="result.profile.profileImageURL || 'assets/images/greyIcon.png'" class="circular-image">
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -42,8 +55,5 @@
             </ng-template>
         </div>
     </div>
-    <div>
-    </div>
 </body>
 </html>
-
