@@ -25,6 +25,7 @@
     "express": "^4.18.2",
     "firebase": "^10.11.0",
     "firebasets": "^1.2.13",
+    "firestore": "^1.1.6",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "yarn": "^1.22.22",
