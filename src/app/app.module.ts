@@ -21,6 +21,7 @@ import { SearchListComponent } from './search-list/search-list.component';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { ViewOtherProfileComponent } from './view-other-profile/view-other-profile.component';
 import { TimestampDatePipe } from './timestamp-date.pipe';
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { TimestampDatePipe } from './timestamp-date.pipe';
     MessagesComponent,
     SearchListComponent,
     ViewOtherProfileComponent,
-    TimestampDatePipe
+    TimestampDatePipe,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

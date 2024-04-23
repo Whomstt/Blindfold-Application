@@ -48,11 +48,21 @@ export class ViewOtherProfileComponent implements OnInit {
       if (currentUser) {
         const userID1 = currentUser.uid;
         
-        // Generate a unique chatID
-        const chatID = this.generateChatID();
-        
         // Determine userID2 from the profile being viewed
         const userID2 = this.userID;
+        
+        // Check if a chat with the pair already exists in both possible orders
+        const chatExists1 = await this.checkChatExists(userID1, userID2);
+        const chatExists2 = await this.checkChatExists(userID2, userID1);
+  
+        // If a chat with the pair already exists, navigate to the messages page
+        if (chatExists1 || chatExists2) {
+          this.router.navigate(['/messages']);
+          return;
+        }
+        
+        // Generate a unique chatID
+        const chatID = this.generateChatID();
         
         // Create a new document in the messages collection
         await this.firestore.collection('chats').doc(chatID).set({
@@ -66,6 +76,18 @@ export class ViewOtherProfileComponent implements OnInit {
     } catch (error) {
       console.error('Error starting chat:', error);
     }
+  }
+  
+  async checkChatExists(userID1: string, userID2: string): Promise<boolean> {
+    // Check if a chat exists between userID1 and userID2
+    const existingChat = await this.firestore.collection('chats', ref => ref
+      .where('userID1', '==', userID1)
+      .where('userID2', '==', userID2)
+      .limit(1) // Limit to 1 document
+    ).get().toPromise();
+
+    // Return true if the chat exists
+    return existingChat !== undefined && !existingChat.empty;
   }
 
   generateChatID(): string {
