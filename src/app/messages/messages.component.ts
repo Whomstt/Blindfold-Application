@@ -9,13 +9,13 @@ import firebase from 'firebase/compat/app';
   styleUrls: ['./messages.component.css']
 })
 export class MessagesComponent implements OnInit {
-  uid: string = ''; // Initialize UID
+  uid: string = ''; 
   userChats: any[] = [];
   chatMessages: any[] = [];
   selectedChatID: string | null = null;
   messageContent: string = '';
-  matchedUserRealNames: { [key: string]: string } = {}; // Map to store matched user real names by ID
-  matchedProfileImageURLs: { [key: string]: string } = {}; // Map to store matched user image URLs by ID
+  matchedUserRealNames: { [key: string]: string } = {}; 
+  matchedProfileImageURLs: { [key: string]: string } = {}; 
 
   constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth) { }
 
@@ -41,7 +41,7 @@ export class MessagesComponent implements OnInit {
           console.log("Chat ID:", chatDoc.id);
           console.log("Chat Data:", chatData);
 
-          // Fetch matched user's profile data to get real name and image URL
+         
           const matchedUserID = userID1 === this.uid ? userID2 : userID1;
           this.fetchMatchedUserInfo(matchedUserID);
         }
@@ -72,7 +72,7 @@ export class MessagesComponent implements OnInit {
 
   loadMessages(chatID: string): void {
     this.selectedChatID = chatID;
-    this.chatMessages = []; // Clear previous messages
+    this.chatMessages = []; 
     const messagesCollection = this.firestore.collection(`chats/${chatID}/messages`);
     messagesCollection.get().subscribe(messagesSnapshot => {
       messagesSnapshot.forEach(messageDoc => {
@@ -82,23 +82,23 @@ export class MessagesComponent implements OnInit {
           data: messageData
         });
       });
-      // Sort messages by timestamp
+      
       this.chatMessages.sort((a, b) => a.data.timestamp - b.data.timestamp);
     });
   }
 
   sendMessage(content: string, chatId: string): void {
-    const messageRef = this.firestore.collection(`chats/${chatId}/messages`).doc(); // Automatically generate a message ID
+    const messageRef = this.firestore.collection(`chats/${chatId}/messages`).doc(); 
     const messageData = {
       content: content,
       senderID: this.uid,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp() // Add timestamp field
-      // You can add more fields here if needed
+      timestamp: firebase.firestore.FieldValue.serverTimestamp() 
+      
     };
     messageRef.set(messageData)
       .then(() => {
         console.log('Message sent successfully');
-        // Optionally, you can reload the chat messages after sending the message
+        
         this.loadMessages(chatId);
       })
       .catch(error => {
@@ -109,7 +109,7 @@ export class MessagesComponent implements OnInit {
   sendMessageForm(chatId: string): void {
     if (this.messageContent.trim() !== '') {
       this.sendMessage(this.messageContent, chatId);
-      this.messageContent = ''; // Clear the input field after sending the message
+      this.messageContent = ''; 
     }
   }
 }

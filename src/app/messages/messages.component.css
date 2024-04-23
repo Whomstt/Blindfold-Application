@@ -45,12 +45,11 @@
     min-height: 40px;
 }
 
-.chat input[type="text"] {
-  border-radius: 10px; 
-  width: 100%;
-  height: 60%;
-}
 
+.chat h3 {
+    text-decoration: underline;
+    color: white;
+}
 
 
 .Messages{
@@ -82,6 +81,7 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 .chatlist {
@@ -104,6 +104,7 @@ body {
     background-color: rgb(142 159 189);
     padding: 20px 30px;
     margin: 0;
+    overflow-y: auto;
 }
 
 .chat div {
@@ -203,18 +204,35 @@ form button:hover {
 }
 
 .sent-message {
-    text-align: right;
-    /* Add other styles for sent messages */
+    text-align: right; /* Align text to the right */
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    float: right; /* Float messages to the right */
+    clear: both; /* Ensure each message starts on a new line */
+    max-width: 50%; /* Limit the maximum width to 50% */
+    word-wrap: break-word;
   }
   
   .received-message {
-    text-align: left;
-    /* Add other styles for received messages */
+   text-align: left; /* Align text to the left */
+    background-color: dodgerblue;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    float: left; /* Float messages to the left */
+    clear: both; /* Ensure each message starts on a new line */
+    max-width: 50%; /* Limit the maximum width to 50% */
+    word-wrap: break-word;
+
   }  
 
 @media (max-height: calc(100vh - 300px)) {
     .chatlist {
-        top: 40px; /* Set top position to 40px when nearing the top */
+        top: 40px; 
     }
 }
 
