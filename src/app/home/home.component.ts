@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../services/firebase.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -11,13 +10,12 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  userEmail: string | null = null; // Initialize userEmail
-  searchQuery: string = '';
-  uid: string = ''; // Initialize UID
-  userProfile: any; // Initialize userProfile to hold user profile data
+  searchQuery: string = ''; 
+  interests: any = {}; // Property to store selected interests
+  uid: string = ''; 
+  userProfile: any; 
 
   constructor(
-    private firebaseService: FirebaseService,
     private afAuth: AngularFireAuth,
     private router: Router,
     private firestore: AngularFirestore,
@@ -29,8 +27,6 @@ export class HomeComponent implements OnInit {
     if (user) {
       this.uid = user.uid;
       console.log("UID:", this.uid);
-
-      // Fetch user profile data
       await this.getUserProfile();
     }
   }
@@ -43,22 +39,23 @@ export class HomeComponent implements OnInit {
         console.log('User profile fetched successfully:', this.userProfile);
       } else {
         console.log('User profile does not exist.');
-        // Handle the case where the user profile does not exist
-        // You can initialize this.userProfile to an empty object or handle it based on your application logic
       }
     } catch (error: any) {
       console.error('Error fetching user profile:', error);
-      // Handle error as needed
     }
   } 
 
-  async logout() {
-    this.firebaseService.logout();
-    this.router.navigate(['']);
-  }
-
   onSearch() {
-    // Redirect to search-list component with the search query as a parameter
-    this.router.navigate(['/search-list'], { queryParams: { query: this.searchQuery } });
+    // Formulate search query with selected interests
+    let searchQuery = `${this.searchQuery}`;
+    for (const [key, value] of Object.entries(this.interests)) {
+      if (value) {
+        searchQuery += `,${key}`;
+      }
+    }
+
+    // Navigate to search-list component with the formulated search query
+    this.router.navigate(['/search-list'], { queryParams: { query: searchQuery } });
   }
 }
+

@@ -50,14 +50,14 @@ export class SearchListComponent implements OnInit {
             }).filter(Boolean); 
             const searchTerms = this.searchQuery.split(',').map(term => term.trim());
   
-            const interests = searchTerms.slice(3);
+            const interests = searchTerms.slice(1);
   
             this.searchResults = matchedResults.filter(result =>
               result && result.user &&
               (result.user.userName.toLowerCase().startsWith(searchTerms[0].toLowerCase()) ||
                   result.profile.userRealName.toLowerCase().startsWith(searchTerms[0].toLowerCase())) &&
-              (searchTerms[1] ? result.profile.userAge >= parseInt(searchTerms[1]) : true) && 
-              (searchTerms[2] ? result.profile.userAge <= parseInt(searchTerms[2]) : true) && 
+              //(searchTerms[1] ? result.profile.userAge >= parseInt(searchTerms[1]) : true) && 
+              //(searchTerms[2] ? result.profile.userAge <= parseInt(searchTerms[2]) : true) && 
               (interests.length === 0 || interests.some(interest => result.profile['user' + interest.charAt(0).toUpperCase() + interest.slice(1).toLowerCase()] === true))
             );
   

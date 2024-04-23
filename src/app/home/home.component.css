@@ -93,6 +93,16 @@ body {
     z-index: 10;
   }
 
+   .checkbox-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            color: white;
+        }
+        .checkbox-item {
+            margin-right: 20px;
+        }
+
 @media (max-width:60em) {
     .sidenav {
         display: none;
