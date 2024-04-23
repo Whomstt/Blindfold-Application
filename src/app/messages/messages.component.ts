@@ -15,6 +15,7 @@ export class MessagesComponent implements OnInit {
   selectedChatID: string | null = null;
   messageContent: string = '';
   matchedUserRealNames: { [key: string]: string } = {}; // Map to store matched user real names by ID
+  matchedProfileImageURLs: { [key: string]: string } = {}; // Map to store matched user image URLs by ID
 
   constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth) { }
 
@@ -40,23 +41,25 @@ export class MessagesComponent implements OnInit {
           console.log("Chat ID:", chatDoc.id);
           console.log("Chat Data:", chatData);
 
-          // Fetch matched user's profile data to get real name
+          // Fetch matched user's profile data to get real name and image URL
           const matchedUserID = userID1 === this.uid ? userID2 : userID1;
-          this.fetchMatchedUserRealName(matchedUserID);
+          this.fetchMatchedUserInfo(matchedUserID);
         }
       });
     });
   }
 
-  fetchMatchedUserRealName(userID: string): void {
-    console.log('Fetching real name for userID:', userID);
+  fetchMatchedUserInfo(userID: string): void {
+    console.log('Fetching info for userID:', userID);
     this.firestore.collection('profiles').doc(userID).get().subscribe(
       (profileDoc: any) => {
         if (profileDoc.exists) {
           const profileData = profileDoc.data();
           console.log('Profile data for userID:', userID, profileData);
           this.matchedUserRealNames[userID] = profileData.userRealName;
+          this.matchedProfileImageURLs[userID] = profileData.profileImageURL; // Store image URL
           console.log('Matched user real name:', this.matchedUserRealNames[userID]);
+          console.log('Matched user image URL:', this.matchedProfileImageURLs[userID]);
         } else {
           console.error('Profile does not exist for userID:', userID);
         }

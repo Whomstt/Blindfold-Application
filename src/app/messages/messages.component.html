@@ -10,19 +10,20 @@
                 <input type="text" placeholder="Search">
             </div>
             <div class="chatlist">
-                <div class="block" *ngFor="let chat of userChats" (click)="loadMessages(chat.id)">
-                    <div class="img">
-                        <img src="assets/images/greyIcon.png" class="cover">
+              <div class="block" *ngFor="let chat of userChats" (click)="loadMessages(chat.id)">
+                <div class="img">
+                    <img [src]="matchedProfileImageURLs[chat.data.userID1 === uid ? chat.data.userID2 : chat.data.userID1] || 'assets/images/greyIcon.png'" class="cover">
+                </div>
+                <div class="info">
+                    <div class="list">
+                        <h5>{{ matchedUserRealNames[chat.data.userID1 === uid ? chat.data.userID2 : chat.data.userID1] }}</h5>
                     </div>
-                    <div class="info">
-                        <div class="list">
-                            <h5>{{ matchedUserRealNames[chat.data.userID1 === uid ? chat.data.userID2 : chat.data.userID1] }}</h5>
-                        </div>
-                        <div class="message3">
-                            <p>You have recently matched with {{ matchedUserRealNames[chat.data.userID1 === uid ? chat.data.userID2 : chat.data.userID1] }}.</p>
-                        </div>
+                    <div class="message3">
+                        <p>You have recently matched with {{ matchedUserRealNames[chat.data.userID1 === uid ? chat.data.userID2 : chat.data.userID1] }}.</p>
                     </div>
                 </div>
+            </div>
+            
             </div>
             <div class="chatContainer">
                 <div class="header">
