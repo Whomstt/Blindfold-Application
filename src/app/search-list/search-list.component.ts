@@ -62,13 +62,15 @@ export class SearchListComponent implements OnInit {
 
             // Filter search results based on userSeeking preference
             this.searchResults = matchedResults.filter(result =>
-              result && result.user &&
-              result.userID !== this.currentUserID && // Exclude current user
-              (result.user.userName.toLowerCase().startsWith(searchTerms[0].toLowerCase()) ||
-                result.profile.userRealName.toLowerCase().startsWith(searchTerms[0].toLowerCase())) &&
-              (currentUserSeeking === '' || result.profile.userGender.toLowerCase() === currentUserSeeking.toLowerCase()) && // Match userGender with userSeeking preference
-              (interests.length === 0 || interests.some(interest => result.profile['user' + interest.charAt(0).toUpperCase() + interest.slice(1).toLowerCase()] === true))
-            );
+  result && result.user &&
+  result.userID !== this.currentUserID && // Exclude current user
+  (result.user.userName.toLowerCase().startsWith(searchTerms[0].toLowerCase()) ||
+    result.profile.userRealName.toLowerCase().startsWith(searchTerms[0].toLowerCase())) &&
+  ((currentUserSeeking === 'both') || // Include all profiles for 'both' preference
+   (currentUserSeeking === 'other' && result.profile.userGender.toLowerCase() === 'other') || // Match 'other' preference with 'other' gender
+   (currentUserSeeking !== 'both' && currentUserSeeking !== 'other' && result.profile.userGender.toLowerCase() === currentUserSeeking.toLowerCase())) && // Match userGender with userSeeking preference
+  (interests.length === 0 || interests.some(interest => result.profile['user' + interest.charAt(0).toUpperCase() + interest.slice(1).toLowerCase()] === true))
+);
 
             console.log('Search results:', this.searchResults);
           },
