@@ -35,6 +35,7 @@
                             <select id="Seeking" name="Seeking" [(ngModel)]="userProfile.userSeeking" required>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
+                                <option value = "both">Both</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
@@ -73,7 +74,7 @@
                     <label class="label2" for="drinker">Drinker</label><br>
                 </div>
                 <div class="profile_description">
-                    <label class="label" for="description">Description:</label><br>
+                    <label class="label" for="description">Bio:</label><br>
                     <textarea id="userBio" name="userBio" rows="4" cols="50" [(ngModel)]="userProfile.userBio" required></textarea>
                 </div>
                 <div class="profile_submit">
@@ -86,7 +87,7 @@
         <a routerLink="/home"><img src="assets/images/search_icon.jpg" class="rounded_img"></a>
         <a routerLink="/messages"><img src="assets/images/message_icon.jpg" class="img-fluid"></a>
         <a routerLink="/dealer"><img src="assets/images/cards.jpg" class="img-fluid"></a>
-        <a routerLink="/profile"><img src="assets/images/profile_icon.jpg" class="rounded_img"></a>
+        <a routerLink="/profile"><img src="assets/images/gear.png" class="rounded_img"></a>
     </div>
 </body>
 </html>
