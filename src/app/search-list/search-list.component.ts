@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-search-list',
@@ -11,32 +12,37 @@ import { Router } from '@angular/router';
 export class SearchListComponent implements OnInit {
   searchQuery: string = ''; 
   searchResults: any[] = []; 
-  currentUserID: string = ''; // Add current user ID property
+  currentUserID: string | null = null; // Allow null values
+  currentUserSeeking: string = ''; // Current user's seeking preference
 
   constructor(
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private firebaseService: FirebaseService
   ) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(async params => {
       this.searchQuery = params['query'] || ''; 
       console.log('Search query:', this.searchQuery); 
-      this.fetchUsernames(); 
+      await this.fetchUsernames(); 
     });
 
-    // Get current user ID (assuming it's available in your application)
-    this.currentUserID = ''; // Set it to the current user's ID
+    // Get current user ID and seeking preference
+    this.getCurrentUser();
   }
 
-  fetchUsernames() {
+ async fetchUsernames() {
+  try {
+    // Get current user's seeking preference
+    this.currentUserSeeking = await this.firebaseService.getCurrentUserSeeking();
+    console.log('Current user seeking preference:', this.currentUserSeeking);
+
     this.firestore.collection('users').valueChanges().subscribe(
       (users: any[]) => {
-  
         this.firestore.collection('profiles').valueChanges().subscribe(
           (profiles: any[]) => {
-  
             const matchedResults = users.map(user => {
               const profile = profiles.find(p => p.userID === user.userID);
               if (profile && !profile.userBanned) {
@@ -51,19 +57,19 @@ export class SearchListComponent implements OnInit {
               }
             }).filter(Boolean); 
             const searchTerms = this.searchQuery.split(',').map(term => term.trim());
-  
             const interests = searchTerms.slice(1);
-  
+            const currentUserSeeking = this.currentUserSeeking;
+
+            // Filter search results based on userSeeking preference
             this.searchResults = matchedResults.filter(result =>
               result && result.user &&
               result.userID !== this.currentUserID && // Exclude current user
               (result.user.userName.toLowerCase().startsWith(searchTerms[0].toLowerCase()) ||
-                  result.profile.userRealName.toLowerCase().startsWith(searchTerms[0].toLowerCase())) &&
-              //(searchTerms[1] ? result.profile.userAge >= parseInt(searchTerms[1]) : true) && 
-              //(searchTerms[2] ? result.profile.userAge <= parseInt(searchTerms[2]) : true) && 
+                result.profile.userRealName.toLowerCase().startsWith(searchTerms[0].toLowerCase())) &&
+              (currentUserSeeking === '' || result.profile.userGender.toLowerCase() === currentUserSeeking.toLowerCase()) && // Match userGender with userSeeking preference
               (interests.length === 0 || interests.some(interest => result.profile['user' + interest.charAt(0).toUpperCase() + interest.slice(1).toLowerCase()] === true))
             );
-  
+
             console.log('Search results:', this.searchResults);
           },
           error => {
@@ -75,7 +81,19 @@ export class SearchListComponent implements OnInit {
         console.error('Error fetching users:', error);
       }
     );
+  } catch (error) {
+    console.error('Error fetching current user seeking preference:', error);
   }
+}
+
+
+  async getCurrentUser() {
+    this.currentUserID = await this.firebaseService.getCurrentUserID();
+    this.currentUserSeeking = await this.firebaseService.getCurrentUserSeeking();
+    console.log('Current user ID:', this.currentUserID);
+    console.log('Current user seeking preference:', this.currentUserSeeking);
+  }
+
   viewProfile(userID: string) {
     this.router.navigate(['/view-other-profile', userID]); // Navigate to view_other_profile page with user ID
   }
