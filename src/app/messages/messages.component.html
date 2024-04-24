@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row no-gutters">
             <div class="chat">
-                <input type="text" placeholder="Search">
+                 <h3>Messages</h3>
             </div>
             <div class="chatlist">
               <div class="block" *ngFor="let chat of userChats" (click)="loadMessages(chat.id)">
@@ -33,7 +33,7 @@
                     <div *ngIf="selectedChatID">
                         <div *ngFor="let message of chatMessages" [ngClass]="{'sent-message': message.data.senderID === uid, 'received-message': message.data.senderID !== uid}">
                             <p class="message1">{{ message.data.content }}</p>
-                            <p class="message1">{{ message.data.timestamp | timestampDate | date: 'medium' }}</p>
+                            <p class="message1 timestamp">{{ message.data.timestamp | timestampDate | date: 'medium' }}</p>
                         </div>
                     </div>
                     <div *ngIf="!selectedChatID">
@@ -55,7 +55,7 @@
         <a routerLink="/home"><img src="assets/images/search_icon.jpg" class="rounded_img"></a>
         <a routerLink="/messages"><img src="assets/images/message_icon.jpg" class="img-fluid"></a>
         <a routerLink="/dealer"><img src="assets/images/cards.jpg" class="img-fluid"></a>
-        <a routerLink="/profile"><img src="assets/images/profile_icon.jpg" class="rounded_img"></a>
+        <a routerLink="/profile"><img src="assets/images/gear.png" class="rounded_img"></a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEH3j5o4wX0l2n5l5rZ5JwFgjV8z4n4y1p5CUZZBpZbP" crossorigin="anonymous"></script>
