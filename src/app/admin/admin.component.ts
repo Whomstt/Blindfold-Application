@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrl: './admin.component.css'
 })
 export class AdminComponent {
+  
     searchQuery: string = ''; 
     searchResults: any[] = []; 
   
@@ -76,12 +77,31 @@ export class AdminComponent {
       this.router.navigate(['/view-other-profile', userID]); // Navigate to view_other_profile page with user ID
     }
 
-    banUser(userId: string) {
+    async banUser(userId: string) {
+      try {
+        await this.firestore.collection('profiles').doc(userId).update({ userBanned: true });
+        console.log(`User with ID ${userId} is banned.`);
+      } catch (error) {
+        console.error('Error banning user:', error);
+      }
     }
   
-    unbanUser(userId: string) {
+    async unbanUser(userId: string) {
+      try {
+        await this.firestore.collection('profiles').doc(userId).update({ userBanned: false });
+        console.log(`User with ID ${userId} is unbanned.`);
+      } catch (error) {
+        console.error('Error unbanning user:', error);
+      }
     }
   
-    deleteUser(userId: string) {
+    async deleteUser(userId: string) {
+      try {
+        await this.firestore.collection('users').doc(userId).delete();
+        await this.firestore.collection('profiles').doc(userId).delete();
+        console.log(`User with ID ${userId} is deleted.`);
+      } catch (error) {
+        console.error('Error deleting user:', error);
+      }
     }
 }

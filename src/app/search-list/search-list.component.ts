@@ -39,7 +39,7 @@ export class SearchListComponent implements OnInit {
   
             const matchedResults = users.map(user => {
               const profile = profiles.find(p => p.userID === user.userID);
-              if (profile) {
+              if (profile && !profile.userBanned) {
                 return {
                   user: user,
                   profile: profile,
