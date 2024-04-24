@@ -94,6 +94,22 @@ export class AdminComponent {
         console.error('Error unbanning user:', error);
       }
     }
+    async admin(userId: string) {
+      try {
+        await this.firestore.collection('users').doc(userId).update({ userType: "Admin" });
+        console.log(`User with ID ${userId} is now admin.`);
+      } catch (error) {
+        console.error('Error creating admin:', error);
+      }
+    }
+    async unAdmin(userId: string) {
+      try {
+        await this.firestore.collection('users').doc(userId).update({ userType: "User" });
+        console.log(`User with ID ${userId} is now user.`);
+      } catch (error) {
+        console.error('Error creating user:', error);
+      }
+    }
   
     async deleteUser(userId: string) {
       try {
