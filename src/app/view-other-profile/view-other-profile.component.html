@@ -40,22 +40,24 @@
                 <div class="interests">
                     <label class="label">Interests:</label><br>
                     <div>
-                        <span *ngIf="userProfile.userReading">Reading</span>
-                        <span *ngIf="userProfile.userFilm">Film</span>
-                        <span *ngIf="userProfile.userCooking">Cooking</span>
-                        <span *ngIf="userProfile.userSport">Sports</span>
-                        <span *ngIf="userProfile.userTravel">Travel</span>
-                        <span *ngIf="userProfile.userGaming">Gaming</span>
-                        <span *ngIf="userProfile.userMusic">Music</span>
-                        <span *ngIf="userProfile.userSmoker">Smoker</span>
-                        <span *ngIf="userProfile.userDrinker">Drinker</span>
+                        <span *ngIf="userProfile.userReading">Reading&nbsp;</span>
+                        <span *ngIf="userProfile.userFilm">Film&nbsp;</span>
+                        <span *ngIf="userProfile.userCooking">Cooking&nbsp;</span>
+                        <span *ngIf="userProfile.userSport">Sports&nbsp;</span>
+                        <span *ngIf="userProfile.userTravel">Travel&nbsp;</span>
+                        <span *ngIf="userProfile.userGaming">Gaming&nbsp;</span>
+                        <span *ngIf="userProfile.userMusic">Music&nbsp;</span>
+                        <span *ngIf="userProfile.userSmoker">Smoker&nbsp;</span>
+                        <span *ngIf="userProfile.userDrinker">Drinker&nbsp;</span>
                     </div>
                 </div>
                 <div class="profile_description">
                     <label class="label" for="description">Bio:</label><br>
                     <div>{{ userProfile.userBio }}</div>
                 </div>
-                <button class="start-chatting-button" (click)="startChatting()">Start Chatting</button>
+                <div class="startChatting">
+                <button (click)="startChatting()">Start Chatting</button>
+            </div>
             </div>
         </div>
     </div>

@@ -51,6 +51,7 @@ body{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
     display: flex;
     margin-left: 17%;
+    height: 90vh;
 }
 
 .container .left{
@@ -191,6 +192,7 @@ select {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: larger;
     text-align: right;
+    padding-left: 10%;
 }
 
  .black-section .Profile_button:hover button{
@@ -245,19 +247,21 @@ select {
     float: right;
 }
 
-.profile_description{
+.profile_description {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: larger;
     margin-top: 5%;
-    
+    padding-left: 10%;
+    width: 60%; /* Set a fixed width for the description */
+    overflow-wrap: break-word; /* Allow long words to break and wrap */
+    word-wrap: break-word; /* For older browsers */
 }
 
-.profile_description textarea{
-
+.profile_description textarea {
     margin-top: 1%;
-    width: 60%;
+    width: 100%; /* Make sure textarea spans the entire width */
     border-bottom: 1.5px solid #F7270B;    
-
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
 .profile_submit{
@@ -286,6 +290,14 @@ input[type="file"] {
 .profile-image img {
   padding-bottom: 10px; /* Adjust the value as needed */
   border-radius: 50%;
+}
+
+.startChatting{
+    padding-left: 10%;
+}
+
+.startChatting:hover button{
+    background-color: #636160; /* Change background color on hover */
 }
 
 

@@ -32,8 +32,12 @@ export class ViewOtherProfileComponent implements OnInit {
     // Use AngularFirestore to fetch user profile based on userID
     this.firestore.collection('profiles').doc(userID).valueChanges().subscribe(
       (profile: any) => {
-        // Assign the fetched profile to userProfile
-        this.userProfile = profile;
+        let check = false;
+        while(!profile.userBanned && !check) { // Check if profile exists and user is not banned
+          // Assign the fetched profile to userProfile
+          this.userProfile = profile;
+          check = true;
+        }
       },
       error => {
         console.error('Error fetching user profile:', error);
