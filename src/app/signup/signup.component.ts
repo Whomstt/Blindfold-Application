@@ -31,8 +31,6 @@ export class SignupComponent {
         const newUser = {
             userID: uid, // Use the UID as the user ID
             userName: userName,
-            userEmail: userEmail,
-            userPassword: userPassword,
             userType: userType,
             // Add other fields as needed
         };

@@ -33,11 +33,9 @@ export class SearchListComponent implements OnInit {
   fetchUsernames() {
     this.firestore.collection('users').valueChanges().subscribe(
       (users: any[]) => {
-        console.log('Users:', users);
   
         this.firestore.collection('profiles').valueChanges().subscribe(
           (profiles: any[]) => {
-            console.log('Profiles:', profiles);
   
             const matchedResults = users.map(user => {
               const profile = profiles.find(p => p.userID === user.userID);
