@@ -12,8 +12,8 @@ import { FirebaseService } from '../services/firebase.service';
 export class SearchListComponent implements OnInit {
   searchQuery: string = ''; 
   searchResults: any[] = []; 
-  currentUserID: string | null = null; // Allow null values
-  currentUserSeeking: string = ''; // Current user's seeking preference
+  currentUserID: string | null = null; 
+  currentUserSeeking: string = ''; 
 
   constructor(
     private route: ActivatedRoute,
@@ -29,13 +29,13 @@ export class SearchListComponent implements OnInit {
       await this.fetchUsernames(); 
     });
 
-    // Get current user ID and seeking preference
+   
     this.getCurrentUser();
   }
 
  async fetchUsernames() {
   try {
-    // Get current user's seeking preference
+    
     this.currentUserSeeking = await this.firebaseService.getCurrentUserSeeking();
     console.log('Current user seeking preference:', this.currentUserSeeking);
 
@@ -49,7 +49,7 @@ export class SearchListComponent implements OnInit {
                 return {
                   user: user,
                   profile: profile,
-                  userID: user.userID // Include userID here
+                  userID: user.userID 
                 };
               } else {
                 console.warn(`Profile not found for user with userID: ${user.userID}`);
@@ -60,17 +60,17 @@ export class SearchListComponent implements OnInit {
             const interests = searchTerms.slice(1);
             const currentUserSeeking = this.currentUserSeeking;
 
-            // Filter search results based on userSeeking preference
+            
             this.searchResults = matchedResults.filter(result =>
-  result && result.user &&
-  result.userID !== this.currentUserID && // Exclude current user
-  (result.user.userName.toLowerCase().startsWith(searchTerms[0].toLowerCase()) ||
-    result.profile.userRealName.toLowerCase().startsWith(searchTerms[0].toLowerCase())) &&
-  ((currentUserSeeking === 'both') || // Include all profiles for 'both' preference
-   (currentUserSeeking === 'other' && result.profile.userGender.toLowerCase() === 'other') || // Match 'other' preference with 'other' gender
-   (currentUserSeeking !== 'both' && currentUserSeeking !== 'other' && result.profile.userGender.toLowerCase() === currentUserSeeking.toLowerCase())) && // Match userGender with userSeeking preference
-  (interests.length === 0 || interests.some(interest => result.profile['user' + interest.charAt(0).toUpperCase() + interest.slice(1).toLowerCase()] === true))
-);
+                 result && result.user &&
+                 result.userID !== this.currentUserID &&
+                 (result.user.userName.toLowerCase().startsWith(searchTerms[0].toLowerCase()) ||
+                 result.profile.userRealName.toLowerCase().startsWith(searchTerms[0].toLowerCase())) &&
+                 ((currentUserSeeking === 'both') || 
+                (currentUserSeeking === 'other' && result.profile.userGender.toLowerCase() === 'other') || 
+                (currentUserSeeking !== 'both' && currentUserSeeking !== 'other' && result.profile.userGender.toLowerCase() === currentUserSeeking.toLowerCase())) && // Match userGender with userSeeking preference
+                (interests.length === 0 || interests.some(interest => result.profile['user' + interest.charAt(0).toUpperCase() + interest.slice(1).toLowerCase()] === true))
+                );
 
             console.log('Search results:', this.searchResults);
           },
@@ -97,6 +97,6 @@ export class SearchListComponent implements OnInit {
   }
 
   viewProfile(userID: string) {
-    this.router.navigate(['/view-other-profile', userID]); // Navigate to view_other_profile page with user ID
+    this.router.navigate(['/view-other-profile', userID]); 
   }
 }
