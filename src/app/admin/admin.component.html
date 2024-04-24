@@ -17,7 +17,7 @@
         <a routerLink="/home"><img src="assets/images/search_icon.jpg" class="rounded_img"></a>
         <a routerLink="/messages"><img src="assets/images/message_icon.jpg" class="img-fluid"></a>
         <a routerLink="/dealer"><img src="assets/images/cards.jpg" class="img-fluid"></a>
-        <a routerLink="/profile"><img src="assets/images/profile_icon.jpg" class="rounded_img"></a>
+        <a routerLink="/profile"><img src="assets/images/gear.png" class="rounded_img"></a>
     </div>
     <div>
         <h1>All Users</h1>
@@ -28,6 +28,7 @@
                         <div class="user-info">
                             <h3>User Information:</h3>
                             <div class="profile-info">
+                                <p><strong>User type:</strong> {{ result.user.userType }}</p>
                                 <p><strong>User Banned:</strong>{{result.profile.userBanned}}</p>
                                 <p><strong>Username:</strong> {{ result.user.userName }}</p>
                                 <p><strong>Age:</strong> {{ result.profile.userAge }}</p>
@@ -48,6 +49,8 @@
                                 <button class="button" (click)="banUser(result.userID)">Ban</button>
                                 <button class="button" (click)="unbanUser(result.userID)">Unban</button>
                                 <button class="button" (click)="deleteUser(result.userID)">Delete</button>
+                                <button class="button" (click)="admin(result.userID)">Admin</button>
+                                <button class="button" (click)="unAdmin(result.userID)">User</button>
                             </div>
                             <a [routerLink]="['/view-other-profile', result.userID]"> <!-- Adding anchor tag here -->
                                 <img [src]="result.profile.profileImageURL || 'assets/images/greyIcon.png'" class="circular-image">
