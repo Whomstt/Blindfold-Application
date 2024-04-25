@@ -57,7 +57,6 @@ body{
 .container .left{
     position: relative;
     flex: 30%;
-    display: flex;
     font-family: Georgia, 'Times New Roman', Times, serif;
     text-decoration: underline white;  
     text-align: center;
@@ -76,7 +75,8 @@ body{
     height: auto; 
     overflow: hidden;
     cursor: pointer;
-    margin-top: 10%;
+    margin-top: 20%;
+    margin-bottom: 10%;
 
 }
 
@@ -238,8 +238,8 @@ select {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: larger;
     margin-left: 10%;
-    float: left;
     padding-top: 5%;
+    display: inline-block;
 
 }
 
@@ -250,18 +250,18 @@ select {
 .profile_description {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: larger;
-    margin-top: 5%;
+    margin-top: 1%;
     padding-left: 10%;
-    width: 60%; /* Set a fixed width for the description */
-    overflow-wrap: break-word; /* Allow long words to break and wrap */
-    word-wrap: break-word; /* For older browsers */
+    width: 95%; 
+    overflow-wrap: break-word; 
+    word-wrap: break-word; 
 }
 
 .profile_description textarea {
     margin-top: 1%;
-    width: 100%; /* Make sure textarea spans the entire width */
+    width: 100%; 
     border-bottom: 1.5px solid #F7270B;    
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    box-sizing: border-box; 
 }
 
 .profile_submit{
@@ -288,7 +288,7 @@ input[type="file"] {
 }
 
 .profile-image img {
-  padding-bottom: 10px; /* Adjust the value as needed */
+  padding-bottom: 10px; 
   border-radius: 50%;
 }
 
@@ -297,7 +297,7 @@ input[type="file"] {
 }
 
 .startChatting:hover button{
-    background-color: #636160; /* Change background color on hover */
+    background-color: #636160; 
 }
 
 
