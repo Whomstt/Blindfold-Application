@@ -67,12 +67,12 @@ export class SearchListComponent implements OnInit {
     result.userID !== this.currentUserID &&
     result.user.userType !== 'Admin' &&
     (
-        // Check if either username or real name starts with the search term
+        
         (result.user.userName.toLowerCase().startsWith(searchTerms[0].toLowerCase()) ||
         result.profile.userRealName.toLowerCase().startsWith(searchTerms[0].toLowerCase()))
     ) &&
     (
-        // Check seeking preference and gender
+        
         (
             currentUserSeeking === 'both' &&
             this.currentUserGender === result?.profile?.userSeeking
@@ -84,7 +84,7 @@ export class SearchListComponent implements OnInit {
         )
     ) &&
     (
-        // Check interests
+        
         interests.length === 0 ||
         interests.some(interest =>
             result?.profile['user' + interest.charAt(0).toUpperCase() + interest.slice(1).toLowerCase()] === true

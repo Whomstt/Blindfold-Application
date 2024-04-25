@@ -54,7 +54,7 @@ export class AdminComponent {
                   return {
                     user: user,
                     profile: profile,
-                    userID: user.userID // Include userID here
+                    userID: user.userID 
                   };
                 } else {
                   console.warn(`Profile not found for user with userID: ${user.userID}`);
