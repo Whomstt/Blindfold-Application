@@ -39,12 +39,12 @@ html, body {
 h1 {
     font-family: 'Irish Grover', sans-serif;
     font-size: 36px;
-    color: #333; /* Dark gray text */
+    color: #333; 
     text-align: center;
 }
 
 .results {
-    margin-left: 13%;
+    margin-left: 2%;
 }
 
 .user-info {
@@ -52,7 +52,7 @@ h1 {
     padding: 3px;
     border: 1px solid #ccc;
     margin-bottom: 20px;
-    overflow: hidden; /* Clear the floats */
+    overflow: hidden;
 }
 
 .profile-info {
@@ -88,7 +88,26 @@ button{
     color: #fff;
     display: inline-block;
 }
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: red;
+    color: #fff;
+}
 
-button:hover{
-background-color: red;
+.top h1 {
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.top button {
+    background-color: #000;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.top button:hover {
+    background-color: red;
 }

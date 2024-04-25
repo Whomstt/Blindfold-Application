@@ -13,14 +13,17 @@
     </style>
 </head>
 <body>
-    <div class="sidenav">
+    <!-- <div class="sidenav">
         <a routerLink="/home"><img src="assets/images/search_icon.jpg" class="rounded_img"></a>
         <a routerLink="/messages"><img src="assets/images/message_icon.jpg" class="img-fluid"></a>
         <a routerLink="/dealer"><img src="assets/images/cards.jpg" class="img-fluid"></a>
         <a routerLink="/profile"><img src="assets/images/gear.png" class="rounded_img"></a>
-    </div>
+    </div> -->
     <div>
-        <h1>All Users</h1>
+        <div class="top">
+            <h1>All Users</h1>
+            <button (click)="logout()">Sign Out</button>
+        </div>
         <div class="results">
             <ng-container *ngIf="searchResults.length > 0; else noResults">
                 <div class="row">
