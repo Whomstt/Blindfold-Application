@@ -297,8 +297,7 @@ input[type="file"] {
 }
 
 .startChatting{
-    display: flex;
-    flex-direction: column;
+    text-align: center;
     justify-content: flex-end; 
     align-items: center; 
     margin-top: auto;
