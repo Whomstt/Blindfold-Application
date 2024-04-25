@@ -190,14 +190,15 @@ select {
 .Profile_button {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: larger;
-    text-align: right;
-}
+    text-align: end;}
 
- .black-section .Profile_button:hover button{
+.Profile_button:hover button{
     background-color:grey;
     cursor: pointer;
 
 }
+
+
 
 .Poker_background img{
 
@@ -243,15 +244,21 @@ select {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: larger;
     margin-top: 5%;
+    ;
     
 }
 
 .profile_description textarea{
 
     margin-top: 1%;
-    width: 60%;
+    width: 40%;
+    height: 42vh;
     border-bottom: 1.5px solid #F7270B;    
 
+}
+
+.profile_submit:hover button{
+    background-color: #636160; /* Change background color on hover */
 }
 
 .profile_submit{
@@ -262,13 +269,13 @@ select {
     margin-right: 8%;
 }
 
-input[type="submit"] {
+input[type="submit"] button{
     background-color: #FF5733; 
     color: #FFFFFF;
     border: none;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover button{
     background-color: #FF8C66; 
     color: #FFFFFF;
 } 

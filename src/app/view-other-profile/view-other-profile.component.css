@@ -226,6 +226,10 @@ select {
     height: 50%;
     background-color: rgb(214, 210, 210);
     margin: 0; 
+    display: flex;
+    flex-direction: column;
+    
+    
 }
 
 .start-chatting-button {
@@ -293,10 +297,14 @@ input[type="file"] {
 }
 
 .startChatting{
-    padding-left: 10%;
+    text-align: center;
+    justify-content: flex-end; 
+    align-items: center; 
+    margin-top: auto;
 }
 
 .startChatting:hover button{
+     align-self: flex-end;
     background-color: #636160; 
 }
 
@@ -327,6 +335,9 @@ input[type="file"]::-webkit-file-upload-button {
       width: 100%;
       margin-left: 0;
     }
+
+  
+
 }
 
 @media screen and (max-width: 900px) {
