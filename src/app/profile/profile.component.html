@@ -74,11 +74,12 @@
                 </div>
                 <div class="profile_description">
                     <label class="label" for="description">Bio:</label><br>
-                    <textarea id="userBio" name="userBio" rows="4" cols="50" [(ngModel)]="userProfile.userBio" required></textarea>
+                    <textarea id="userBio" name="userBio" rows="4" cols="50" [(ngModel)]="userProfile.userBio" maxlength="180" required></textarea>
                 </div>
                 <div class="profile_submit">
                     <button type="button" (click)="updateProfile()">Submit</button>
                 </div>
+                <div class="character-count">Characters left: {{ 180 - userProfile.userBio?.length }}</div>
             </div>
         </div>
     </div>
