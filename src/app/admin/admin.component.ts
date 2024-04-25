@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { FirebaseService } from '../services/firebase.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-admin',
@@ -9,14 +12,18 @@ import { Router } from '@angular/router';
   styleUrl: './admin.component.css'
 })
 export class AdminComponent {
+  @Output() isLogout = new EventEmitter<void>();
   
-    searchQuery: string = ''; 
-    searchResults: any[] = []; 
+  searchQuery: string = ''; 
+  searchResults: any[] = []; 
   
     constructor(
       private route: ActivatedRoute,
       private firestore: AngularFirestore,
-      private router: Router
+      private router: Router,
+      private firebaseService: FirebaseService,
+      private afAuth: AngularFireAuth,
+      private storage: AngularFireStorage
     ) { }
     ngOnInit() {
       this.route.queryParams.subscribe(params => {
@@ -24,6 +31,12 @@ export class AdminComponent {
         console.log('Search query:', this.searchQuery); 
         this.fetchUsernames(); 
       });
+    }
+
+    async logout() {
+      this.firebaseService.logout();
+      this.isLogout.emit();
+      this.router.navigate(['']);
     }
   
     fetchUsernames() {
