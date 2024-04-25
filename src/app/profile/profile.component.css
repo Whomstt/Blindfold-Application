@@ -199,6 +199,10 @@ select {
 
 }
 
+.interests input[type="checkbox"] + label {
+    position: relative;
+    z-index: 10;
+}
 
 
 .Poker_background img{
@@ -245,15 +249,16 @@ select {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: larger;
     margin-top: 5%;
-    left: 5%;
     position: relative;
-    
+    float: right;
+    right: 15%;
+    width: 50%;
 }
 
 .profile_description textarea{
     position: relative;
     margin-top: 1%;
-    width: 60%;
+    width: 100%;
     max-height: 30vh;
     height: 41vh;
     border-bottom: 1.5px solid #F7270B;   
@@ -278,8 +283,10 @@ select {
     left: 5%;
 }
 .character-count {
-    left: 5%;
-    position: relative;
+  position: absolute;
+  top: 0;
+  left: 55%;
+   
 }
 
 input[type="submit"] button{
