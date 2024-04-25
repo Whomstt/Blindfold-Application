@@ -22,6 +22,7 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 import { ViewOtherProfileComponent } from './view-other-profile/view-other-profile.component';
 import { TimestampDatePipe } from './timestamp-date.pipe';
 import { AdminComponent } from './admin/admin.component';
+import { BannedComponent } from './banned/banned.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AdminComponent } from './admin/admin.component';
     SearchListComponent,
     ViewOtherProfileComponent,
     TimestampDatePipe,
-    AdminComponent
+    AdminComponent,
+    BannedComponent
   ],
   imports: [
     BrowserModule,

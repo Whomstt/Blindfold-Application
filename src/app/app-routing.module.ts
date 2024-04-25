@@ -10,6 +10,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { SearchListComponent } from './search-list/search-list.component';
 import { ViewOtherProfileComponent } from './view-other-profile/view-other-profile.component';
 import { AdminComponent } from './admin/admin.component';
+import { BannedComponent } from './banned/banned.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'search-list', component : SearchListComponent, canActivate: [AuthGuard] },
   { path: 'view-other-profile', component : ViewOtherProfileComponent, canActivate: [AuthGuard] },
   { path: 'view-other-profile/:userID', component: ViewOtherProfileComponent, canActivate: [AuthGuard] },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] }
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: 'banned', component: BannedComponent }
 ];
 
 @NgModule({

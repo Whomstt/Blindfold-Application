@@ -44,14 +44,20 @@
                                     {{ result.profile.userMusic ? 'Music' : '' }}
                                     {{ result.profile.userTravel ? 'Travel' : '' }}
                                 </p>
-                            </div>
-                            <div style="display: block;">
+                                <p><strong>Bio:&nbsp;</strong>{{result.profile.userBio}}</p>
                                 <button class="button" (click)="banUser(result.userID)">Ban</button>
                                 <button class="button" (click)="unbanUser(result.userID)">Unban</button>
                                 <button class="button" (click)="deleteUser(result.userID)">Delete</button>
                                 <button class="button" (click)="admin(result.userID)">Admin</button>
                                 <button class="button" (click)="unAdmin(result.userID)">User</button>
                             </div>
+                            <!-- <div style="display: block;">
+                                <button class="button" (click)="banUser(result.userID)">Ban</button>
+                                <button class="button" (click)="unbanUser(result.userID)">Unban</button>
+                                <button class="button" (click)="deleteUser(result.userID)">Delete</button>
+                                <button class="button" (click)="admin(result.userID)">Admin</button>
+                                <button class="button" (click)="unAdmin(result.userID)">User</button>
+                            </div> -->
                             <a [routerLink]="['/view-other-profile', result.userID]"> <!-- Adding anchor tag here -->
                                 <img [src]="result.profile.profileImageURL || 'assets/images/greyIcon.png'" class="circular-image">
                             </a>
