@@ -61,17 +61,36 @@ export class SearchListComponent implements OnInit {
             const interests = searchTerms.slice(1);
             const currentUserSeeking = this.currentUserSeeking;
 
-            
-            this.searchResults = matchedResults.filter(result =>
-                 result && result.user &&
-                 result.userID !== this.currentUserID &&
-                 result.user.userType !== 'Admin' &&
-                 (result.user.userName.toLowerCase().startsWith(searchTerms[0].toLowerCase()) ||
-                 result.profile.userRealName.toLowerCase().startsWith(searchTerms[0].toLowerCase())) &&
-                 ((currentUserSeeking === 'both') ||  
-                (currentUserSeeking !== 'both' && result.profile.userGender.toLowerCase() === currentUserSeeking.toLowerCase() && this.currentUserGender === result.profile.userSeeking)) && // Match userGender with userSeeking preference
-                (interests.length === 0 || interests.some(interest => result.profile['user' + interest.charAt(0).toUpperCase() + interest.slice(1).toLowerCase()] === true))
-                );
+         this.searchResults = matchedResults.filter(result =>
+    result &&
+    result.user &&
+    result.userID !== this.currentUserID &&
+    result.user.userType !== 'Admin' &&
+    (
+        // Check if either username or real name starts with the search term
+        (result.user.userName.toLowerCase().startsWith(searchTerms[0].toLowerCase()) ||
+        result.profile.userRealName.toLowerCase().startsWith(searchTerms[0].toLowerCase()))
+    ) &&
+    (
+        // Check seeking preference and gender
+        (
+            currentUserSeeking === 'both' &&
+            this.currentUserGender === result?.profile?.userSeeking
+        ) ||
+        (
+            currentUserSeeking !== 'both' &&
+            result?.profile?.userGender.toLowerCase() === currentUserSeeking.toLowerCase() &&
+            this.currentUserGender === result?.profile?.userSeeking
+        )
+    ) &&
+    (
+        // Check interests
+        interests.length === 0 ||
+        interests.some(interest =>
+            result?.profile['user' + interest.charAt(0).toUpperCase() + interest.slice(1).toLowerCase()] === true
+        )
+    )
+);
 
             console.log('Search results:', this.searchResults);
           },
