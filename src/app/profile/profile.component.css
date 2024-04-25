@@ -192,7 +192,8 @@ select {
 .Profile_button {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: larger;
-    text-align: end;}
+    text-align: end;
+    }
 
 .Profile_button:hover button{
     background-color:grey;
@@ -200,6 +201,10 @@ select {
 
 }
 
+.interests input[type="checkbox"] + label {
+    position: relative;
+    z-index: 10;
+}
 
 
 .Poker_background img{
@@ -246,19 +251,21 @@ select {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: larger;
     margin-top: 5%;
-    ;
-    
+    position: relative;
+    float: right;
+    right: 15%;
+    width: 50%;
 }
 
 .profile_description textarea{
-
+    position: relative;
     margin-top: 1%;
-    width: 40%;
-    max-height: 42vh;
+    width: 100%;
+    max-height: 30vh;
     height: 41vh;
-
-    border-bottom: 1.5px solid #F7270B;    
-
+    border-bottom: 1.5px solid #F7270B;   
+    top: 50%;
+    
 }
 
 .profile_submit:hover button{
@@ -271,6 +278,17 @@ select {
     text-align: center;
     cursor: pointer;
     margin-right: 33%;
+    float: right;
+}
+
+.label{
+    left: 5%;
+}
+.character-count {
+  position: absolute;
+  top: 0;
+  left: 55%;
+   
 }
 
 input[type="submit"] button{
@@ -299,6 +317,8 @@ input[type="file"]::-webkit-file-upload-button {
   display: block;
 }
 
+
+
 @media (max-width:60em) {
     .sidenav {
       display: none;
@@ -322,7 +342,7 @@ input[type="file"]::-webkit-file-upload-button {
     }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 950px) {
     
     .container {
         flex-direction: column; 
