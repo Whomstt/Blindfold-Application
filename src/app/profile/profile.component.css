@@ -19,6 +19,8 @@
 
 }
 
+
+
 .sidenav a:hover {
     background-color: #333; 
 }
@@ -335,4 +337,5 @@ input[type="file"]::-webkit-file-upload-button {
         display: none;
     }
 }
+
 
