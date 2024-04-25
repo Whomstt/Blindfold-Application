@@ -293,7 +293,9 @@ input[type="file"] {
 }
 
 .startChatting{
-    padding-left: 10%;
+    display: flex; /* Use flexbox layout */
+    justify-content: center; /* Horizontally center the content */
+    align-items: flex-end; 
 }
 
 .startChatting:hover button{
@@ -327,6 +329,9 @@ input[type="file"]::-webkit-file-upload-button {
       width: 100%;
       margin-left: 0;
     }
+
+  
+
 }
 
 @media screen and (max-width: 900px) {
