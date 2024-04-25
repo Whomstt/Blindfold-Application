@@ -89,7 +89,7 @@ async getCurrentUserSeeking() {
         return data.userSeeking;
       } else {
         console.warn('User profile document not found or does not exist.');
-        return 'female'; // Default value if userSeeking is not set
+        
       }
     } else {
       console.warn('No current user found.');
@@ -100,4 +100,30 @@ async getCurrentUserSeeking() {
     
   }
 }
+
+async getCurrentUserGender() {
+  try {
+    const currentUser = await this.afAuth.currentUser;
+    console.log('Current user:', currentUser);
+    if (currentUser) {
+      const doc = await this.firestore.collection('profiles').doc(currentUser.uid).get().toPromise();
+      if (doc && doc.exists) {
+        console.log('Document:', doc.data());
+        const data: any = doc.data();
+        console.log('User seeking preference:', data.userGender);
+        return data.userGender;
+      } else {
+        console.warn('User profile document not found or does not exist.');
+        
+      }
+    } else {
+      console.warn('No current user found.');
+      throw new Error('No current user found.');
+    }
+  } catch (error) {
+    console.error('Error getting user seeking preference:', error);
+    
+  }
+}
+
 }

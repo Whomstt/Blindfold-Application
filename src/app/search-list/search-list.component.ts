@@ -14,7 +14,7 @@ export class SearchListComponent implements OnInit {
   searchResults: any[] = []; 
   currentUserID: string | null = null; 
   currentUserSeeking: string = ''; 
-
+  currentUserGender: string = '';
   constructor(
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
@@ -37,6 +37,7 @@ export class SearchListComponent implements OnInit {
   try {
     
     this.currentUserSeeking = await this.firebaseService.getCurrentUserSeeking();
+    this.currentUserGender = await this.firebaseService.getCurrentUserGender();
     console.log('Current user seeking preference:', this.currentUserSeeking);
 
     this.firestore.collection('users').valueChanges().subscribe(
@@ -64,11 +65,11 @@ export class SearchListComponent implements OnInit {
             this.searchResults = matchedResults.filter(result =>
                  result && result.user &&
                  result.userID !== this.currentUserID &&
+                 result.user.userType !== 'Admin' &&
                  (result.user.userName.toLowerCase().startsWith(searchTerms[0].toLowerCase()) ||
                  result.profile.userRealName.toLowerCase().startsWith(searchTerms[0].toLowerCase())) &&
-                 ((currentUserSeeking === 'both') || 
-                (currentUserSeeking === 'other' && result.profile.userGender.toLowerCase() === 'other') || 
-                (currentUserSeeking !== 'both' && currentUserSeeking !== 'other' && result.profile.userGender.toLowerCase() === currentUserSeeking.toLowerCase())) && // Match userGender with userSeeking preference
+                 ((currentUserSeeking === 'both') ||  
+                (currentUserSeeking !== 'both' && result.profile.userGender.toLowerCase() === currentUserSeeking.toLowerCase() && this.currentUserGender === result.profile.userSeeking)) && // Match userGender with userSeeking preference
                 (interests.length === 0 || interests.some(interest => result.profile['user' + interest.charAt(0).toUpperCase() + interest.slice(1).toLowerCase()] === true))
                 );
 
