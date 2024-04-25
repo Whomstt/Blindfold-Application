@@ -293,8 +293,8 @@ input[type="file"] {
 }
 
 .startChatting{
-    display: flex; /* Use flexbox layout */
-    justify-content: center; /* Horizontally center the content */
+    display: flex; 
+    justify-content: center; 
     align-items: flex-end; 
 }
 
