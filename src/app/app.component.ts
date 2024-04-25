@@ -42,9 +42,6 @@ export class AppComponent implements OnInit {
       if (isAdmin) {
         // Navigate to the admin page if the user is an admin
         this.router.navigate(['/admin']);
-      } else {
-        // Redirect to the home page if the user is not an admin
-        this.router.navigate(['/home']);
       }
     });
   }
