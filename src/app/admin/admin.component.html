@@ -44,6 +44,7 @@
                                     {{ result.profile.userMusic ? 'Music' : '' }}
                                     {{ result.profile.userTravel ? 'Travel' : '' }}
                                 </p>
+                                <p><strong>Bio:</strong>{{result.profile.userBio}}</p>
                             </div>
                             <div style="display: block;">
                                 <button class="button" (click)="banUser(result.userID)">Ban</button>
