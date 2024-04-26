@@ -81,25 +81,22 @@ export class ProfileComponent implements OnInit {
       if (event.target.files.length > 0) {
         const file = event.target.files[0];
         
+        // Generate a random string
+        const randomString = Math.random().toString(36).substring(2, 8);
         
         const reader = new FileReader();
         
-        
         reader.onload = async (e: any) => {
           try {
-            
             const img = new Image();
             img.src = e.target.result;
             
             img.onload = async () => {
               try {
-                
                 console.log('Image dimensions:', img.width, 'x', img.height);
-                
                 
                 const size = Math.min(img.width, img.height);
                 
-               
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
                 
@@ -108,26 +105,21 @@ export class ProfileComponent implements OnInit {
                   canvas.height = size;
                   ctx.drawImage(img, (img.width - size) / 2, (img.height - size) / 2, size, size, 0, 0, size, size);
                   
-                  
                   console.log('Canvas dimensions:', canvas.width, 'x', canvas.height);
-                  
                   
                   canvas.toBlob(async (blob) => {
                     if (blob) {
-                     
                       console.log('Blob size:', blob.size);
                       
-                    
-                      const croppedFile = new File([blob], file.name, { type: 'image/png' });
+                      // Construct the new file name
+                      const newFileName = `${Date.now()}_${randomString}.png`;
                       
+                      const croppedFile = new File([blob], newFileName, { type: 'image/png' });
                       
                       console.log('Cropped file:', croppedFile);
                       
-                     
-                      const snapshot = await this.storage.upload(`userProfileImages/${croppedFile.name}`, croppedFile);
-                     
+                      const snapshot = await this.storage.upload(`userProfileImages/${newFileName}`, croppedFile);
                       const downloadURL = await snapshot.ref.getDownloadURL();
-                      
                       
                       this.userProfile.profileImageURL = downloadURL;
                     }
@@ -144,15 +136,12 @@ export class ProfileComponent implements OnInit {
           }
         };
         
-        
         reader.readAsDataURL(file);
       }
     } catch (error) {
       console.error('Error uploading image:', error);
     }
   }
-  
-  
 
   async onFileSelected(event: any) {
     try {
