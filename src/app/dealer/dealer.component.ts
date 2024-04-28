@@ -21,9 +21,9 @@ export class DealerComponent {
   
         // Get the current user's gender and seeking preferences
         const currentUserDoc = await this.firestore.collection('profiles').doc(currentUserId).get().toPromise();
-        const currentUserData = currentUserDoc?.data() as { userGender: string, userSeeking: string } | undefined; // Add type assertion for currentUserData
-        const userGender = currentUserData?.userGender || ''; // Provide a default value if userGender is undefined
-        const userSeeking = currentUserData?.userSeeking || ''; // Provide a default value if userSeeking is undefined
+        const currentUserData = currentUserDoc?.data() as { userGender: string, userSeeking: string } | undefined;
+        const userGender = currentUserData?.userGender || '';
+        const userSeeking = currentUserData?.userSeeking || '';
   
         console.log('Current user gender:', userGender);
         console.log('Current user seeking:', userSeeking);
@@ -32,12 +32,12 @@ export class DealerComponent {
         let randomUser;
         if (userSeeking === 'both') {
           // If the current user is seeking both, retrieve all user genders
-          randomUser = await this.getRandomUser(currentUserId, ['male', 'female', 'other'], userGender);
+          randomUser = await this.getRandomUser(currentUserId, ['male', 'female', 'other'], userGender, userSeeking);
         } else {
           // Otherwise, retrieve users based on the current user's seeking preference
-          randomUser = await this.getRandomUser(currentUserId, [userSeeking], userGender);
+          randomUser = await this.getRandomUser(currentUserId, [userSeeking], userGender, userSeeking);
         }
-
+  
   
         // If a random user is found, navigate to their profile page
         if (randomUser) {
@@ -53,7 +53,7 @@ export class DealerComponent {
     }
   }
   
-  async getRandomUser(currentUserId: string, genders: string[], currentUserGender: string): Promise<any> {
+  async getRandomUser(currentUserId: string, genders: string[], currentUserGender: string, currentUserSeeking: string): Promise<any> {
     try {
       // Query Firestore for users excluding the current user
       const usersSnapshot = await this.firestore.collection('users', ref => 
@@ -69,7 +69,9 @@ export class DealerComponent {
           // Check if the user is banned
           const userProfileDoc = await this.firestore.collection('profiles').doc(userData.userID).get().toPromise();
           const userProfileData: { userBanned: boolean, userGender: string, userSeeking: string } | undefined = userProfileDoc?.data() as { userBanned: boolean, userGender: string, userSeeking: string } | undefined; // Add type assertion for userProfileData
-          if (userProfileData && !userProfileData.userBanned && genders.includes(userProfileData.userGender) && userProfileData.userSeeking === currentUserGender) {
+          if (userProfileData && !userProfileData.userBanned && genders.includes(userProfileData.userGender) && 
+            ((currentUserSeeking === 'both' && (userProfileData.userSeeking === currentUserGender || userProfileData.userSeeking === 'both')) || 
+             (userProfileData.userSeeking === 'both' && currentUserSeeking === userProfileData.userGender))) {
             nonBannedUsers.push(userProfileData);
           }
         }
@@ -88,8 +90,4 @@ export class DealerComponent {
       return null;
     }
   }
-  
-  
-  
-  
 }

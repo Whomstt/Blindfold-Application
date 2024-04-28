@@ -72,17 +72,20 @@ export class SearchListComponent implements OnInit {
         result.profile.userRealName.toLowerCase().startsWith(searchTerms[0].toLowerCase()))
     ) &&
     (
-        
-        (
-          (currentUserSeeking === 'both' &&
-          (this.currentUserGender === result?.profile?.userSeeking || result?.profile?.userSeeking === 'both'))
-        ) ||
-        (
-            currentUserSeeking !== 'both' &&
-            result?.profile?.userGender.toLowerCase() === currentUserSeeking.toLowerCase() &&
-            this.currentUserGender === result?.profile?.userSeeking
-        )
-    ) &&
+      (
+          currentUserSeeking === 'both' &&
+          (this.currentUserGender === result?.profile?.userSeeking || result?.profile?.userSeeking === 'both')
+      ) ||
+      (
+          currentUserSeeking !== 'both' &&
+          result?.profile?.userGender.toLowerCase() === currentUserSeeking.toLowerCase() &&
+          (
+              this.currentUserGender === result?.profile?.userSeeking ||
+              result?.profile?.userSeeking === 'both'
+          )
+      )
+  )
+   &&
     (
         
         interests.length === 0 ||
