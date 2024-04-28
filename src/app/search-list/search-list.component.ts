@@ -74,8 +74,8 @@ export class SearchListComponent implements OnInit {
     (
         
         (
-            currentUserSeeking === 'both' &&
-            this.currentUserGender === result?.profile?.userSeeking
+          (currentUserSeeking === 'both' &&
+          (this.currentUserGender === result?.profile?.userSeeking || result?.profile?.userSeeking === 'both'))
         ) ||
         (
             currentUserSeeking !== 'both' &&
