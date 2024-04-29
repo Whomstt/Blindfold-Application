@@ -54,19 +54,22 @@ export class ProfileComponent implements OnInit {
 
   async updateProfile() {
     try {
-      
-      const { userProfile, uid } = this;
-      const newProfileData = { ...userProfile };
-  
-      
-      await this.firebaseService.updateProfile(uid, newProfileData);
-      
-      console.log('Profile updated successfully!');
-      window.location.reload();
+        const { userProfile, uid } = this;
+        if (userProfile.userAge >= 18) {
+            const newProfileData = { ...userProfile };
+            
+            await this.firebaseService.updateProfile(uid, newProfileData);
+            
+            console.log('Profile updated successfully!');
+            window.location.reload();
+        } else {
+            console.error('User must be 18 years or older to update profile.');
+        }
     } catch (error) {
-      console.error('Error updating profile:', error);
+        console.error('Error updating profile:', error);
     }
-  }
+}
+
   
 
   async logout() {
@@ -81,7 +84,6 @@ export class ProfileComponent implements OnInit {
       if (event.target.files.length > 0) {
         const file = event.target.files[0];
         
-        // Generate a random string
         const randomString = Math.random().toString(36).substring(2, 8);
         
         const reader = new FileReader();
@@ -111,7 +113,6 @@ export class ProfileComponent implements OnInit {
                     if (blob) {
                       console.log('Blob size:', blob.size);
                       
-                      // Construct the new file name
                       const newFileName = `${Date.now()}_${randomString}.png`;
                       
                       const croppedFile = new File([blob], newFileName, { type: 'image/png' });

@@ -24,9 +24,10 @@
                             <input type="text" id="name" name="name" [(ngModel)]="userProfile.userRealName" required>
                         </div>
                         <div class="form-group">
-                          <div class="label">Age</div>
-                          <input type="number" id="age" name="age" min="18" max="99" [(ngModel)]="userProfile.userAge" required>
-                        </div>
+                            <div class="label">Age</div>
+                            <input type="number" id="age" name="age" min="18" max="99" [(ngModel)]="userProfile.userAge" required>
+                            <div *ngIf="userProfile.userAge < 18" class="error-message">User must be 18 years or older.</div>
+                        </div>                    
                         <div class="form-group">
                             <div class="label">Gender</div>
                             <select id="gender" name="gender" [(ngModel)]="userProfile.userGender" required>
