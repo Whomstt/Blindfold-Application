@@ -32,7 +32,6 @@ export class SignupComponent {
             userID: uid, // Use the UID as the user ID
             userName: userName,
             userType: userType,
-            // Add other fields as needed
         };
 
         // Add the new user document to the "users" collection
@@ -63,7 +62,6 @@ export class SignupComponent {
         this.router.navigate(['/home']); // Redirect to home page
     } catch (error) {
         console.error("Signup Error:", error);
-        // Handle error here
     }
   }
 

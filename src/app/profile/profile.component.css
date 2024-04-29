@@ -307,7 +307,7 @@ input[type="file"] {
 }
 
 .profile-image img {
-  padding-bottom: 10px; /* Adjust the value as needed */
+  padding-bottom: 10px;
   border-radius: 50%;
 }
 

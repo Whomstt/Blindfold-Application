@@ -54,7 +54,6 @@ export class FirebaseService {
 
   async updateProfile(uid: string, newData: any): Promise<void> {
     try {
-      // Assuming 'profiles' is the name of your Firestore collection
       await this.firestore.collection('profiles').doc(uid).update(newData);
     } catch (error) {
       throw error;

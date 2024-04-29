@@ -230,7 +230,7 @@ form button:hover {
   }  
 
   .timestamp {
-    opacity: 0.3; /* Adjust the opacity value as needed */
+    opacity: 0.3; 
 }
 
 @media (max-height: calc(100vh - 300px)) {
