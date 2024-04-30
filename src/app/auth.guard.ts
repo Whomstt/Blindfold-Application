@@ -15,10 +15,10 @@ export class AuthGuard implements CanActivate {
     return this.afAuth.authState.pipe(
       map(user => {
         if (user) {
-          return true; // User is signed in, allow navigation to the route
+          return true; 
         } else {
-          this.router.navigate(['/']); // User is not signed in, redirect to "/"
-          return false; // Prevent navigation to the route
+          this.router.navigate(['/']); 
+          return false; 
         }
       })
     );

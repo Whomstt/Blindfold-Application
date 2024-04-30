@@ -24,14 +24,14 @@ export class AppComponent implements OnInit {
       if (user) {
         this.checkBannedStatus(user.uid);
       } else {
-        // If user is not logged in, redirect to login page or another appropriate page
+        
         this.router.navigate(['/login']);
       }
     });
   }
 
   checkBannedStatus(uid: string): void {
-    // Fetch profile data from "profiles" collection
+    
     this.firestore.collection('profiles').doc(uid).valueChanges().pipe(
       map((profileData: any) => profileData && profileData.userBanned === true),
       catchError(error => {
@@ -40,10 +40,10 @@ export class AppComponent implements OnInit {
       })
     ).subscribe(isBanned => {
       if (isBanned) {
-        // Redirect to the banned page if the user is banned
+        
         this.router.navigate(['/banned']);
       } else {
-        // If the user is not banned, check if they are an admin
+        
         this.checkAdminStatus(uid);
       }
     });
