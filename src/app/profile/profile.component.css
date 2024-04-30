@@ -269,7 +269,7 @@ select {
 }
 
 .profile_submit:hover button{
-    background-color: #636160; /* Change background color on hover */
+    background-color: #636160; 
 }
 
 .profile_submit{

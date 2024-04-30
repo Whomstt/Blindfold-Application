@@ -9,14 +9,14 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     height: 97vh;
     display: flex;
-    flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
+    flex-wrap: wrap; 
 }
 
 .left {
-    flex: 0 0 35%; /* Set the left container to take up 30% of the container width */
+    flex: 0 0 35%; 
     background-color: white;
     padding: 10px;
-    box-sizing: border-box; /* Include padding in the width calculation */
+    box-sizing: border-box; 
 }
 
 .left h2{
@@ -25,14 +25,14 @@
 }
 
 .right {
-    flex: 0 0 65%; /* Set the right container to take up 70% of the container width */
+    flex: 0 0 65%; 
     background-color: rgb(7, 7, 7);
     display: flex;
     flex-direction: column;
 }
 
 .rightcentral{
-    flex: 1; /* Make the right central container take up remaining space */
+    flex: 1; 
     background-color: rgb(9, 9, 9);
     max-height: 65%;
     height: 100%;
@@ -43,25 +43,25 @@
 }
 
 .leftblack, .rightblack {
-    flex: 1; /* Each container takes up equal space */
+    flex: 1; 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .leftblack {
-    background-color: white; /* Set background color to white */
+    background-color: white; 
 }
 
 .rightblack {
-    background-color: red; /* Set background color to red */
+    background-color: red; 
 }
 
 .container-image {
-    max-width: 97%; /* Ensures the image doesn't exceed the width of its container */
-    max-height: 100%; /* Ensures the image doesn't exceed the height of its container */
-    display: block; /* Ensures the image is displayed as a block element */
-    margin: auto; /* Centers the image horizontally within its container */
+    max-width: 97%; 
+    max-height: 100%; 
+    display: block; 
+    margin: auto; 
 }
 
 .leftblack img{
@@ -90,8 +90,8 @@
 }
 
     .right h2 {
-    font-family: 'Irish Grover', sans-serif; /* Apply the custom font */
-    text-align: center; /* Center align the heading */
+    font-family: 'Irish Grover', sans-serif; 
+    text-align: center; 
     color: white;
     font-size: 40px;
     text-decoration: underline;
@@ -104,22 +104,22 @@
 
 
 .h2 {
-    font-family: 'Irish Grover', sans-serif; /* Apply the custom font */
-    text-align: center; /* Center align the heading */
-    margin-bottom: 20px; /* Add margin below the heading */
+    font-family: 'Irish Grover', sans-serif; 
+    text-align: center; 
+    margin-bottom: 20px; 
 }
 
 label {
-    display: block; /* Make labels block elements to stack vertically */
-    margin-bottom: 5px; /* Add margin below each label */
+    display: block; 
+    margin-bottom: 5px; 
 }
 
 input {
-    width: 100%; /* Make input fields take full width of the container */
-    padding: 8px; /* Add padding to input fields */
-    margin-bottom: 10px; /* Add margin below each input field */
-    border: 1px solid #ccc; /* Add border to input fields */    
-    box-sizing: border-box; /* Include padding and border in the input width */
+    width: 100%; 
+    padding: 8px; 
+    margin-bottom: 10px; 
+    border: 1px solid #ccc;     
+    box-sizing: border-box; 
     border-bottom: 1.5px solid #F7270B;    
     align-items: center;
     justify-content: center;
@@ -127,18 +127,18 @@ input {
 }
 
 button {
-    width: 100%; /* Make buttons take full width of the container */
-    padding: 10px; /* Add padding to buttons */
-    margin-top: 10px; /* Add margin above buttons */
-    border: none; /* Remove default button border */
-    border-radius: 4px; /* Add rounded corners to buttons */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    background-color: #F7270B; /* Set button background color */
-    color: white; /* Set button text color */
+    width: 100%; 
+    padding: 10px; 
+    margin-top: 10px; 
+    border: none; 
+    border-radius: 4px;
+    cursor: pointer; 
+    background-color: #F7270B; 
+    color: white; 
 }
 
 button:hover {
-    background-color: #c11e08; /* Change button background color on hover */
+    background-color: #c11e08; 
 }
 
 @media screen and (max-width: 800px) {

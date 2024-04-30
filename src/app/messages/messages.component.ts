@@ -57,7 +57,7 @@ export class MessagesComponent implements OnInit {
           const profileData = profileDoc.data();
           console.log('Profile data for userID:', userID, profileData);
           this.matchedUserRealNames[userID] = profileData.userRealName;
-          this.matchedProfileImageURLs[userID] = profileData.profileImageURL; // Store image URL
+          this.matchedProfileImageURLs[userID] = profileData.profileImageURL; 
           console.log('Matched user real name:', this.matchedUserRealNames[userID]);
           console.log('Matched user image URL:', this.matchedProfileImageURLs[userID]);
         } else {

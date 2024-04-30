@@ -104,22 +104,22 @@
 
 
 .h2 {
-    font-family: 'Irish Grover', sans-serif; /* Apply the custom font */
-    text-align: center; /* Center align the heading */
-    margin-bottom: 20px; /* Add margin below the heading */
+    font-family: 'Irish Grover', sans-serif; 
+    text-align: center; 
+    margin-bottom: 20px; 
 }
 
 label {
-    display: block; /* Make labels block elements to stack vertically */
-    margin-bottom: 5px; /* Add margin below each label */
+    display: block; 
+    margin-bottom: 5px; 
 }
 
 input {
-    width: 100%; /* Make input fields take full width of the container */
-    padding: 8px; /* Add padding to input fields */
-    margin-bottom: 10px; /* Add margin below each input field */
-    border: 1px solid #ccc; /* Add border to input fields */    
-    box-sizing: border-box; /* Include padding and border in the input width */
+    width: 100%; 
+    padding: 8px; 
+    margin-bottom: 10px; 
+    border: 1px solid #ccc;    
+    box-sizing: border-box; 
     border-bottom: 1.5px solid #F7270B;    
     align-items: center;
     justify-content: center;
@@ -127,18 +127,18 @@ input {
 }
 
 button {
-    width: 100%; /* Make buttons take full width of the container */
-    padding: 10px; /* Add padding to buttons */
-    margin-top: 10px; /* Add margin above buttons */
-    border: none; /* Remove default button border */
-    border-radius: 4px; /* Add rounded corners to buttons */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    background-color: #F7270B; /* Set button background color */
-    color: white; /* Set button text color */
+    width: 100%; 
+    padding: 10px; 
+    margin-top: 10px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    background-color: #F7270B; 
+    color: white; 
 }
 
 button:hover {
-    background-color: #c11e08; /* Change button background color on hover */
+    background-color: #c11e08; 
 }
 
 @media screen and (max-width: 800px) {
