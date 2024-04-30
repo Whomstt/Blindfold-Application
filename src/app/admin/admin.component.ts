@@ -87,7 +87,7 @@ export class AdminComponent {
       );
     }
     viewProfile(userID: string) {
-      this.router.navigate(['/view-other-profile', userID]); // Navigate to view_other_profile page with user ID
+      this.router.navigate(['/view-other-profile', userID]); 
     }
 
     async banUser(userId: string) {
