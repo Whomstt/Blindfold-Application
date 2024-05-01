@@ -36,11 +36,7 @@ export class SignupComponent {
 
         await this.firestore.collection('users').doc(uid).set(newUser);
 
-        console.log('New user added successfully!');
-
         await this.addProfile(uid, 18, '', '', false, '', '', false, false, false, false, false, false, false, false, false);
-
-        console.log('Profile created successfully!');
 
         await this.onSignup(userEmail, userPassword);
     } catch (error: any) {
@@ -86,7 +82,6 @@ export class SignupComponent {
         };
 
         await this.firestore.collection('profiles').doc(uid).set(newProfile);
-        console.log('New profile added successfully!');
     } catch (error: any) {
         console.error('Error adding new profile:', error);
     }

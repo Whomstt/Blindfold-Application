@@ -78,13 +78,10 @@ export class FirebaseService {
 async getCurrentUserSeeking() {
   try {
     const currentUser = await this.afAuth.currentUser;
-    console.log('Current user:', currentUser);
     if (currentUser) {
       const doc = await this.firestore.collection('profiles').doc(currentUser.uid).get().toPromise();
       if (doc && doc.exists) {
-        console.log('Document:', doc.data());
         const data: any = doc.data();
-        console.log('User seeking preference:', data.userSeeking);
         return data.userSeeking;
       } else {
         console.warn('User profile document not found or does not exist.');
@@ -103,13 +100,10 @@ async getCurrentUserSeeking() {
 async getCurrentUserGender() {
   try {
     const currentUser = await this.afAuth.currentUser;
-    console.log('Current user:', currentUser);
     if (currentUser) {
       const doc = await this.firestore.collection('profiles').doc(currentUser.uid).get().toPromise();
       if (doc && doc.exists) {
-        console.log('Document:', doc.data());
         const data: any = doc.data();
-        console.log('User seeking preference:', data.userGender);
         return data.userGender;
       } else {
         console.warn('User profile document not found or does not exist.');

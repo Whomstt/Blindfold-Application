@@ -22,10 +22,7 @@ export class DealerComponent {
         const currentUserData = currentUserDoc?.data() as { userGender: string, userSeeking: string } | undefined;
         const userGender = currentUserData?.userGender || '';
         const userSeeking = currentUserData?.userSeeking || '';
-  
-        console.log('Current user gender:', userGender);
-        console.log('Current user seeking:', userSeeking);
-  
+    
         let randomUser;
         if (userSeeking === 'both') {
           randomUser = await this.getRandomUser(currentUserId, ['male', 'female', 'other'], userGender, userSeeking);
@@ -35,11 +32,8 @@ export class DealerComponent {
   
   
         if (randomUser) {
-          console.log('Random user gender:', randomUser.userGender);
-          console.log('Random user seeking:', randomUser.userSeeking);
           this.router.navigate(['/view-other-profile', randomUser.userID]);
         } else {
-          console.log('No random user found matching seeking preference.');
         }
       }
     } catch (error) {

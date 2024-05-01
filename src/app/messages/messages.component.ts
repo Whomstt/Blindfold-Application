@@ -23,7 +23,6 @@ export class MessagesComponent implements OnInit {
     const user = await this.afAuth.currentUser;
     if (user) {
       this.uid = user.uid;
-      console.log("UID:", this.uid);
     }
 
     this.firestore.collection('chats').get().subscribe(snapshot => {
@@ -38,8 +37,6 @@ export class MessagesComponent implements OnInit {
             data: chatData
           });
 
-          console.log("Chat ID:", chatDoc.id);
-          console.log("Chat Data:", chatData);
 
          
           const matchedUserID = userID1 === this.uid ? userID2 : userID1;
@@ -50,16 +47,12 @@ export class MessagesComponent implements OnInit {
   }
 
   fetchMatchedUserInfo(userID: string): void {
-    console.log('Fetching info for userID:', userID);
     this.firestore.collection('profiles').doc(userID).get().subscribe(
       (profileDoc: any) => {
         if (profileDoc.exists) {
           const profileData = profileDoc.data();
-          console.log('Profile data for userID:', userID, profileData);
           this.matchedUserRealNames[userID] = profileData.userRealName;
           this.matchedProfileImageURLs[userID] = profileData.profileImageURL; 
-          console.log('Matched user real name:', this.matchedUserRealNames[userID]);
-          console.log('Matched user image URL:', this.matchedProfileImageURLs[userID]);
         } else {
           console.error('Profile does not exist for userID:', userID);
         }
@@ -97,7 +90,6 @@ export class MessagesComponent implements OnInit {
     };
     messageRef.set(messageData)
       .then(() => {
-        console.log('Message sent successfully');
         
         this.loadMessages(chatId);
       })

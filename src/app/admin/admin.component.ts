@@ -28,7 +28,6 @@ export class AdminComponent {
     ngOnInit() {
       this.route.queryParams.subscribe(params => {
         this.searchQuery = params['query'] || ''; 
-        console.log('Search query:', this.searchQuery); 
         this.fetchUsernames(); 
       });
     }
@@ -42,11 +41,9 @@ export class AdminComponent {
     fetchUsernames() {
       this.firestore.collection('users').valueChanges().subscribe(
         (users: any[]) => {
-          console.log('Users:', users);
     
           this.firestore.collection('profiles').valueChanges().subscribe(
             (profiles: any[]) => {
-              console.log('Profiles:', profiles);
     
               const matchedResults = users.map(user => {
                 const profile = profiles.find(p => p.userID === user.userID);
@@ -74,15 +71,12 @@ export class AdminComponent {
                 (interests.length === 0 || interests.some(interest => result.profile['user' + interest.charAt(0).toUpperCase() + interest.slice(1).toLowerCase()] === true))
               );
     
-              console.log('Search results:', this.searchResults);
             },
             error => {
-              console.error('Error fetching profiles:', error);
             }
           );
         },
         error => {
-          console.error('Error fetching users:', error);
         }
       );
     }
@@ -93,7 +87,6 @@ export class AdminComponent {
     async banUser(userId: string) {
       try {
         await this.firestore.collection('profiles').doc(userId).update({ userBanned: true });
-        console.log(`User with ID ${userId} is banned.`);
       } catch (error) {
         console.error('Error banning user:', error);
       }
@@ -102,7 +95,6 @@ export class AdminComponent {
     async unbanUser(userId: string) {
       try {
         await this.firestore.collection('profiles').doc(userId).update({ userBanned: false });
-        console.log(`User with ID ${userId} is unbanned.`);
       } catch (error) {
         console.error('Error unbanning user:', error);
       }
@@ -110,7 +102,6 @@ export class AdminComponent {
     async admin(userId: string) {
       try {
         await this.firestore.collection('users').doc(userId).update({ userType: "Admin" });
-        console.log(`User with ID ${userId} is now admin.`);
       } catch (error) {
         console.error('Error creating admin:', error);
       }
@@ -118,7 +109,6 @@ export class AdminComponent {
     async unAdmin(userId: string) {
       try {
         await this.firestore.collection('users').doc(userId).update({ userType: "User" });
-        console.log(`User with ID ${userId} is now user.`);
       } catch (error) {
         console.error('Error creating user:', error);
       }
@@ -128,7 +118,6 @@ export class AdminComponent {
       try {
         await this.firestore.collection('users').doc(userId).delete();
         await this.firestore.collection('profiles').doc(userId).delete();
-        console.log(`User with ID ${userId} is deleted.`);
       } catch (error) {
         console.error('Error deleting user:', error);
       }

@@ -25,7 +25,6 @@ export class SearchListComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(async params => {
       this.searchQuery = params['query'] || ''; 
-      console.log('Search query:', this.searchQuery); 
       await this.fetchUsernames(); 
     });
 
@@ -38,7 +37,6 @@ export class SearchListComponent implements OnInit {
     
     this.currentUserSeeking = await this.firebaseService.getCurrentUserSeeking();
     this.currentUserGender = await this.firebaseService.getCurrentUserGender();
-    console.log('Current user seeking preference:', this.currentUserSeeking);
 
     this.firestore.collection('users').valueChanges().subscribe(
       (users: any[]) => {
@@ -95,7 +93,6 @@ export class SearchListComponent implements OnInit {
     )
 );
 
-            console.log('Search results:', this.searchResults);
           },
           error => {
             console.error('Error fetching profiles:', error);
@@ -115,8 +112,6 @@ export class SearchListComponent implements OnInit {
   async getCurrentUser() {
     this.currentUserID = await this.firebaseService.getCurrentUserID();
     this.currentUserSeeking = await this.firebaseService.getCurrentUserSeeking();
-    console.log('Current user ID:', this.currentUserID);
-    console.log('Current user seeking preference:', this.currentUserSeeking);
   }
 
   viewProfile(userID: string) {

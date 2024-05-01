@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
     const user = await this.afAuth.currentUser;
     if (user) {
       this.uid = user.uid;
-      console.log("UID:", this.uid);
       await this.getUserProfile();
     }
   }
@@ -36,9 +35,7 @@ export class HomeComponent implements OnInit {
       const userProfileDoc = await this.firestore.collection('profiles').doc(this.uid).get().toPromise();
       if (userProfileDoc && userProfileDoc.exists) {
         this.userProfile = userProfileDoc.data();
-        console.log('User profile fetched successfully:', this.userProfile);
       } else {
-        console.log('User profile does not exist.');
       }
     } catch (error: any) {
       console.error('Error fetching user profile:', error);

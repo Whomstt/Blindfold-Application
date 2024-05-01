@@ -29,8 +29,7 @@ export class ProfileComponent implements OnInit {
     const user = await this.afAuth.currentUser;
     if (user) {
       this.uid = user.uid;
-      console.log("UID:", this.uid);
-
+    
       
       await this.getUserProfile();
     }
@@ -41,9 +40,7 @@ export class ProfileComponent implements OnInit {
       const userProfileDoc = await this.firestore.collection('profiles').doc(this.uid).get().toPromise();
       if (userProfileDoc && userProfileDoc.exists) {
         this.userProfile = userProfileDoc.data();
-        console.log('User profile fetched successfully:', this.userProfile);
       } else {
-        console.log('User profile does not exist.');
        
       }
     } catch (error: any) {
@@ -60,7 +57,6 @@ export class ProfileComponent implements OnInit {
             
             await this.firebaseService.updateProfile(uid, newProfileData);
             
-            console.log('Profile updated successfully!');
             window.location.reload();
         } else {
             console.error('User must be 18 years or older to update profile.');
@@ -79,7 +75,6 @@ export class ProfileComponent implements OnInit {
   }
 
   async uploadImage(event: any) {
-    console.log('Uploading image...');
     try {
       if (event.target.files.length > 0) {
         const file = event.target.files[0];
@@ -95,7 +90,6 @@ export class ProfileComponent implements OnInit {
             
             img.onload = async () => {
               try {
-                console.log('Image dimensions:', img.width, 'x', img.height);
                 
                 const size = Math.min(img.width, img.height);
                 
@@ -107,17 +101,14 @@ export class ProfileComponent implements OnInit {
                   canvas.height = size;
                   ctx.drawImage(img, (img.width - size) / 2, (img.height - size) / 2, size, size, 0, 0, size, size);
                   
-                  console.log('Canvas dimensions:', canvas.width, 'x', canvas.height);
-                  
+                                                  
                   canvas.toBlob(async (blob) => {
                     if (blob) {
-                      console.log('Blob size:', blob.size);
                       
                       const newFileName = `${Date.now()}_${randomString}.png`;
                       
                       const croppedFile = new File([blob], newFileName, { type: 'image/png' });
                       
-                      console.log('Cropped file:', croppedFile);
                       
                       const snapshot = await this.storage.upload(`userProfileImages/${newFileName}`, croppedFile);
                       const downloadURL = await snapshot.ref.getDownloadURL();
