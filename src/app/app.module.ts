@@ -44,13 +44,13 @@ import { BannedComponent } from './banned/banned.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig), // Initializing Firebase here,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     FormsModule,
   ],
   
   providers: [
-    AngularFireAuth, // Provide AngularFireAuth directly
+    AngularFireAuth,
     FirebaseService,
     importProvidersFrom([
       provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),

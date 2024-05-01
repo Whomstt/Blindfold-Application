@@ -14,12 +14,10 @@ export class DealerComponent {
 
   async findMatch(): Promise<void> {
     try {
-      // Get the current user's ID
       const currentUser = await this.afAuth.currentUser;
       if (currentUser) {
         const currentUserId = currentUser.uid;
   
-        // Get the current user's gender and seeking preferences
         const currentUserDoc = await this.firestore.collection('profiles').doc(currentUserId).get().toPromise();
         const currentUserData = currentUserDoc?.data() as { userGender: string, userSeeking: string } | undefined;
         const userGender = currentUserData?.userGender || '';
@@ -28,18 +26,14 @@ export class DealerComponent {
         console.log('Current user gender:', userGender);
         console.log('Current user seeking:', userSeeking);
   
-        // Query Firestore for a random user (excluding the current user) whose gender matches the current user's seeking preference and the current user's gender matches the other user's seeking preference
         let randomUser;
         if (userSeeking === 'both') {
-          // If the current user is seeking both, retrieve all user genders
           randomUser = await this.getRandomUser(currentUserId, ['male', 'female', 'other'], userGender, userSeeking);
         } else {
-          // Otherwise, retrieve users based on the current user's seeking preference
           randomUser = await this.getRandomUser(currentUserId, [userSeeking], userGender, userSeeking);
         }
   
   
-        // If a random user is found, navigate to their profile page
         if (randomUser) {
           console.log('Random user gender:', randomUser.userGender);
           console.log('Random user seeking:', randomUser.userSeeking);
@@ -55,35 +49,30 @@ export class DealerComponent {
   
   async getRandomUser(currentUserId: string, genders: string[], currentUserGender: string, currentUserSeeking: string): Promise<any> {
     try {
-      // Query Firestore for users excluding the current user
       const usersSnapshot = await this.firestore.collection('users', ref => 
         ref.where('userID', '!=', currentUserId)
       ).get().toPromise();
       
-      // Check if usersSnapshot is not undefined and not empty
       if (usersSnapshot && !usersSnapshot.empty) {
-        // Filter out banned users
         const nonBannedUsers = [];
         for (const userDoc of usersSnapshot.docs) {
-          const userData: any = userDoc.data(); // Explicitly type 'userData' as any
-          // Check if the user is banned
+          const userData: any = userDoc.data();
           const userProfileDoc = await this.firestore.collection('profiles').doc(userData.userID).get().toPromise();
-          const userProfileData: { userBanned: boolean, userGender: string, userSeeking: string } | undefined = userProfileDoc?.data() as { userBanned: boolean, userGender: string, userSeeking: string } | undefined; // Add type assertion for userProfileData
+          const userProfileData: { userBanned: boolean, userGender: string, userSeeking: string } | undefined = userProfileDoc?.data() as { userBanned: boolean, userGender: string, userSeeking: string } | undefined;
           if (userProfileData && !userProfileData.userBanned && genders.includes(userProfileData.userGender) && 
             ((currentUserSeeking === 'both' && (userProfileData.userSeeking === currentUserGender || userProfileData.userSeeking === 'both')) || 
              (userProfileData.userSeeking === 'both' && currentUserSeeking === userProfileData.userGender))) {
             nonBannedUsers.push(userProfileData);
           }
         }
-        // If there are non-banned users whose gender matches the specified genders and seeking preference matches the current user's gender, select a random one
         if (nonBannedUsers.length > 0) {
           const randomIndex = Math.floor(Math.random() * nonBannedUsers.length);
           return nonBannedUsers[randomIndex];
         } else {
-          return null; // No non-banned users found matching the specified genders and seeking preference
+          return null;
         }
       } else {
-        return null; // No users found
+        return null;
       }
     } catch (error) {
       console.error('Error getting random user:', error);

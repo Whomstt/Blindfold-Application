@@ -11,7 +11,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 })
 export class HomeComponent implements OnInit {
   searchQuery: string = ''; 
-  interests: any = {}; // Property to store selected interests
+  interests: any = {};
   uid: string = ''; 
   userProfile: any; 
 
@@ -46,15 +46,12 @@ export class HomeComponent implements OnInit {
   } 
 
   onSearch() {
-    // Formulate search query with selected interests
     let searchQuery = `${this.searchQuery}`;
     for (const [key, value] of Object.entries(this.interests)) {
       if (value) {
         searchQuery += `,${key}`;
       }
     }
-
-    // Navigate to search-list component with the formulated search query
     this.router.navigate(['/search-list'], { queryParams: { query: searchQuery } });
   }
 }

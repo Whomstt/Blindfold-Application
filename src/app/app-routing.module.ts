@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }, // Require authentication
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'profile', component : ProfileComponent, canActivate: [AuthGuard] }, 
   { path: 'dealer', component : DealerComponent, canActivate: [AuthGuard] }, 
   { path: 'messages', component : MessagesComponent, canActivate: [AuthGuard] },

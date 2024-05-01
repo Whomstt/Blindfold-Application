@@ -17,7 +17,7 @@ export class SignupComponent {
   userPassword: string = '';
   userPassword2: string = '';
   userType: string = 'User';
-  errorMessage: string = ''; // Declare error message variable
+  errorMessage: string = '';
 
   constructor(
     public firebaseService: FirebaseService,
@@ -29,27 +29,24 @@ export class SignupComponent {
   async addUser(uid: string, userName: string, userEmail: string, userPassword: string, userPassword2: string, userType: string) {
     try {
         const newUser = {
-            userID: uid, // Use the UID as the user ID
+            userID: uid,
             userName: userName,
             userType: userType,
         };
 
-        // Add the new user document to the "users" collection
         await this.firestore.collection('users').doc(uid).set(newUser);
 
         console.log('New user added successfully!');
 
-        // Call addProfile after user is added successfully
-        await this.addProfile(uid, 18, '', '', false, '', '', false, false, false, false, false, false, false, false, false); // Pass necessary arguments for profile creation
+        await this.addProfile(uid, 18, '', '', false, '', '', false, false, false, false, false, false, false, false, false);
 
         console.log('Profile created successfully!');
 
-        // Call onSignup() after user and profile are added successfully
         await this.onSignup(userEmail, userPassword);
     } catch (error: any) {
         this.errorMessage = error.message;
         console.error('Error adding new user:', error);
-        return; // Halt the process if an error occurred
+        return;
     }
   }
 
@@ -58,8 +55,7 @@ export class SignupComponent {
         await this.afAuth.createUserWithEmailAndPassword(email, password);
         this.isSignedIn = true;
         
-        // Redirect to desired route after successful signup
-        this.router.navigate(['/home']); // Redirect to home page
+        this.router.navigate(['/home']);
     } catch (error) {
         console.error("Signup Error:", error);
     }
@@ -117,11 +113,9 @@ export class SignupComponent {
       const { user } = await this.afAuth.createUserWithEmailAndPassword(this.userEmail, this.userPassword);
       if (user) {
         this.isSignedIn = true;
-        // Call addUser with the UID
         await this.addUser(user.uid, this.userName, this.userEmail, this.userPassword, this.userPassword2, this.userType);
         
-        // Redirect to desired route after successful signup
-        this.router.navigate(['/profile']); // Redirect to home page
+        this.router.navigate(['/profile']);
       } else {
         throw new Error("User creation failed.");
       }

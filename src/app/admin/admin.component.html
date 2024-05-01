@@ -13,12 +13,6 @@
     </style>
 </head>
 <body>
-    <!-- <div class="sidenav">
-        <a routerLink="/home"><img src="assets/images/search_icon.jpg" class="rounded_img"></a>
-        <a routerLink="/messages"><img src="assets/images/message_icon.jpg" class="img-fluid"></a>
-        <a routerLink="/dealer"><img src="assets/images/cards.jpg" class="img-fluid"></a>
-        <a routerLink="/profile"><img src="assets/images/gear.png" class="rounded_img"></a>
-    </div> -->
     <div>
         <div class="top">
             <h1>All Users</h1>
@@ -54,14 +48,7 @@
                                 <button class="button" (click)="admin(result.userID)">Admin</button>
                                 <button class="button" (click)="unAdmin(result.userID)">User</button>
                             </div>
-                            <!-- <div style="display: block;">
-                                <button class="button" (click)="banUser(result.userID)">Ban</button>
-                                <button class="button" (click)="unbanUser(result.userID)">Unban</button>
-                                <button class="button" (click)="deleteUser(result.userID)">Delete</button>
-                                <button class="button" (click)="admin(result.userID)">Admin</button>
-                                <button class="button" (click)="unAdmin(result.userID)">User</button>
-                            </div> -->
-                            <a [routerLink]="['/view-other-profile', result.userID]"> <!-- Adding anchor tag here -->
+                            <a [routerLink]="['/view-other-profile', result.userID]">
                                 <img [src]="result.profile.profileImageURL || 'assets/images/greyIcon.png'" class="circular-image">
                             </a>
                         </div>
