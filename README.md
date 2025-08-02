@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.3.
 
+## Description
+
+Blindfold is a full-stack dating web application developed using Angular for the frontend and NodeJS for the backend. The platform enables users to create profiles, authenticate securely, and connect with others through a real-time messaging system. Designed with user experience and privacy in mind, Blindfold offers an intuitive interface to help people discover and build meaningful relationships based on shared interests.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
